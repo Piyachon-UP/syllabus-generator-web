@@ -1,4 +1,4 @@
-/* Syllabus Generator Web UI v1.3.4 / JSON Contract v1.0.0 — all operations stay in this browser. */
+/* Syllabus Generator Web UI v1.4.0 / JSON Contract v1.0.0 — all operations stay in this browser. */
 (() => {
 'use strict';
 const contract = JSON.parse(document.getElementById('contract-json').textContent);
@@ -69,13 +69,10 @@ function ensureStarterRows(data){
  return data;
 }
 function blankData(){return {SchemaVersion:'1.0.0',OfferingId:'',SourceType:'BlazorManual',ExtractedAt:nowISO(),CourseInfo:{...blankRecord('CourseInfo'),FacultyName:'คณะวิทยาศาสตร์',UniversityName:'มหาวิทยาลัยพะเยา'},Curriculum:blankRecord('Curriculum'),Instructors:[],PLOs:[],CLOs:[blankRecord('CLOs')],ClassMeetings:[],Exams:[],StudentGroups:[],LecturePlans:Array.from({length:15},(_,i)=>({...blankRecord('LecturePlans'),WeekNumber:i+1})),LabPlans:Array.from({length:15},(_,i)=>({...blankRecord('LabPlans'),WeekNumber:i+1})),Assessments:[blankRecord('Assessments')],GradeScale:[],Resources:[blankRecord('Resources')]};}
-let state=blankData(), currentId=null, currentTab='course', weeklyKind='LecturePlans', showingErrors=false, saveTimer=null, saving=false, suppressSave=false;
-let storageMode=''; let db=null;
-const uuid=()=>typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():`draft-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-async function initStore(){if(!('indexedDB'in window)){storageMode='localStorage';return;}try{db=await new Promise((resolve,reject)=>{const req=indexedDB.open('up-syllabus-drafts-v1',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('drafts'))req.result.createObjectStore('drafts',{keyPath:'id'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);req.onblocked=()=>reject(new Error('IndexedDB blocked'));}); storageMode='IndexedDB';}catch(e){storageMode='localStorage';}}
-function storeOperation(type,value){return new Promise((resolve,reject)=>{try{let t=db.transaction('drafts',type==='get'?'readonly':'readwrite'),s=t.objectStore('drafts'),r=type==='list'?s.getAll():type==='get'?s.get(value):type==='put'?s.put(value):s.delete(value);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);}catch(e){reject(e);}});}
-function lsAll(){try{return JSON.parse(localStorage.getItem('up-syllabus-drafts-v1')||'[]');}catch(e){return [];}}
-async function store(type, value){if(storageMode==='IndexedDB'){return storeOperation(type,value);}let list=lsAll();if(type==='list')return list;if(type==='get')return list.find(x=>x.id===value);if(type==='delete')list=list.filter(x=>x.id!==value);if(type==='put')list=[...list.filter(x=>x.id!==value.id),value];try{localStorage.setItem('up-syllabus-drafts-v1',JSON.stringify(list));}catch(e){toast('พื้นที่เก็บข้อมูลไม่พร้อม กรุณาสำรองเป็น JSON');throw e;}return value;}
+// JSON-only model: nothing is saved to IndexedDB/localStorage.
+// Users explicitly download a JSON file and re-open it for further edits.
+let state=blankData(), currentTab='course', weeklyKind='LecturePlans', showingErrors=false;
+let unsavedChanges=false, lastLoadedFile='';
 function isPopulated(group,r){return Object.entries(r||{}).some(([k,v])=>k!=='WeekNumber'&&(Array.isArray(v)?v.length>0:typeof v==='boolean'?false:String(v??'').trim()!==''));}
 function normalizedInput(v,type){if(type==='boolean')return Boolean(v);if(type==='array')return String(v??'').split(/[,;\n]/).map(s=>s.trim().toUpperCase()).filter(Boolean).filter((x,i,a)=>a.indexOf(x)===i);if(type==='number'||type==='integer')return v===''?'':Number(v);return String(v??'');}
 function inputValue(v){return Array.isArray(v)?v.join(', '):v??'';}
@@ -199,7 +196,7 @@ function tablePanel(group,title,desc,actions=''){
 }
 
 
-function coursePage(){return `<div class="section-stack"><div class="notice">แบบฟอร์มจะเริ่มว่างทุกครั้งที่เปิดเว็บไซต์ หากต้องการแก้ไขงานเดิมให้กด “Draft ของฉัน” · ระบุหน่วยกิตเป็นตัวเลขเดียว เช่น 3 และชั่วโมงเรียนเป็น 2, 2, 5 ระบบจะจัดรูปแบบ 3(2-2-5) เมื่อพัฒนาการส่งออกเอกสาร DOCX</div>${COURSE_GROUPS.map(g=>formPanel('CourseInfo',g.title,g.desc,g.keys,g.id)).join('')}</div>`;}
+function coursePage(){return `<div class="section-stack"><div class="notice">ข้อมูลจะอยู่ในหน้านี้จนกว่าจะปิดหรือรีเฟรช หากต้องการกลับมาทำต่อให้กด “บันทึก JSON” แล้วเก็บไฟล์ไว้ เมื่อเปิดครั้งถัดไปให้กด “เปิด JSON” · ระบุหน่วยกิตเป็นตัวเลขเดียว เช่น 3 และชั่วโมงเรียนเป็น 2, 2, 5 ระบบจะจัดรูปแบบ 3(2-2-5) ในขั้นตอนสร้าง DOCX</div>${COURSE_GROUPS.map(g=>formPanel('CourseInfo',g.title,g.desc,g.keys,g.id)).join('')}</div>`;}
 
 function weeklyPage(){return `<div class="section-stack"><div class="notice">กรอกหัวข้อและกิจกรรมในช่องเดียว · เลือกชื่อผู้สอนได้หลายคนต่อสัปดาห์ และเพิ่มรายชื่ออื่นเองได้</div><div class="inline-row"><div class="switchbar"><button data-action="week-switch" data-value="LecturePlans" class="${weeklyKind==='LecturePlans'?'active':''}">บรรยาย (Lecture)</button><button data-action="week-switch" data-value="LabPlans" class="${weeklyKind==='LabPlans'?'active':''}">ปฏิบัติการ (Lab)</button></div><span class="pill neutral">${weeklyKind==='LecturePlans'?'Lecture Plan':'Laboratory Plan'}</span></div>${tablePanel(weeklyKind,weeklyKind==='LecturePlans'?'แผนการสอนภาคบรรยาย':'แผนการสอนภาคปฏิบัติ','หัวข้อ/กิจกรรม วิธีสอน รหัส CLO และผู้สอน',`<button class="btn btn-mini" data-action="fill-weeks" data-group="${weeklyKind}">＋ เติมให้ครบ 15 สัปดาห์</button>`)}</div>`;}
 function assessmentPage(){return `<div class="section-stack"><div class="notice warn">น้ำหนักคะแนนประเมินรวม 100% · CLO ที่เชื่อมโยงคั่นด้วยจุลภาค · กำหนดเกณฑ์คะแนนขั้นต่ำตามระบบเกรดที่ใช้</div>${tablePanel('Assessments','รายการวัดและประเมินผล','ประเภทประเมินเป็นภาษาไทย เลือกจากรายการหรือระบุเองได้')}<section class="panel"><div class="panel-head"><div><h3>เกณฑ์ตัดเกรด</h3><div class="subhead">กรอกเฉพาะคะแนนขั้นต่ำของแต่ละเกรดตามตัวอย่าง ไม่ต้องระบุคะแนนสูงสุด</div></div></div><div class="panel-body grade-layout"><div class="field grade-mode-field"><label for="grade-mode">ระบบเกรด</label><select id="grade-mode" data-action="grade-mode"><option value="" ${!gradeMode()?'selected':''}>— เลือกระบบเกรด —</option><option value="abc" ${gradeMode()==='abc'?'selected':''}>A, B+, B, C+, C, D+, D, F</option><option value="su" ${gradeMode()==='su'?'selected':''}>S / U</option></select><span class="micro">เลือกแล้วจึงกรอกคะแนนขั้นต่ำในตาราง</span></div>${gradeCutoffTable()}</div></section>${tablePanel('Resources','หนังสือและแหล่งเรียนรู้','ประเภทแหล่งเรียนรู้ภาษาไทย เลือกจากรายการหรือระบุเองได้')}</div>`;}
@@ -209,10 +206,20 @@ function render(){const t=TABS.find(x=>x.id===currentTab);el('nav').innerHTML=TA
 switch(currentTab){case 'course':el('panel-content').innerHTML=coursePage();break;case 'plos':el('panel-content').innerHTML=plosPage();break;case 'instructors':el('panel-content').innerHTML=instructorsPage();break;case 'clos':el('panel-content').innerHTML=`<div class="section-stack"><div class="notice">เลือกรหัส PLO ที่เชื่อมโยงจากหลักสูตรในแท็บ PLOs สามารถเลือกหลายรหัสต่อ CLO ได้</div>${tablePanel('CLOs','ผลลัพธ์การเรียนรู้รายวิชา','คำอธิบาย CLO และ PLO ที่เชื่อมโยง')}</div>`;break;case 'weekly':el('panel-content').innerHTML=weeklyPage();break;case 'assessment':el('panel-content').innerHTML=assessmentPage();break;}
 refreshHeader();}
 
-function refreshHeader(){el('storage-label').textContent=storageMode||'กำลังตรวจสอบ';}
+function refreshHeader(){el('storage-label').textContent='บันทึกเป็นไฟล์ JSON เท่านั้น';}
 function toast(message){const root=el('toast');root.textContent=message;root.classList.remove('hidden');clearTimeout(toast._timer);toast._timer=setTimeout(()=>root.classList.add('hidden'),3800);}
-function scheduleSave(){el('save-status').textContent='มีการเปลี่ยนแปลง…';clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveDraft(false),900);}
-async function saveDraft(notify=true){clearTimeout(saveTimer);saveTimer=null;if(suppressSave)return;if(saving){scheduleSave();return;}saving=true;try{if(!currentId)currentId=uuid();const p={id:currentId,updatedAt:nowISO(),name:[state.CourseInfo.CourseCode,state.CourseInfo.CourseTitleTh].filter(Boolean).join(' · ')||'รายวิชาใหม่',data:payload()};await store('put',p);el('save-status').textContent=`บันทึกใน ${storageMode} แล้ว`;if(notify)toast('บันทึก Draft ใน Browser แล้ว (ยังไม่ได้ส่งข้อมูลขึ้น Server)');}catch(e){el('save-status').textContent='บันทึกไม่ได้ — กรุณา Export JSON';}finally{saving=false;}}
+// Keep the existing event handlers but replace autosave with an unsaved-changes indicator.
+function scheduleSave(){
+  unsavedChanges=true;
+  el('save-status').textContent='ยังไม่ได้บันทึกการแก้ไขลง JSON';
+}
+function resetSavedStatus(text){
+  unsavedChanges=false;
+  el('save-status').textContent=text;
+}
+function confirmDiscard(){
+  return !unsavedChanges || confirm('มีข้อมูลที่ยังไม่ได้บันทึกเป็นไฟล์ JSON หากดำเนินการต่อการแก้ไขเหล่านี้จะหายไป ต้องการดำเนินการต่อหรือไม่?');
+}
 function tab(id){currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
 function onInput(event){const t=event.target;
 if(t.dataset.action==='curriculum-select'&&event.type==='change'){
@@ -223,7 +230,7 @@ if(t.dataset.action==='teacher-scope'&&event.type==='change'){allDepartments=t.v
 if(t.dataset.action==='grade-mode'&&event.type==='change'){
  const mode=t.value;
  if(!mode)return;
- if(state.GradeScale.length&&!confirm('การเปลี่ยนรูปแบบเกรดจะแทนที่ตารางช่วงคะแนนเดิม กรุณาสำรอง Draft หากต้องการเก็บข้อมูลเดิม ยืนยันหรือไม่?')){render();return;}
+ if(state.GradeScale.length&&!confirm('การเปลี่ยนรูปแบบเกรดจะแทนที่เกณฑ์เดิม กรุณาบันทึก JSON หากต้องการเก็บข้อมูลเดิม ยืนยันหรือไม่?')){render();return;}
  state.GradeScale=(mode==='su'?GRADE_SU:GRADE_ABC).map(Grade=>({...blankRecord('GradeScale'),Grade}));updateGradeCutoffs(mode);render();scheduleSave();return;
 }
 if(t.dataset.action==='weekly-teacher-custom')return;
@@ -308,25 +315,63 @@ else {
 return {errors,warnings};}
 function showValidation(){const r=validate(payload());showingErrors=true;el('validation').classList.add('visible');el('issue-heading').textContent=`ผลตรวจสอบ · ${r.errors.length} ข้อผิดพลาด · ${r.warnings.length} ข้อควรตรวจ`;let html=[...r.errors,...r.warnings].map(x=>`<button class="issue ${x.severity==='warning'?'warning':''}" data-action="issue-tab" data-value="${x.tab}" data-group="${x.group}"><div class="severity">${x.severity==='error'?'ERROR':'เตือน'}</div><div>${escapeHtml(x.message)}<div class="where">${escapeHtml(x.group)} ${x.field?'· '+escapeHtml(x.field):''}</div></div></button>`).join('');el('issue-list').innerHTML=html||'<div class="issue ok">✓ ข้อมูลผ่านการตรวจสอบเงื่อนไขที่กำหนด พร้อมส่งออก JSON</div>';el('validation').scrollIntoView({behavior:'smooth',block:'start'});return r;}
 function download(blob,filename){const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500);}
-function backupJSON(){const d=payload();const filename='DRAFT_'+(d.OfferingId||new Date().toISOString().slice(0,10))+'.json';download(new Blob([JSON.stringify(d,null,2)],{type:'application/json;charset=utf-8'}),filename);toast('สำรอง Draft เป็น JSON แล้ว — ไฟล์นี้อาจยังไม่ผ่าน Validation');}
-function exportJSON(){const d=payload(),r=validate(d);if(r.errors.length){showValidation();toast(`พบ ${r.errors.length} ข้อผิดพลาด กรุณาแก้ก่อนส่งออก`);return;}const filename=(d.OfferingId||'syllabus')+'.json';download(new Blob([JSON.stringify(d,null,2)],{type:'application/json;charset=utf-8'}),filename);toast('ดาวน์โหลด JSON แล้ว • แนะนำสำรองไฟล์ทุกครั้งหลังกรอกเสร็จ');}
-async function importJSON(file){if(!file)return;try{if(file.size>5*1024*1024)throw new Error('ไฟล์ใหญ่เกิน 5 MB');const s=await file.text();const obj=JSON.parse(s);if(obj.SchemaVersion!=='1.0.0')throw new Error('รองรับ SchemaVersion 1.0.0 เท่านั้น');if(!obj.CourseInfo||!Array.isArray(obj.Instructors))throw new Error('โครงสร้างข้อมูลไม่ใช่ Syllabus JSON v1');if(!confirm('นำเข้า JSON เป็น Draft ใหม่? ข้อมูล Draft ปัจจุบันจะยังคงอยู่ในรายการ Draft'))return;if(currentId||saveTimer)await saveDraft(false);state=fromPayload(obj);manualTeacherRows.clear();currentId=uuid();currentTab='course';showingErrors=false;el('validation').classList.remove('visible');render();await saveDraft(false);toast('นำเข้า JSON สำเร็จ กรุณากดตรวจสอบข้อมูลก่อนส่งออก');}catch(e){toast('ไม่สามารถนำเข้าได้: '+e.message);}finally{el('file-import').value='';}}
-async function newDraft(withDemo=false){if(!confirm(withDemo?'โหลดข้อมูลตัวอย่างสมมติเป็น Draft ใหม่?':'สร้าง Draft ใหม่? Draft เดิมจะยังถูกบันทึกไว้ใน Browser'))return;if(currentId||saveTimer)await saveDraft(false);state=withDemo?fromPayload(demo):blankData();manualTeacherRows.clear();currentId=withDemo?uuid():null;currentTab='course';showingErrors=false;el('validation').classList.remove('visible');render();if(withDemo)await saveDraft(false);else el('save-status').textContent='แบบฟอร์มใหม่ (ว่าง) · ยังไม่บันทึก';toast(withDemo?'โหลดข้อมูลสมมติแล้ว กรุณาอย่านำไปใช้เป็นข้อมูลหลักสูตรจริง':'สร้าง Draft ใหม่แล้ว · ไม่มีข้อมูลค้าง');}
-async function openDrawer(){if(currentId||saveTimer)await saveDraft(false);const all=await store('list');all.sort((a,b)=>String(b.updatedAt).localeCompare(String(a.updatedAt)));el('draft-list').innerHTML=all.length?all.map(d=>`<div class="draft-item ${currentId===d.id?'current':''}"><div><strong>${escapeHtml(d.name||'ไม่ระบุชื่อ')}</strong><small>${escapeHtml(new Date(d.updatedAt).toLocaleString('th-TH'))}</small></div><div class="inline-row"><button class="btn btn-mini" data-action="load-draft" data-value="${escapeHtml(d.id)}">เปิด</button><button class="btn btn-mini btn-danger" data-action="delete-draft" data-value="${escapeHtml(d.id)}">ลบ</button></div></div>`).join(''):'<div class="empty">ยังไม่มี Draft</div>';el('drawer').classList.remove('hidden');}
+// The same contract is used for incomplete and validated JSON. Incomplete
+// data remains importable but is NOT claimed to be schema-valid for Blazor.
+function saveJSON(){
+  const d=payload();
+  const c=state.CourseInfo||{};
+  const code=safePart(c.CourseCode)||'UNNAMED';
+  const year=/^\d{4}$/.test(String(c.AcademicYear||''))?String(c.AcademicYear):'YEAR';
+  const term=safePart(c.Semester)||'TERM';
+  const section=safePart(c.Section).replace(/^SEC/,'')||'SECTION';
+  const filename=`SYLLABUS_${code}_${year}_${term}_${section}.json`;
+  download(new Blob([JSON.stringify(d,null,2)],{type:'application/json;charset=utf-8'}),filename);
+  resetSavedStatus('เริ่มดาวน์โหลด JSON แล้ว · ตรวจสอบไฟล์ใน Downloads');
+  toast('เริ่มดาวน์โหลด '+filename+' · บันทึกได้แม้ยังตรวจสอบไม่ผ่าน');
+}
+async function importJSON(file){
+ if(!file)return;
+ try{
+   if(file.size>5*1024*1024)throw new Error('ไฟล์ใหญ่เกิน 5 MB');
+   const obj=JSON.parse(await file.text());
+   if(obj.SchemaVersion!=='1.0.0')throw new Error('รองรับ SchemaVersion 1.0.0 เท่านั้น');
+   if(!obj.CourseInfo||typeof obj.CourseInfo!=='object'||Array.isArray(obj.CourseInfo)||!Array.isArray(obj.Instructors))throw new Error('ไม่ใช่ไฟล์ Syllabus JSON v1');
+   if(!confirmDiscard())return;
+   state=fromPayload(obj);
+   lastLoadedFile=file.name;
+   manualTeacherRows.clear();currentTab='course';weeklyKind='LecturePlans';showingErrors=false;
+   el('validation').classList.remove('visible');render();
+   resetSavedStatus('เปิดไฟล์ '+file.name+' แล้ว');
+   toast('เปิด JSON สำเร็จ · แก้ไขข้อมูลแล้วกดบันทึก JSON อีกครั้ง');
+ }catch(e){toast('เปิด JSON ไม่สำเร็จ: '+e.message);}
+ finally{el('file-import').value='';}
+}
+function newDraft(){
+ if(!confirmDiscard())return;
+ state=blankData();lastLoadedFile='';manualTeacherRows.clear();currentTab='course';weeklyKind='LecturePlans';showingErrors=false;
+ el('validation').classList.remove('visible');render();resetSavedStatus('เริ่มรายวิชาใหม่ · ยังไม่ได้บันทึก JSON');toast('เริ่มรายวิชาใหม่แล้ว');
+}
 async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)return;const {action,group,row,value}=b.dataset;if(action==='weekly-teacher-remove'){
  const r=state[group]?.[Number(row)];if(r)setWeeklyTeachers(group,Number(row),splitTeacherNames(r.Notes).filter(x=>x!==value));return;
 }if(action==='weekly-teacher-add-custom'){
  const root=b.closest('.teacher-multi'),input=root?.querySelector('[data-action="weekly-teacher-custom"]');
  const name=normalizeName(input?.value);if(!name){input?.focus();return;}
  const rec=state[group]?.[Number(row)];if(rec)setWeeklyTeachers(group,Number(row),[...splitTeacherNames(rec.Notes),name]);return;
-}if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}if(action==='issue-tab'){if(group==='LabPlans')weeklyKind='LabPlans';tab(value);setTimeout(()=>el('group-'+group)?.scrollIntoView({behavior:'smooth',block:'start'}),120);return;}if(action==='validate'){showValidation();return;}if(action==='export'){exportJSON();return;}if(action==='backup'){backupJSON();return;}if(action==='save'){await saveDraft(true);return;}if(action==='import'){el('file-import').click();return;}if(action==='new'){await newDraft(false);return;}if(action==='demo'){await newDraft(true);return;}if(action==='drafts'){await openDrawer();return;}if(action==='close-drawer'){el('drawer').classList.add('hidden');return;}if(action==='load-draft'){const r=await store('get',value);if(!r)return;if(currentId||saveTimer)await saveDraft(false);state=fromPayload(r.data);manualTeacherRows.clear();currentId=r.id;currentTab='course';el('drawer').classList.add('hidden');render();toast('เปิด Draft แล้ว');return;}if(action==='delete-draft'){if(!confirm('ลบ Draft นี้ออกจาก Browser อย่างถาวร?'))return;await store('delete',value);if(currentId===value){state=blankData();currentId=null;render();el('save-status').textContent='แบบฟอร์มใหม่ (ว่าง) · ยังไม่บันทึก';}await openDrawer();return;}}
-async function init(){await initStore();const all=await store('list');
-// Always open a truly blank form on a new page visit. Never select the latest
-// stored Draft silently: its semester/staff values otherwise look like defaults.
-// Saved drafts are left intact and can be loaded explicitly via 'Draft ของฉัน'.
-state=blankData(); currentId=null; manualTeacherRows.clear(); currentTab='course';
-render();
-el('save-status').textContent=all.length?`แบบฟอร์มใหม่ (ว่าง) · มี Draft เดิม ${all.length} รายการ`:'แบบฟอร์มใหม่ (ว่าง) · ยังไม่บันทึก';
-document.addEventListener('input',onInput);document.addEventListener('change',onInput);document.addEventListener('click',clickAction);el('file-import').addEventListener('change',e=>importJSON(e.target.files?.[0]));document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveDraft(true);}if(e.key==='Escape')el('drawer').classList.add('hidden');});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&saveTimer)saveDraft(false);});window.addEventListener('beforeunload',()=>{if(saveTimer)saveDraft(false);});}
-init().catch(e=>{console.error(e);toast('เริ่มต้นแอปไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ');});
+}if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}if(action==='issue-tab'){if(group==='LabPlans')weeklyKind='LabPlans';tab(value);setTimeout(()=>el('group-'+group)?.scrollIntoView({behavior:'smooth',block:'start'}),120);return;}if(action==='validate'){showValidation();return;}
+if(action==='save'){saveJSON();return;}
+if(action==='import'){el('file-import').click();return;}
+if(action==='new'){newDraft();return;}
+}
+function init(){
+ state=blankData();manualTeacherRows.clear();currentTab='course';
+ render();resetSavedStatus('ยังไม่ได้บันทึก JSON');
+ document.addEventListener('input',onInput);
+ document.addEventListener('change',onInput);
+ document.addEventListener('click',clickAction);
+ el('file-import').addEventListener('change',e=>importJSON(e.target.files?.[0]));
+ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveJSON();}});
+ window.addEventListener('beforeunload',e=>{if(unsavedChanges){e.preventDefault();e.returnValue='';}});
+}
+
+try{init();}catch(e){console.error(e);toast('เริ่มต้นแอปไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ');}
 })();
