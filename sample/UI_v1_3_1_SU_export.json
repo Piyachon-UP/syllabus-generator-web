@@ -1,0 +1,153 @@
+{
+  "SchemaVersion": "1.0.0",
+  "OfferingId": "244442-1-2569-SEC01",
+  "SourceType": "BlazorManual",
+  "ExtractedAt": "2026-10-28T14:48:01.313Z",
+  "CourseInfo": {
+    "CourseCode": "244442",
+    "CourseTitleTh": "ไมโครคอนโทรลเลอร์และการเขียนโปรแกรม",
+    "CourseTitleEn": "Microcontroller and Programming",
+    "CourseDescriptionTh": "การเขียนโปรแกรมไมโครคอนโทรลเลอร์",
+    "CourseDescriptionEn": "Microcontroller applications",
+    "Credits": "3",
+    "LectureHours": 2,
+    "LabHours": 2,
+    "SelfStudyHours": 5,
+    "AcademicYear": 2569,
+    "Semester": "1",
+    "Section": "01",
+    "FacultyName": "คณะวิทยาศาสตร์",
+    "UniversityName": "มหาวิทยาลัยพะเยา"
+  },
+  "Curriculum": {
+    "CurriculumCode": "BS-PHYSICS",
+    "CurriculumName": "หลักสูตรวิทยาศาสตรบัณฑิต",
+    "ProgramName": "สาขาวิชาฟิสิกส์",
+    "DegreeLevel": "วิทยาศาสตรบัณฑิต",
+    "DepartmentName": "สาขาวิชาฟิสิกส์"
+  },
+  "Instructors": [
+    {
+      "IsResponsibleInstructor": true,
+      "Prefix": "ผศ.ดร.",
+      "FirstName": "ปิยชนน์",
+      "LastName": "เกษสุวรรณ",
+      "DisplayName": "ผศ.ดร. ปิยชนน์ เกษสุวรรณ",
+      "Department": "สาขาวิชาฟิสิกส์"
+    }
+  ],
+  "PLOs": [
+    {
+      "PloCode": "PLO1",
+      "DescriptionTh": "ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ",
+      "Category": "Knowledge / Communication"
+    },
+    {
+      "PloCode": "PLO2",
+      "DescriptionTh": "ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน",
+      "Category": "Practical / Digital / AI"
+    },
+    {
+      "PloCode": "PLO3",
+      "DescriptionTh": "ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม",
+      "Category": "Ethics"
+    },
+    {
+      "PloCode": "PLO4",
+      "DescriptionTh": "ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก",
+      "Category": "Communication / Teamwork"
+    },
+    {
+      "PloCode": "PLO5",
+      "DescriptionTh": "ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต",
+      "Category": "Lifelong Learning"
+    },
+    {
+      "PloCode": "PLO6",
+      "DescriptionTh": "ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้",
+      "Category": "Design Thinking"
+    },
+    {
+      "PloCode": "PLO7",
+      "DescriptionTh": "ผู้เรียนสามารถอธิบายหลักการทางฟิสิกส์พื้นฐานได้",
+      "Category": "Knowledge"
+    },
+    {
+      "PloCode": "PLO8",
+      "DescriptionTh": "ผู้เรียนสามารถทำการทดลองทางฟิสิกส์ด้วยกระบวนวิธีทางวิทยาศาสตร์ได้",
+      "Category": "Knowledge/ Practical"
+    },
+    {
+      "PloCode": "PLO9",
+      "DescriptionTh": "ผู้เรียนสามารถวิเคราะห์ผลการทดลองหรือข้อมูลทางฟิสิกส์ได้",
+      "Category": "Knowledge/ Practical"
+    },
+    {
+      "PloCode": "PLO10",
+      "DescriptionTh": "ผู้เรียนสามารถวิพากษ์ผลการทดลองทางฟิสิกส์ได้",
+      "Category": "Knowledge/ Practical"
+    },
+    {
+      "PloCode": "PLO11",
+      "DescriptionTh": "ผู้เรียนสามารถสร้างนวัตกรรมหรืองานวิจัยที่เกิดประโยชน์",
+      "Category": "Knowledge/ Practical/ Innovation"
+    }
+  ],
+  "CLOs": [
+    {
+      "CloCode": "CLO1",
+      "DescriptionTh": "ประยุกต์หลักการไมโครคอนโทรลเลอร์",
+      "MappedPloCodes": [
+        "PLO7"
+      ]
+    }
+  ],
+  "ClassMeetings": [],
+  "Exams": [],
+  "StudentGroups": [],
+  "LecturePlans": [
+    {
+      "WeekNumber": 1,
+      "Topic": "บรรยายการทำงานของวงจร",
+      "TeachingMethods": "การบรรยาย",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ปิยชนน์ เกษสุวรรณ; อ. กฤษดา เหลืองทองคำ"
+    }
+  ],
+  "LabPlans": [
+    {
+      "WeekNumber": 1,
+      "Topic": "ทดลองอ่านข้อมูลเซนเซอร์",
+      "TeachingMethods": "การทดลองและเก็บข้อมูล",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ปิยชนน์ เกษสุวรรณ"
+    }
+  ],
+  "Assessments": [
+    {
+      "AssessmentName": "คะแนนสอบและปฏิบัติ",
+      "AssessmentType": "การสอบปฏิบัติ",
+      "WeightPercent": 100,
+      "MappedCloCodes": [
+        "CLO1"
+      ]
+    }
+  ],
+  "GradeScale": [
+    {
+      "Grade": "S",
+      "MinimumScore": 60,
+      "MaximumScore": 100
+    },
+    {
+      "Grade": "U",
+      "MinimumScore": 0,
+      "MaximumScore": 59.99
+    }
+  ],
+  "Resources": []
+}
