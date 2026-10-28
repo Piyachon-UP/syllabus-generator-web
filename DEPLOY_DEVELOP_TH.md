@@ -1,31 +1,38 @@
-# อัปเดต UX/UI v1.3.3 ไปยัง GitHub `develop`
+# นำ UI v1.3.4 ไปทดสอบใน GitHub Branch `develop`
 
 Repository: https://github.com/Piyachon-UP/syllabus-generator-web/tree/develop
 
-## วิธีอัปเดต
+## ก่อนอัปเดต
 
-1. สำรอง Draft สำคัญจาก Web App เป็น JSON ก่อนแก้ไข
-2. ดาวน์โหลดและแตก `Smart_Syllabus_Generator_Web_UI_v1_3_3_Patch.zip`
-3. ไปที่ Branch **develop** บน GitHub (อย่าเลือก main)
-4. อัปเดตไฟล์ตาม path เดิม:
-   - `index.html` ที่ Repository Root (สำคัญสำหรับเว็บ)
-   - `src/app.js` (ให้ตรงกับ index.html)
-   - `tools/build.py` (แสดงเวอร์ชัน 1.3.3)
-   - `README_TH.md` และ `DEPLOY_DEVELOP_TH.md` (คู่มือ)
-5. Commit ด้วยข้อความ `Fix persisted term values and instructor rows; add custom resource type v1.3.3`
-6. ดาวน์โหลด ZIP ของ Branch `develop` เพื่อทดสอบในเครื่อง ผ่าน `py -3 -m http.server 8000`
-7. กด `Ctrl + Shift + R` ใน Browser หลังอัปเดต
+หากมีข้อมูลที่เคยกรอกบน `localhost:8000` ให้เปิดรุ่นที่ใช้อยู่และกด **เครื่องมือ → สำรอง Draft JSON** เพื่อเก็บเป็นไฟล์ไว้ก่อน
 
-`main` ยัง Deploy ผ่าน GitHub Pages รุ่นปัจจุบัน ไม่ต้อง Merge จนกว่าจะทดสอบเรียบร้อย
+## อัปเดต
 
-## ผลที่ต้องตรวจ
+1. แตก `Smart_Syllabus_Generator_Web_UI_v1_3_4_Patch.zip`
+2. ไปยัง GitHub Repository และเปลี่ยน Branch เป็น **develop** (ไม่ใช่ main)
+3. อัปโหลดไฟล์ **ตาม path เดิม**:
+   - `index.html` (Root)
+   - `src/app.js`
+   - `tools/build.py`
+   - `README_TH.md` และ `DEPLOY_DEVELOP_TH.md`
+   - `tools/test_v134.py` (ถ้าต้องการชุดทดสอบ)
+4. Commit message: `Start new form blank and make draft restore explicit v1.3.4`
+5. ดาวน์โหลด ZIP ของ Branch develop ใหม่ หรือ Clone/Pull มาในเครื่อง ทดสอบผ่าน Localhost:
+   ```powershell
+   py -3 -m http.server 8000
+   ```
+6. กด `Ctrl + Shift + R` เพื่อโหลด HTML ใหม่
 
-- สร้าง Draft ใหม่ → ปีการศึกษาและภาคเรียนเป็นช่องว่าง
-- เปิด Draft เก่าที่เคยมีปี `1` / ภาคเรียน `0` → ช่องสองช่องนี้ว่าง แต่ข้อมูลอื่นอยู่ครบ
-- เปิด Draft ที่ปี `2569` / ภาคเรียน `1` → ยังคงค่าเดิม
-- เมนูผู้สอน → ไม่แสดงแถวว่างเอง แต่กด “＋ เพิ่มผู้สอน” แล้วเริ่มกรอกได้
-- Draft เก่าที่มีแถวผู้สอนเปล่าและแถวที่กรอกแล้ว → แสดงเฉพาะแถวที่กรอกแล้ว
-- การประเมิน → หนังสือและแหล่งเรียนรู้ → ประเภทแหล่งเรียนรู้ → `กำหนดเอง` → กรอกข้อความอื่นได้
-- Save Draft, Refresh, Validate, Export JSON
+> ไม่ต้องเปลี่ยน Settings → Pages และยังไม่ต้อง Merge เข้า main
 
-> ปี `1` และภาคเรียน `0` ใน Draft เก่ามีความเป็นไปได้ว่าเกิดจากค่าที่เคยบันทึกไว้ การปรับรุ่นนี้ทำความสะอาดเฉพาะค่าที่ไม่ถูกต้องดังกล่าว ไม่ล้างค่าปี/ภาคเรียนที่ผู้ใช้กรอกถูกต้อง
+## รายการทดสอบสำคัญ
+
+1. เปิด `http://localhost:8000/` — ช่อง **ปีการศึกษา** และ **ภาคเรียน** ว่าง
+2. ไปแท็บ **ผู้สอน** — แสดง `0 คน` และข้อความ `ยังไม่มีผู้สอน` ไม่มีแถวเก่าค้าง
+3. กด **＋ เพิ่มผู้สอน** เลือกชื่อ กด **บันทึก Draft**
+4. Refresh หน้าเว็บ — **แสดงหน้ากรอกข้อมูลใหม่ว่าง** (พฤติกรรมตั้งใจของรุ่นนี้)
+5. กด **Draft ของฉัน** → **เปิด** Draft ที่เพิ่งบันทึก — รายชื่อเดิมกลับมาและข้อมูลไม่สูญหาย
+6. เปิด Draft เก่าที่มีปี พ.ศ. 2569 / ภาคเรียน 1 — คงข้อมูลทั้งสองช่องตามที่เคยกรอก
+7. เมื่อกรอกครบ ตรวจสอบและ Export JSON ยังคงตรงตาม Schema 1.0.0
+
+**ข้อควรทราบ:** Localhost และ GitHub Pages แยกพื้นที่เก็บ Draft กัน ต้อง Export/Import JSON เมื่อย้ายไปคนละ URL
