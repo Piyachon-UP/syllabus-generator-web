@@ -1,0 +1,493 @@
+{
+  "SchemaVersion": "1.0.0",
+  "OfferingId": "244442-1-2569-SEC01",
+  "SourceType": "BlazorManual",
+  "ExtractedAt": "2026-10-28T08:18:53.028Z",
+  "CourseInfo": {
+    "CourseCode": "244442",
+    "CourseTitleTh": "ไมโครคอนโทรลเลอร์และการเขียนโปรแกรม",
+    "CourseTitleEn": "Microcontroller and Programming",
+    "CourseDescriptionTh": "ศึกษาพื้นฐานไมโครคอนโทรลเลอร์ การเชื่อมต่ออุปกรณ์และการเขียนโปรแกรม (ข้อมูลสมมติสำหรับทดสอบเท่านั้น)",
+    "Credits": "3(2-2-5)",
+    "LectureHours": 2,
+    "LabHours": 2,
+    "SelfStudyHours": 5,
+    "AcademicYear": 2569,
+    "Semester": "1",
+    "Section": "01",
+    "FacultyName": "คณะวิทยาศาสตร์",
+    "UniversityName": "มหาวิทยาลัยพะเยา",
+    "TeachingLanguage": "ไทย"
+  },
+  "Curriculum": {
+    "CurriculumName": "หลักสูตรตัวอย่าง (แทนที่ด้วยข้อมูลจริง)",
+    "ProgramName": "ฟิสิกส์"
+  },
+  "Instructors": [
+    {
+      "StaffId": "DEMO001",
+      "IsResponsibleInstructor": true,
+      "Prefix": "ผศ.ดร.",
+      "FirstName": "ตัวอย่าง",
+      "LastName": "ผู้สอน",
+      "DisplayName": "ผศ.ดร. ตัวอย่าง ผู้สอน",
+      "Email": "demo@example.invalid",
+      "Department": "คณะวิทยาศาสตร์",
+      "LecturePercent": 100,
+      "LabPercent": 100,
+      "Notes": "ข้อมูลสมมติเท่านั้น"
+    }
+  ],
+  "PLOs": [
+    {
+      "PloCode": "PLO1",
+      "DescriptionTh": "ประยุกต์ความรู้ด้านวิทยาศาสตร์แก้ปัญหา (ตัวอย่างสมมติ)"
+    }
+  ],
+  "CLOs": [
+    {
+      "CloCode": "CLO1",
+      "DescriptionTh": "ออกแบบโปรแกรมไมโครคอนโทรลเลอร์พื้นฐาน (ตัวอย่างสมมติ)",
+      "BloomLevel": "Apply",
+      "MappedPloCodes": [
+        "PLO1"
+      ]
+    }
+  ],
+  "ClassMeetings": [
+    {
+      "DayOfWeek": "จันทร์",
+      "StartTime": "09:00",
+      "EndTime": "11:00",
+      "RoomCode": "DEMO-LAB",
+      "DeliveryType": "Lecture",
+      "Notes": "ตัวอย่าง"
+    }
+  ],
+  "Exams": [
+    {
+      "ExamTypeCode": "M",
+      "ExamDate": "2027-01-15",
+      "StartTime": "09:00",
+      "EndTime": "12:00",
+      "RoomCode": "DEMO-ROOM",
+      "Notes": "ตัวอย่าง ไม่ใช่ตารางสอบจริง"
+    }
+  ],
+  "StudentGroups": [
+    {
+      "StudentProgramName": "ฟิสิกส์",
+      "StudentYearLevel": 2,
+      "RegisteredStudentCount": 25,
+      "StudentCurriculumCode": "DEMO-CURR",
+      "StudentCurriculumRevisionYear": 2568,
+      "Notes": "ข้อมูลสมมติ"
+    }
+  ],
+  "LecturePlans": [
+    {
+      "WeekNumber": 1,
+      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 1",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 2,
+      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 2",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 3,
+      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 3",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 4,
+      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 4",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 5,
+      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 5",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 6,
+      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 6",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 7,
+      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 7",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 8,
+      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 8",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 9,
+      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 9",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 10,
+      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 10",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 11,
+      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 11",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 12,
+      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 12",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 13,
+      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 13",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 14,
+      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 14",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 15,
+      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 15",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    }
+  ],
+  "LabPlans": [
+    {
+      "WeekNumber": 1,
+      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 1",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 2,
+      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 2",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 3,
+      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 3",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 4,
+      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 4",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 5,
+      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 5",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 6,
+      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 6",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 7,
+      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 7",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 8,
+      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 8",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 9,
+      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 9",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 10,
+      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 10",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 11,
+      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 11",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 12,
+      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 12",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 13,
+      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 13",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 14,
+      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 14",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    },
+    {
+      "WeekNumber": 15,
+      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)",
+      "LearningActivities": "กิจกรรมสัปดาห์ที่ 15",
+      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "AssessmentMethods": "ใบงาน",
+      "Notes": "ข้อมูลสมมติ"
+    }
+  ],
+  "Assessments": [
+    {
+      "AssessmentCode": "AS01",
+      "AssessmentName": "ใบงานและปฏิบัติการ",
+      "AssessmentType": "Practical",
+      "WeightPercent": 60,
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ตัวอย่าง"
+    },
+    {
+      "AssessmentCode": "AS02",
+      "AssessmentName": "โครงงาน",
+      "AssessmentType": "Project",
+      "WeightPercent": 40,
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ตัวอย่าง"
+    }
+  ],
+  "GradeScale": [
+    {
+      "Grade": "A",
+      "MinimumScore": 80,
+      "MaximumScore": 100
+    },
+    {
+      "Grade": "B+",
+      "MinimumScore": 75,
+      "MaximumScore": 79.99
+    },
+    {
+      "Grade": "B",
+      "MinimumScore": 70,
+      "MaximumScore": 74.99
+    },
+    {
+      "Grade": "C+",
+      "MinimumScore": 65,
+      "MaximumScore": 69.99
+    },
+    {
+      "Grade": "C",
+      "MinimumScore": 60,
+      "MaximumScore": 64.99
+    },
+    {
+      "Grade": "D+",
+      "MinimumScore": 55,
+      "MaximumScore": 59.99
+    },
+    {
+      "Grade": "D",
+      "MinimumScore": 50,
+      "MaximumScore": 54.99
+    },
+    {
+      "Grade": "F",
+      "MinimumScore": 0,
+      "MaximumScore": 49.99
+    }
+  ],
+  "Resources": [
+    {
+      "ResourceType": "Textbook",
+      "Title": "หนังสือ/แหล่งเรียนรู้ตัวอย่าง",
+      "Year": 2026,
+      "Notes": "ข้อมูลสมมติ"
+    }
+  ]
+}
