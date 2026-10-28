@@ -1,4 +1,4 @@
-/* Syllabus Generator Web UI v1.3.2 / JSON Contract v1.0.0 — all operations stay in this browser. */
+/* Syllabus Generator Web UI v1.3.3 / JSON Contract v1.0.0 — all operations stay in this browser. */
 (() => {
 'use strict';
 const contract = JSON.parse(document.getElementById('contract-json').textContent);
@@ -43,7 +43,7 @@ const SELECT={DegreeLevel:['วิทยาศาสตรบัณฑิต','�
 const LECTURE_METHODS=['การบรรยาย','การบรรยายเชิงปฏิสัมพันธ์','การอภิปรายกลุ่ม','การเรียนรู้แบบใช้ปัญหาเป็นฐาน (PBL)','การเรียนรู้แบบใช้โครงงานเป็นฐาน (PjBL)','การเรียนรู้แบบกรณีศึกษา','การเรียนรู้แบบสืบเสาะหาความรู้','การเรียนรู้แบบร่วมมือ','ห้องเรียนกลับด้าน (Flipped Classroom)','การสาธิต','การเรียนรู้แบบผสมผสาน','การนำเสนอและอภิปราย','การเรียนรู้ด้วยตนเอง','การฝึกปฏิบัติคำนวณและแก้โจทย์','การเรียนรู้ผ่านสื่อดิจิทัล','กำหนดเอง'];
 const LAB_METHODS=['การสาธิตขั้นตอนปฏิบัติ','การฝึกปฏิบัติในห้องปฏิบัติการ','การทดลองและเก็บข้อมูล','การปฏิบัติแบบรายบุคคล','การปฏิบัติแบบกลุ่ม','การฝึกใช้เครื่องมือและอุปกรณ์','การออกแบบและดำเนินการทดลอง','การเรียนรู้แบบโครงงาน','การแก้ปัญหาจากสถานการณ์จริง','การเรียนรู้แบบฐานกิจกรรม','การฝึกทักษะผ่านสถานการณ์จำลอง','การศึกษาภาคสนาม','การประเมินผลจากชิ้นงาน','การทำเวิร์กช็อป','การเรียนรู้แบบสืบเสาะหาความรู้','กำหนดเอง'];
 const ASSESSMENT_TYPES=['การสอบย่อย','การบ้าน / แบบฝึกหัด','การสอบกลางภาค','การสอบปลายภาค','การสอบปฏิบัติ','รายงาน','โครงงาน','การนำเสนอ','การมีส่วนร่วมในชั้นเรียน','การประเมินชิ้นงาน','การประเมินทักษะปฏิบัติ','การสังเกตพฤติกรรม','แฟ้มสะสมผลงาน','การประเมินตนเอง','การประเมินโดยเพื่อน','กำหนดเอง'];
-const RESOURCE_TYPES=['ตำราเรียน','หนังสือ','หนังสืออิเล็กทรอนิกส์','เอกสารประกอบการสอน','บทความวิชาการ','บทความวิจัย','วารสาร','เว็บไซต์','วิดีโอการสอน','สื่อออนไลน์','คู่มือปฏิบัติการ','ฐานข้อมูลวิชาการ','ซอฟต์แวร์และเครื่องมือ','สื่อการเรียนรู้แบบเปิด'];
+const RESOURCE_TYPES=['ตำราเรียน','หนังสือ','หนังสืออิเล็กทรอนิกส์','เอกสารประกอบการสอน','บทความวิชาการ','บทความวิจัย','วารสาร','เว็บไซต์','วิดีโอการสอน','สื่อออนไลน์','คู่มือปฏิบัติการ','ฐานข้อมูลวิชาการ','ซอฟต์แวร์และเครื่องมือ','สื่อการเรียนรู้แบบเปิด','กำหนดเอง'];
 const GRADE_ABC=['A','B+','B','C+','C','D+','D','F'];
 const GRADE_SU=['S','U'];
 const VISIBLE_COLS={CLOs:['CloCode','DescriptionTh','MappedPloCodes'],LecturePlans:['WeekNumber','Topic','TeachingMethods','MappedCloCodes','Notes'],LabPlans:['WeekNumber','Topic','TeachingMethods','MappedCloCodes','Notes'],Assessments:['AssessmentName','AssessmentType','WeightPercent','MappedCloCodes'],GradeScale:['Grade','MinimumScore','MaximumScore'],Resources:['ResourceType','Title','Author','Year','Url']};
@@ -63,12 +63,12 @@ const dataFields=group=>(contract.properties[group]?.type==='object'?contract.pr
 const blankRecord=(group)=>Object.fromEntries(Object.entries(dataFields(group)).map(([k,v])=>[k,v.type==='boolean'?false:v.type==='array'?[]:'']));
 const nowISO=()=>new Date().toISOString();
 // Rows that should visibly display an empty editing row when there is no saved data.
-const STARTER_ROW_GROUPS=['Instructors','CLOs','Assessments','Resources'];
+const STARTER_ROW_GROUPS=['CLOs','Assessments','Resources'];
 function ensureStarterRows(data){
  for(const group of STARTER_ROW_GROUPS){if(!Array.isArray(data[group])||data[group].length===0)data[group]=[blankRecord(group)];}
  return data;
 }
-function blankData(){return {SchemaVersion:'1.0.0',OfferingId:'',SourceType:'BlazorManual',ExtractedAt:nowISO(),CourseInfo:{...blankRecord('CourseInfo'),FacultyName:'คณะวิทยาศาสตร์',UniversityName:'มหาวิทยาลัยพะเยา'},Curriculum:blankRecord('Curriculum'),Instructors:[blankRecord('Instructors')],PLOs:[],CLOs:[blankRecord('CLOs')],ClassMeetings:[],Exams:[],StudentGroups:[],LecturePlans:Array.from({length:15},(_,i)=>({...blankRecord('LecturePlans'),WeekNumber:i+1})),LabPlans:Array.from({length:15},(_,i)=>({...blankRecord('LabPlans'),WeekNumber:i+1})),Assessments:[blankRecord('Assessments')],GradeScale:[],Resources:[blankRecord('Resources')]};}
+function blankData(){return {SchemaVersion:'1.0.0',OfferingId:'',SourceType:'BlazorManual',ExtractedAt:nowISO(),CourseInfo:{...blankRecord('CourseInfo'),FacultyName:'คณะวิทยาศาสตร์',UniversityName:'มหาวิทยาลัยพะเยา'},Curriculum:blankRecord('Curriculum'),Instructors:[],PLOs:[],CLOs:[blankRecord('CLOs')],ClassMeetings:[],Exams:[],StudentGroups:[],LecturePlans:Array.from({length:15},(_,i)=>({...blankRecord('LecturePlans'),WeekNumber:i+1})),LabPlans:Array.from({length:15},(_,i)=>({...blankRecord('LabPlans'),WeekNumber:i+1})),Assessments:[blankRecord('Assessments')],GradeScale:[],Resources:[blankRecord('Resources')]};}
 let state=blankData(), currentId=null, currentTab='course', weeklyKind='LecturePlans', showingErrors=false, saveTimer=null, saving=false, suppressSave=false;
 let storageMode=''; let db=null;
 const uuid=()=>typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():`draft-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -83,7 +83,27 @@ function cleanedRecord(group,r,requiredOnly=false){const prop=dataFields(group),
 function safePart(v){return String(v??'').trim().toUpperCase().replace(/\s+/g,'').replace(/[^A-Z0-9_-]/g,'');}
 function offeringId(){const c=state.CourseInfo||{},a=safePart(c.CourseCode),b=safePart(c.Semester),y=String(c.AcademicYear||'').trim(),sec=safePart(c.Section).replace(/^SEC/,'');return a&&b&&/^\d{4}$/.test(y)&&sec?`${a}-${b}-${y}-SEC${sec}`:'';}
 function payload(){const d={SchemaVersion:'1.0.0',OfferingId:offeringId(),SourceType:'BlazorManual',ExtractedAt:nowISO()};for(const group of SECTION_KEYS){if(group==='CourseInfo'||group==='Curriculum'){d[group]=cleanedRecord(group,state[group]);}else d[group]=(state[group]||[]).filter(r=>isPopulated(group,r)).map(r=>cleanedRecord(group,r));}return d;}
-function fromPayload(obj){const d=blankData();for(const group of SECTION_KEYS){const input=obj?.[group];if(group==='CourseInfo'||group==='Curriculum')d[group]={...blankRecord(group),...((input&&typeof input==='object'&&!Array.isArray(input))?input:{})};else if(Array.isArray(input)) d[group]=input.map(x=>({...blankRecord(group),...x}));}const oldCredit=String(d.CourseInfo.Credits||'');if(/^\d+\s*\(\s*\d+\s*[-–]\s*\d+\s*[-–]\s*\d+\s*\)$/.test(oldCredit))d.CourseInfo.Credits=oldCredit.split('(')[0].trim();for(const group of ['LecturePlans','LabPlans']){if(!d[group].length)d[group]=Array.from({length:15},(_,i)=>({...blankRecord(group),WeekNumber:i+1}));}return ensureStarterRows(d);}
+function fromPayload(obj){
+ const d=blankData();
+ for(const group of SECTION_KEYS){
+  const input=obj?.[group];
+  if(group==='CourseInfo'||group==='Curriculum')d[group]={...blankRecord(group),...((input&&typeof input==='object'&&!Array.isArray(input))?input:{})};
+  else if(Array.isArray(input))d[group]=input.map(x=>({...blankRecord(group),...x}));
+ }
+ // Earlier Drafts may already contain invalid browser-restored sentinel values.
+ // Clear only the known invalid 1/0 values, preserving correctly entered year/term.
+ const info=d.CourseInfo;
+ if(['0','1'].includes(String(info.AcademicYear??'').trim()))info.AcademicYear='';
+ if(String(info.Semester??'').trim()==='0')info.Semester='';
+ const oldCredit=String(info.Credits||'');
+ if(/^\d+\s*\(\s*\d+\s*[-–]\s*\d+\s*[-–]\s*\d+\s*\)$/.test(oldCredit))info.Credits=oldCredit.split('(')[0].trim();
+ // Do not resurface a phantom instructor row from pre-v1.3.3 Drafts.
+ d.Instructors=d.Instructors.filter(r=>isPopulated('Instructors',r));
+ for(const group of ['LecturePlans','LabPlans']){
+  if(!d[group].length)d[group]=Array.from({length:15},(_,i)=>({...blankRecord(group),WeekNumber:i+1}));
+ }
+ return ensureStarterRows(d);
+}
 function getArrayType(group,key){return dataFields(group)[key]?.type;}
 // Compatible with the existing JSON contract: multiple weekly instructors are saved
 // in the pre-existing Notes string separated by semicolons; no new schema fields.
@@ -148,7 +168,7 @@ function inputElement(group,key,value,scope,row,table=false){
  const htmlType=group==='CourseInfo'?'text':(type==='integer'||type==='number'?'number':key==='Url'?'url':'text');
  const step=type==='integer'?'1':type==='number'?'0.01':undefined;
  const placeholder=group==='CourseInfo'?'':(type==='array'?'CLO1, CLO2':'');
- return `<input aria-label="${escapeHtml(MAP[key]||key)}" type="${htmlType}" class="${cls}" ${group==='CourseInfo'?'inputmode="text"':step?`step="${step}"`:''} ${group!=='CourseInfo'&&(type==='number'||type==='integer')?'min="0"':''} ${attr} value="${escapeHtml(inputValue(value))}" placeholder="${placeholder}">`;
+ return `<input aria-label="${escapeHtml(MAP[key]||key)}" type="${htmlType}" class="${cls}" ${group==='CourseInfo'?'inputmode="text" autocomplete="off"':step?`step="${step}"`:''} ${group!=='CourseInfo'&&(type==='number'||type==='integer')?'min="0"':''} ${attr} value="${escapeHtml(inputValue(value))}" placeholder="${placeholder}">`;
 }
 
 
@@ -243,12 +263,13 @@ if(t.dataset.action==='instructor-select'&&event.type==='change'){
   el('validation').classList.remove('visible');showingErrors=false;render();scheduleSave();return;
 }
 if(!t.dataset.group)return;
-// "กำหนดเอง" is an action in the dropdown, never a saved teaching/assessment value.
+// "กำหนดเอง" is an action in the dropdown, never a saved teaching/assessment/resource value.
 // The same input remains editable so users can type any Thai method/category.
 if((t.dataset.key==='TeachingMethods'&&['LecturePlans','LabPlans'].includes(t.dataset.group)) ||
-   (t.dataset.key==='AssessmentType'&&t.dataset.group==='Assessments')){
+   (t.dataset.key==='AssessmentType'&&t.dataset.group==='Assessments') ||
+   (t.dataset.key==='ResourceType'&&t.dataset.group==='Resources')){
  if(t.value.trim()==='กำหนดเอง'){
-   t.value='';t.placeholder=t.dataset.key==='TeachingMethods'?'ระบุวิธีการสอนเอง':'ระบุประเภทประเมินเอง';
+   t.value='';t.placeholder=t.dataset.key==='TeachingMethods'?'ระบุวิธีการสอนเอง':t.dataset.key==='ResourceType'?'ระบุประเภทแหล่งเรียนรู้เอง':'ระบุประเภทประเมินเอง';
    t.focus();
    toast('พิมพ์รายการที่ต้องการในช่องนี้ได้เลย');
  }

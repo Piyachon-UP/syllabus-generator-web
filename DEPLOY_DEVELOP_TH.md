@@ -1,36 +1,31 @@
-# อัปเดต v1.3.2 ไปยัง GitHub Branch develop
+# อัปเดต UX/UI v1.3.3 ไปยัง GitHub `develop`
 
 Repository: https://github.com/Piyachon-UP/syllabus-generator-web/tree/develop
 
-1. **สำรอง Draft:** เปิดเว็บที่กำลังใช้งาน เลือก **เครื่องมือ → สำรอง Draft JSON** สำหรับงานที่กรอกไว้
-2. ดาวน์โหลด `Smart_Syllabus_Generator_Web_UI_v1_3_2_Patch.zip` แล้วแตกไฟล์บน Windows
-3. เข้า Repository และเลือก Branch **develop** (ไม่ใช่ main)
-4. แทนที่ไฟล์ตามตำแหน่งเดิมด้วยไฟล์จาก ZIP:
-   - `index.html`
-   - `src/app.js`
-   - `data/instructors.json`
-   - `tools/build.py`
-5. Commit ข้อความ `Refine blank starter rows and custom dropdowns v1.3.2`
-6. ดาวน์โหลด ZIP จาก Branch develop เพื่อทดสอบในเครื่อง หรือใช้ GitHub Desktop เพื่อ Pull โค้ดใหม่
-7. เปิด PowerShell ในโฟลเดอร์ที่แตก ZIP แล้วรัน `py -3 -m http.server 8000`
-8. เปิด `http://localhost:8000/` และกด Ctrl+Shift+R
-9. เลือก **เครื่องมือ → สร้าง Draft ใหม่** เพื่อทดสอบ ช่อง `AcademicYear` / `Semester` ต้องว่าง และแถวเปล่า 1 แถวในแท็บผู้สอน, CLOs, รายการประเมิน และแหล่งเรียนรู้
-10. ตรวจ Dropdown วิธีสอนทั้ง Lecture / Lab และประเภทประเมิน ให้มี `กำหนดเอง` เลือกแล้วกรอกค่าอื่นได้
+## วิธีอัปเดต
 
-**ไม่ต้องแก้ Settings → Pages** และยังไม่ต้อง Merge `develop` ไป `main` เพราะหน้าเว็บ production ยังคง Deploy จาก `main`
+1. สำรอง Draft สำคัญจาก Web App เป็น JSON ก่อนแก้ไข
+2. ดาวน์โหลดและแตก `Smart_Syllabus_Generator_Web_UI_v1_3_3_Patch.zip`
+3. ไปที่ Branch **develop** บน GitHub (อย่าเลือก main)
+4. อัปเดตไฟล์ตาม path เดิม:
+   - `index.html` ที่ Repository Root (สำคัญสำหรับเว็บ)
+   - `src/app.js` (ให้ตรงกับ index.html)
+   - `tools/build.py` (แสดงเวอร์ชัน 1.3.3)
+   - `README_TH.md` และ `DEPLOY_DEVELOP_TH.md` (คู่มือ)
+5. Commit ด้วยข้อความ `Fix persisted term values and instructor rows; add custom resource type v1.3.3`
+6. ดาวน์โหลด ZIP ของ Branch `develop` เพื่อทดสอบในเครื่อง ผ่าน `py -3 -m http.server 8000`
+7. กด `Ctrl + Shift + R` ใน Browser หลังอัปเดต
 
-## ทำไม Draft เดิมยังเห็นปี/ภาคเรียนเดิม?
+`main` ยัง Deploy ผ่าน GitHub Pages รุ่นปัจจุบัน ไม่ต้อง Merge จนกว่าจะทดสอบเรียบร้อย
 
-แอป Auto Restore Draft ล่าสุดจาก IndexedDB หรือ localStorage การอัปเดตเว็บไซต์จะไม่ลบค่าที่กรอกไว้ หากต้องการทดสอบช่องเปล่าในเวอร์ชันนี้ ให้สำรอง JSON ก่อน แล้วใช้ **สร้าง Draft ใหม่**
+## ผลที่ต้องตรวจ
 
-## การอัปโหลดไฟล์ย่อยผ่าน GitHub Web
+- สร้าง Draft ใหม่ → ปีการศึกษาและภาคเรียนเป็นช่องว่าง
+- เปิด Draft เก่าที่เคยมีปี `1` / ภาคเรียน `0` → ช่องสองช่องนี้ว่าง แต่ข้อมูลอื่นอยู่ครบ
+- เปิด Draft ที่ปี `2569` / ภาคเรียน `1` → ยังคงค่าเดิม
+- เมนูผู้สอน → ไม่แสดงแถวว่างเอง แต่กด “＋ เพิ่มผู้สอน” แล้วเริ่มกรอกได้
+- Draft เก่าที่มีแถวผู้สอนเปล่าและแถวที่กรอกแล้ว → แสดงเฉพาะแถวที่กรอกแล้ว
+- การประเมิน → หนังสือและแหล่งเรียนรู้ → ประเภทแหล่งเรียนรู้ → `กำหนดเอง` → กรอกข้อความอื่นได้
+- Save Draft, Refresh, Validate, Export JSON
 
-ต้องให้ path ของไฟล์ถูกต้อง: `src/app.js` อยู่ในโฟลเดอร์ `src`, `data/instructors.json` อยู่ใน `data`, `tools/build.py` อยู่ใน `tools`, และ `index.html` อยู่ที่ root ของ Repo หากหน้าเว็บแสดงเวอร์ชันเดิม ให้ตรวจว่าบันทึก Commit เข้า `develop` ถูก Branch และลองรีเฟรชแบบไม่ใช้ Cache
-
-## การตรวจสอบหลังอัปเดต
-
-- ช่องปีและภาคเรียนว่างเมื่อกดสร้าง Draft ใหม่
-- ผู้สอนเคมี: ผกาสุคนธ์เป็นคนสุดท้ายของกลุ่ม
-- ฟอร์มผู้สอน/CLO/Assessments/Resources มีแถวเริ่มต้นอย่างละ 1 แถว
-- เปลี่ยนเป็นกำหนดเองแล้วพิมพ์ค่าอื่นได้
-- ป้อนข้อมูลทดสอบให้ครบ, ตรวจสอบ, ส่งออก JSON, นำเข้า JSON กลับได้
+> ปี `1` และภาคเรียน `0` ใน Draft เก่ามีความเป็นไปได้ว่าเกิดจากค่าที่เคยบันทึกไว้ การปรับรุ่นนี้ทำความสะอาดเฉพาะค่าที่ไม่ถูกต้องดังกล่าว ไม่ล้างค่าปี/ภาคเรียนที่ผู้ใช้กรอกถูกต้อง
