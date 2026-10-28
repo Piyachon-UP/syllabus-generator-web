@@ -23,11 +23,18 @@ with sync_playwright() as p:
  page.wait_for_timeout(150)
  assert 'ข้อผิดพลาด' in page.locator('#issue-heading').inner_text()
  page.on('dialog',lambda dialog:dialog.accept())
- page.get_by_role('button',name='ข้อมูลตัวอย่าง').click()
+ page.locator('#tools-menu summary').click()
+ page.locator('button[data-action="demo"]').click()
  page.wait_for_timeout(450)
  print('offering',page.locator('#offering-label').inner_text())
  assert page.locator('#offering-label').inner_text()=='244442-1-2569-SEC01'
  assert page.locator('#s-instructors').inner_text()=='1'
+ assert page.locator('#progress-steps button').count()==6
+ assert page.locator('#group-CourseInfo').count()==1
+ assert page.locator('#course-credits').count()==1
+ assert page.locator('#course-descriptions').count()==1
+ assert page.locator('#tools-menu').count()==1
+ assert page.locator('button[data-action="save"]').count()==1
  page.get_by_role('button',name='ตรวจสอบ').click()
  print('validation:',page.locator('#issue-heading').inner_text())
  assert '0 ข้อผิดพลาด' in page.locator('#issue-heading').inner_text()
