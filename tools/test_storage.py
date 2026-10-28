@@ -15,7 +15,8 @@ with sync_playwright() as p:
  },configurable:true}); }''')
  page.on('dialog',lambda d:d.accept())
  page.set_content(HTML,wait_until='load')
- page.get_by_role('button',name='ข้อมูลตัวอย่าง').click()
+ page.locator('#tools-menu summary').click()
+ page.locator('button[data-action="demo"]').click()
  page.wait_for_timeout(1100)
  before=page.locator('#offering-label').inner_text()
  assert before=='244442-1-2569-SEC01',before
@@ -28,7 +29,8 @@ with sync_playwright() as p:
  assert page.locator('.draft-item').count()>=2
  page.locator('button[data-action="close-drawer"]').click()
  with page.expect_download() as event:
-  page.get_by_role('button',name='สำรอง Draft JSON').click()
+  page.locator('#tools-menu summary').click()
+  page.locator('button[data-action="backup"]').click()
  assert event.value.suggested_filename.startswith('DRAFT_')
  print('PASS: localStorage fallback draft persistence, multiple drafts, backup JSON')
  b.close()

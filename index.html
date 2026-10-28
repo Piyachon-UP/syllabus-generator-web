@@ -4,62 +4,599 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#102c4a">
-<meta name="description" content="Smart Syllabus Generator — ออกแบบ Course Syllabus พร้อมบันทึก Draft และส่งออก JSON ใน Browser">
+<meta name="description" content="Smart Syllabus Generator — ออกแบบ Course Syllabus พร้อมเปิดและบันทึก JSON ใน Browser">
 <title>Smart Syllabus Generator | Faculty of Science UP</title>
 <style>
 :root{color-scheme:light;--navy:#102c4a;--navy2:#1a3f65;--ink:#172a3d;--muted:#62758b;--line:#dfe7ef;--bg:#f3f6fa;--white:#fff;--teal:#008b87;--cyan:#dcf4f0;--blue:#edf5fd;--amber:#ad6818;--red:#b93c4c;--green:#0a8863;--shadow:0 9px 34px rgba(27,56,91,.06);font-family:'Sarabun','Leelawadee UI','Noto Sans Thai',system-ui,-apple-system,'Segoe UI',sans-serif}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-size:14px}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:wait}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(0,139,135,.26);outline-offset:2px}button:hover:not(:disabled){filter:brightness(.98)}a{color:var(--teal)}.app{display:grid;grid-template-columns:246px minmax(0,1fr);min-height:100vh}.sidebar{background:linear-gradient(165deg,#102d4d,#15395c);color:#fff;padding:25px 16px;display:flex;flex-direction:column;gap:30px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;gap:12px;align-items:center;padding:0 9px}.brand-mark{background:#ecfaf5;border-radius:13px;width:43px;height:43px;display:grid;place-items:center;color:#087f77;font-size:23px;font-weight:800}.brand-title{font-weight:800;font-size:16px;letter-spacing:.3px}.brand-small{color:#b5c9dc;font-size:11px}.sidebar-label{color:#8daecb;letter-spacing:1.4px;font-size:10px;font-weight:700;margin:6px 12px 10px}.nav{display:flex;flex-direction:column;gap:5px}.nav button{display:flex;text-align:left;gap:12px;align-items:center;padding:13px 13px;background:transparent;color:#c3d6e7;border:0;border-radius:11px;font-weight:600;width:100%;line-height:1.35}.nav button.active{background:#edf8f7;color:#104b53;box-shadow:0 4px 10px rgba(0,0,0,.09)}.nav button:not(.active):hover{background:rgba(255,255,255,.09);color:white}.nav .num{display:grid;place-items:center;font-size:12px;border:1px solid currentColor;border-radius:8px;min-width:25px;height:25px;opacity:.85}.sidebar-bottom{margin-top:auto;color:#a4c0d7;font-size:11px;padding:15px 11px;border-top:1px solid #34516e;line-height:1.65}.dot{display:inline-block;width:7px;height:7px;background:#57deb1;border-radius:50%;margin-right:6px}.main{min-width:0;padding:24px clamp(17px,3.3vw,50px) 40px;max-width:1560px;width:100%;margin:auto}.topline{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal)}h1{font-size:27px;margin:6px 0 6px;line-height:1.25;letter-spacing:-.4px}h2{font-size:19px;line-height:1.3;margin:0}h3{font-size:15px;margin:0}p{margin:0}small,.muted{color:var(--muted)}.header-desc{color:var(--muted);font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn{border:1px solid var(--line);background:#fff;color:#25445e;padding:10px 13px;border-radius:9px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px}.btn-primary{background:var(--teal);border-color:var(--teal);color:#fff}.btn-navy{background:var(--navy);border-color:var(--navy);color:white}.btn-danger{color:var(--red);background:#fff5f6;border-color:#fad9de}.btn-mini{padding:6px 10px;min-height:30px;font-size:11px}.btn-ghost{border-color:transparent;background:transparent}.btn-wide{width:100%}.btn svg{width:16px;height:16px}.hero{margin-top:24px;background:linear-gradient(115deg,#173a5c,#22587b);border-radius:15px;min-height:148px;display:flex;justify-content:space-between;align-items:center;gap:30px;padding:25px 29px;color:white;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:3%;top:-55%;width:300px;height:300px;border:45px solid rgba(255,255,255,.045);border-radius:50%;pointer-events:none}.hero>*{z-index:1}.hero .meta{font-size:11px;color:#aee1e5;letter-spacing:1px;font-weight:700}.hero h2{font-size:24px;max-width:800px;margin:9px 0}.hero .sub{font-size:12px;color:#cadfeb}.hero .offering{background:rgba(255,255,255,.13);padding:12px 15px;border:1px solid rgba(255,255,255,.17);border-radius:10px;text-align:right;min-width:190px}.hero .offering strong{display:block;letter-spacing:.5px;font-size:15px}.hero .offering span{display:block;font-size:10px;color:#c1d5e5}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0 22px}.stat{background:white;border:1px solid var(--line);border-radius:12px;padding:15px 17px;display:flex;align-items:center;justify-content:space-between;gap:10px}.stat .hint{font-size:11px;color:var(--muted);font-weight:600}.stat .number{font-weight:800;font-size:24px;margin-top:5px}.stat .symbol{font-size:23px;opacity:.8;color:var(--teal)}.pagebar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:3px 0 17px;flex-wrap:wrap}.pagebar .intro{font-size:12px;color:var(--muted);margin-top:6px;max-width:800px}.section-stack{display:flex;flex-direction:column;gap:16px}.panel{border:1px solid var(--line);background:white;border-radius:13px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.panel-head h3{font-size:15px;font-weight:800}.panel-head .subhead{font-size:11px;color:var(--muted);margin-top:5px}.panel-body{padding:20px}.form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 18px}.field{min-width:0;display:flex;flex-direction:column;gap:6px}.field.wide{grid-column:span 2}.field.full{grid-column:1/-1}.field label{font-size:11px;color:#4f6378;font-weight:700}.field .required{color:var(--red)}.field input,.field select,.field textarea{background:#fff;border:1px solid #d6e2ec;border-radius:8px;color:var(--ink);padding:9px 11px;outline:none;min-height:39px;width:100%}.field input:focus,.field textarea:focus,.field select:focus{border-color:#2caaa1;box-shadow:0 0 0 3px rgba(22,152,144,.11)}.field textarea{min-height:78px;line-height:1.55;resize:vertical}.field .micro{color:var(--muted);font-size:10px}.notice{background:#eaf5f7;border:1px solid #cfe8ed;border-radius:10px;color:#315e6c;padding:13px 16px;font-size:12px;line-height:1.7}.notice.warn{background:#fff8ed;border-color:#f8e7cb;color:#82561e}.table-wrap{overflow-x:auto;width:100%}.editor-table{width:100%;min-width:850px;border-collapse:separate;border-spacing:0;text-align:left}.editor-table th{font-size:10px;font-weight:800;letter-spacing:.05px;text-transform:uppercase;color:#5f7385;background:#f4f8fb;border-bottom:1px solid var(--line);padding:10px 10px;white-space:nowrap}.editor-table td{padding:8px 7px;border-bottom:1px solid #edf1f5;vertical-align:top}.editor-table tr:last-child td{border-bottom:0}.editor-table tr:hover td{background:#fbfdff}.editor-table td input:not([type=checkbox]),.editor-table td select,.editor-table td textarea{background:white;color:var(--ink);border:1px solid #dde6ee;border-radius:7px;padding:9px 8px;width:100%;min-width:88px;min-height:37px}.editor-table td textarea{min-height:58px;resize:vertical;line-height:1.45}.editor-table .narrow{min-width:65px!important;max-width:95px}.editor-table .long{min-width:210px!important}.editor-table .small{min-width:110px!important}.editor-table .row-no{color:#8b9bad;font-size:11px;font-weight:700;padding-top:18px;white-space:nowrap}.editor-table .del{background:#fff7f6;color:#b65057;border:1px solid #f4d6d8;border-radius:7px;width:32px;height:33px}.editor-table .check{width:18px;height:18px;accent-color:var(--teal);margin-top:8px}.table-note{padding:12px 18px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);background:#fbfdff}.inline-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.pill{background:#e9f6f3;color:#0c776e;border:1px solid #cef0e9;padding:5px 9px;border-radius:100px;font-size:10px;font-weight:800}.pill.neutral{color:#52677b;background:#f2f5f8;border-color:#dfe5ee}.pill.bad{background:#fff1f1;color:#ae3c4d;border-color:#f3d8dc}.switchbar{display:inline-flex;background:#edf2f7;padding:4px;border-radius:10px;gap:3px}.switchbar button{background:transparent;color:#5f7486;border:0;border-radius:7px;padding:9px 16px;font-weight:700;font-size:12px}.switchbar button.active{background:white;box-shadow:0 2px 6px rgba(0,0,0,.07);color:#147e79}.validate-area{display:none;margin:20px 0 0}.validate-area.visible{display:block}.results-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}.issues{display:grid;grid-template-columns:1fr 1fr;gap:10px}.issue{background:white;border:1px solid var(--line);border-radius:9px;padding:12px 15px;display:flex;gap:12px;align-items:flex-start;font-size:12px;text-align:left;width:100%;color:var(--ink)}.issue .severity{font-weight:800;color:var(--red);min-width:42px}.issue.warning .severity{color:#a76b17}.issue .where{font-size:10px;color:var(--muted);margin-top:4px}.issue.ok{border-color:#cbe9dc;background:#effbf5}.toast{position:fixed;bottom:22px;right:22px;background:#153e56;color:white;padding:13px 17px;border-radius:10px;box-shadow:0 12px 40px #0003;z-index:999;max-width:min(420px,90vw);font-size:12px;line-height:1.6}.drawer-back{position:fixed;inset:0;background:#08253d55;z-index:100;display:flex;justify-content:flex-end}.drawer{background:white;width:min(440px,100vw);height:100%;padding:25px;overflow:auto;box-shadow:-8px 0 40px #08253d22}.drawer h2{margin:0 0 5px}.draft-item{border:1px solid var(--line);border-radius:9px;padding:12px;margin:10px 0;display:flex;gap:7px;justify-content:space-between;align-items:center}.draft-item strong{font-size:12px;display:block}.draft-item small{display:block;font-size:10px;margin:5px 0}.draft-item.current{border-color:var(--teal);background:#f6fdfb}.empty{padding:30px;text-align:center;color:var(--muted);font-size:12px}.footerline{color:#91a0ae;font-size:10px;margin-top:25px;text-align:center}.hidden{display:none!important}@media(max-width:1100px){.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.app{grid-template-columns:205px minmax(0,1fr)}.sidebar{padding:22px 10px}}@media(max-width:770px){.app{display:block}.sidebar{position:static;width:100%;height:auto;gap:12px;padding:14px;overflow:visible}.sidebar-label,.sidebar-bottom{display:none}.brand{padding:0 0 5px}.nav{flex-direction:row;overflow:auto;padding-bottom:3px}.nav button{width:auto;flex-shrink:0;padding:9px 12px;font-size:11px;gap:6px}.nav .num{display:none}.main{padding:16px}.hero{padding:20px;min-height:auto}.hero h2{font-size:19px}.hero .offering{min-width:140px}.topline{align-items:flex-start}h1{font-size:23px}.issues{grid-template-columns:1fr}}@media(max-width:510px){.form-grid{grid-template-columns:1fr}.field.wide{grid-column:1}.hero{display:block}.hero .offering{text-align:left;margin-top:17px;width:max-content}.stats{gap:8px}.stat{padding:10px}.stat .number{font-size:20px}.panel-body{padding:13px}.panel-head{padding:14px}.actions{gap:5px}.btn{padding:9px 10px;font-size:11px}}
 
+/* Phase 1.1 UX refinement (schema + storage keys unchanged). */
+.nav-state{margin-left:auto;font-size:13px;font-weight:800;color:#a2bbce}
+.nav-state.complete{color:#5be4b3}.nav-state.partial{color:#f0c879}
+.progress-card{margin:2px 0 23px;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:var(--shadow)}
+.progress-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.progress-heading h2{margin-top:4px;font-size:17px}.progress-heading strong{font-size:18px;color:#087e78;font-variant-numeric:tabular-nums}
+.progress-track{height:8px;border-radius:99px;background:#e5edf2;overflow:hidden;margin:15px 0 12px}
+#progress-fill{height:100%;width:0;background:#078e84;border-radius:99px;transition:width .25s ease}
+.progress-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.progress-step{border:1px solid var(--line);background:#f8fafc;border-radius:9px;min-height:72px;text-align:left;padding:9px 10px;color:var(--ink);display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;align-items:center;font-size:11px;font-weight:700}
+.progress-step:hover{border-color:#a5bfc9}.progress-step[aria-current="step"]{outline:2px solid #4ea9a4;outline-offset:0}
+.step-index{border:1px solid #c7d6e3;color:#55718a;border-radius:7px;min-width:21px;height:21px;display:inline-grid;place-items:center}
+.progress-step.complete{background:#f0fbf6;border-color:#c5e9d9;color:#166753}
+.progress-step.complete .step-index{color:#fff;background:#0a8863;border-color:#0a8863}
+.progress-step.partial{background:#fffaf0;border-color:#efdcb7}
+.progress-step.partial .step-index{border-color:#ddb977;color:#98641b}
+.step-state{width:100%;font-size:10px;font-weight:500;color:var(--muted);padding-left:1px}
+.progress-footnote{font-size:11px;color:var(--muted);margin-top:11px}
+.tools-menu{position:relative}.tools-menu>summary{list-style:none;user-select:none;cursor:pointer}
+.tools-menu>summary::-webkit-details-marker{display:none}
+.tools-menu[open]>summary{border-color:var(--teal);color:var(--teal)}
+.tools-dropdown{position:absolute;right:0;top:calc(100% + 7px);z-index:80;width:225px;padding:7px;background:white;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px #102c4a25}
+.tools-caption{padding:8px 10px;font-size:10px;color:var(--muted);font-weight:700}
+.tools-dropdown button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:11px 10px;border-radius:8px;color:var(--ink);font-weight:600;font-size:12px}
+.tools-dropdown button:hover{background:#eff7f8}
+.course-jumps{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:#e9f2f8;border:1px solid #d5e4ee;border-radius:12px;padding:12px 14px}
+.course-jumps>span{font-size:11px;color:#466580;font-weight:800;margin-right:3px}
+.jump-pill{background:white;border:1px solid #cbdde9;border-radius:99px;padding:7px 12px;font-size:11px;font-weight:700;color:#285474}
+.jump-pill:hover{background:#d5ecee;border-color:#5ba6ac}
+.panel[id],.panel,.progress-card{scroll-margin-top:16px}
+@media(max-width:1200px){.progress-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.progress-card{padding:15px}.progress-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.progress-step{min-height:66px}.tools-dropdown{right:-65px}}
+@media(max-width:400px){.progress-step{font-size:10px}.actions{width:100%}.tools-dropdown{right:-100px}}
+
+
+/* v1.1.1 — Sidebar navigation bug fix.
+   Do not reuse the global .empty utility on navigation status icons:
+   .empty adds 30px padding and makes each nav item ~100px tall.
+   Also reserve explicit width for status and label to prevent Thai wrapping.
+*/
+.nav button { gap: 10px; min-height: 51px; }
+.nav .num { flex: 0 0 25px; }
+.nav button > span:nth-child(2) { flex: 1 1 auto; min-width: 0; white-space: nowrap; }
+.nav button > .nav-state { flex: 0 0 14px; width: 14px; min-width: 14px; margin-left: auto; padding: 0; text-align: center; line-height: 1.25; }
+.nav button.active > .nav-state { color: #0b7870; }
+.nav button.active > .nav-state.partial { color: #9d681b; }
+@media (max-width: 770px) {
+  .nav button { min-height: 42px; }
+  .nav button > span:nth-child(2) { flex: 0 0 auto; }
+  .nav button > .nav-state { margin-left: 0; }
+}
+
+/* v1.2: simple authoring layout, no dashboard, read-only PLO master and instructor selector */
+.main>.pagebar{margin-top:24px}
+.master-summary{margin-top:15px;padding:12px 14px;border-radius:9px;background:#edf8f6;color:#17665f;font-weight:700;font-size:12px}
+.plo-list{display:flex;flex-direction:column;padding:4px 21px 10px}
+.plo-item{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;border-bottom:1px solid #e9eff4;padding:15px 3px;align-items:start}
+.plo-item:last-child{border-bottom:0}
+.plo-code{background:#eaf7f5;color:#087d78;padding:7px 10px;border-radius:8px;font-size:12px;text-align:center}
+.plo-description{line-height:1.65;white-space:pre-line;color:var(--ink);font-size:13px}
+.plo-category{color:var(--muted);font-size:11px;margin-top:6px}
+.instructor-editor{min-width:760px}
+.instructor-editor th:nth-child(2){width:33%}
+.instructor-editor th:nth-child(3){width:23%}
+.instructor-editor td select{min-width:245px}
+.instructor-editor td .teacher-current{color:var(--muted);font-size:11px;margin-top:5px}
+.instructor-editor .teacher-department{display:block;font-size:12px;line-height:1.6;padding-top:7px;max-width:240px}
+.instructor-editor td.teacher-check{text-align:center}
+@media(max-width:650px){.plo-list{padding:2px 12px 8px}.plo-item{grid-template-columns:56px minmax(0,1fr);gap:8px}.plo-code{padding:6px 5px;font-size:11px}}
+
+/* v1.3 — compact authoring, editable dropdown suggestions and PLO mappings */
+.table-CLOs{min-width:850px}.table-LecturePlans,.table-LabPlans{min-width:1040px}.table-Assessments{min-width:820px}.table-Resources{min-width:850px}
+.table-LecturePlans th:nth-child(3),.table-LabPlans th:nth-child(3){min-width:290px}
+.table-LecturePlans th:nth-child(4),.table-LabPlans th:nth-child(4){min-width:235px}
+.table-LecturePlans th:last-child,.table-LabPlans th:last-child{width:45px}
+.weekly-topic{min-width:270px;min-height:85px;resize:vertical}
+.editable-choice input{min-width:190px}.editable-choice .choice-hint{font-size:10px;color:var(--muted);display:block;margin-top:5px}
+.plo-picker{min-width:225px}.plo-picker select{width:100%;max-width:360px}.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.chip{border:1px solid #b9d8d3;background:#eef9f6;color:#08766e;border-radius:18px;padding:5px 9px;font-size:11px;font-weight:750}
+.chip:hover{background:#d9f2eb}.manual-teacher{display:grid;gap:7px;margin-top:9px}.manual-teacher input{width:100%}
+.instructor-editor{min-width:690px}.instructor-editor th:nth-child(2){width:43%}.instructor-editor th:nth-child(3){width:32%}
+@media(max-width:770px){.table-wrap{overflow-x:auto}}
+
+/* v1.3.1 — multi-instructor weekly plan and familiar grade cutoffs */
+.table-LecturePlans,.table-LabPlans{min-width:1110px}
+.table-LecturePlans th:nth-child(6),.table-LabPlans th:nth-child(6){min-width:285px}
+.teacher-multi{min-width:240px;max-width:420px;display:grid;gap:7px}
+.teacher-multi>select{min-width:240px}
+.teacher-chips{display:flex;flex-wrap:wrap;gap:6px}
+.teacher-custom{display:flex;align-items:center;gap:5px}
+.teacher-custom input{min-width:158px!important;flex:1}
+.teacher-custom button{flex:0 0 auto;white-space:nowrap}
+.grade-layout{display:grid;grid-template-columns:minmax(230px,1fr) minmax(240px,320px);gap:28px;align-items:start}
+.grade-mode-field{width:100%}
+.grade-table-wrap{width:100%;max-width:320px}
+.grade-table{border-collapse:collapse;width:100%;font-size:13px;border:1px solid #a6bed0}
+.grade-table th{background:#dcecff;border:1px solid #aec7d8;padding:8px 10px;text-align:center;color:#193750}
+.grade-table td{border:1px solid #aec7d8;background:#eff6fd;height:40px;padding:3px 8px}
+.grade-table td.grade-label{font-weight:700;width:60px}
+.grade-table td.grade-op{text-align:center;width:36px;color:#1b3041;font-weight:700}
+.grade-table input{display:block;width:100%;height:31px;background:#fff;border:1px solid #aabfd2;border-radius:3px;text-align:center;padding:4px;color:#182c40}
+.grade-table tr.inactive td{background:#f2f3f5;color:#9aa4af}
+.grade-table tr.inactive input{background:#edf0f2;cursor:not-allowed}
+.grade-table .terminal-grade{display:block;text-align:center;color:#a5adba}
+.grade-help{grid-column:2;font-size:11px;color:var(--muted);line-height:1.6;margin-top:-18px}
+@media(max-width:780px){.grade-layout{grid-template-columns:1fr;gap:15px}.grade-help{grid-column:1;margin-top:-4px}}
+
+/* v1.4.1: True dropdown lists remain complete after opening a saved JSON file. */
+.editable-choice{display:flex;flex-direction:column;gap:6px;min-width:0}
+.editor-table td .editable-choice select{width:100%;min-width:180px;max-width:100%}
+.editor-table td .editable-choice .editable-custom-input{width:100%;min-width:180px;max-width:100%;border:1px solid #2caaa1;background:#f4fbfa}
+.editor-table td .editable-choice .editable-custom-input.hidden{display:none!important}
+
+
+/* v1.4.2 — persistent, section-wide save action. Shown for all six tabs. */
+.section-save-footer{
+  position:sticky;bottom:0;z-index:45;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  margin-top:22px;padding:14px 19px;
+  background:rgba(255,255,255,.97);border:1px solid #cbdde8;
+  border-bottom:0;border-radius:13px 13px 0 0;
+  box-shadow:0 -8px 30px rgba(16,44,74,.11);
+  backdrop-filter:blur(10px);
+}
+.section-save-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.section-save-title{font-size:13px;font-weight:800;color:var(--navy)}
+.section-save-hint{font-size:11px;color:var(--muted);line-height:1.5}
+.save-indicator{font-size:11px;color:#247a71;line-height:1.5}
+.section-save-button{flex:0 0 auto;min-width:154px;font-size:13px;padding:12px 17px}
+@media(max-width:650px){
+ .section-save-footer{margin-left:-8px;margin-right:-8px;padding:12px 12px;gap:9px}
+ .section-save-hint{font-size:10px}
+ .section-save-button{min-width:128px;font-size:12px;padding:12px 10px}
+}
+@media(max-width:380px){.section-save-title{font-size:12px}.section-save-button{min-width:110px}}
+
+
+/* =============================================================
+   v1.4.3 — Responsive Typography & Layout
+   Presentation only: preserves JSON, field names, save/import logic.
+   ============================================================= */
+:root {
+  --font-body:16px;
+  --font-input:16px;
+  --font-label:15px;
+  --font-table:16px;
+  --font-sidebar:16px;
+  --font-heading:20px;
+  --font-caption:14px;
+}
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body { font-size:var(--font-body); line-height:1.55; }
+.app { grid-template-columns:258px minmax(0,1fr); }
+.sidebar { padding:24px 16px; }
+.brand-title { font-size:18px; }
+.brand-small { font-size:12px; }
+.sidebar-label { font-size:12px; }
+.sidebar-bottom { font-size:13px; line-height:1.7; }
+.nav button { min-height:52px; font-size:var(--font-sidebar); gap:11px; }
+.nav .num { font-size:14px; min-width:28px; height:28px; flex-basis:28px; }
+.nav button > span:nth-child(2) { white-space:nowrap; }
+.main { padding-bottom:32px; }
+h1 { font-size:clamp(24px,2.15vw,28px); }
+h2 { font-size:var(--font-heading); }
+h3,.panel-head h3 { font-size:18px; }
+.eyebrow { font-size:12px; }
+.header-desc,.pagebar .intro { font-size:var(--font-caption); line-height:1.6; }
+.panel-head { padding:18px 22px; }
+.panel-head .subhead,.field .micro,.table-note,.grade-help { font-size:var(--font-caption); line-height:1.6; }
+.panel-body { padding:22px; }
+.field label { font-size:var(--font-label); }
+.field input,.field select,.field textarea {
+  font-size:var(--font-input); min-height:46px; padding:10px 12px; line-height:1.5;
+}
+.field textarea { min-height:96px; }
+.notice { font-size:var(--font-caption); line-height:1.7; }
+.btn,.switchbar button,.jump-pill { font-size:15px; min-height:44px; padding:10px 14px; }
+.btn-mini { min-height:40px; font-size:14px; padding:8px 12px; }
+.switchbar button { padding:10px 14px; }
+.pill { font-size:12px; }
+.editor-table th { font-size:13px; letter-spacing:0; white-space:normal; }
+.editor-table td { font-size:var(--font-table); padding:10px 8px; }
+.editor-table td input:not([type=checkbox]),
+.editor-table td select,.editor-table td textarea {
+  font-size:var(--font-input); min-height:44px; padding:10px 11px; line-height:1.5;
+}
+.editor-table td textarea { min-height:74px; }
+.editor-table .row-no { font-size:14px; }
+.editor-table .del { min-width:40px; height:42px; font-size:19px; }
+.editor-table .check { width:20px;height:20px; }
+.table-CLOs,.table-Assessments,.table-Resources { min-width:960px; }
+.table-LecturePlans,.table-LabPlans { min-width:1200px; }
+.instructor-editor { min-width:770px; }
+.instructor-editor td .teacher-current,.instructor-editor .teacher-department,
+.editable-choice .choice-hint,.editor-table td .editable-choice select,
+.editor-table td .editable-choice .editable-custom-input { font-size:var(--font-caption); }
+.plo-description { font-size:var(--font-body); }
+.plo-code { font-size:14px; }
+.plo-category,.master-summary { font-size:var(--font-caption); }
+.chip { font-size:13px; min-height:32px; }
+.teacher-multi,.teacher-multi > select { max-width:100%; }
+.teacher-chips { gap:7px; }
+.grade-table { font-size:15px; }
+.grade-table td { height:46px; }
+.grade-table input { font-size:16px; height:38px; }
+.grade-table-wrap { max-width:370px; }
+.section-save-footer { min-height:83px; padding:14px 20px max(14px,env(safe-area-inset-bottom)); }
+.section-save-title,.section-save-button { font-size:16px; }
+.section-save-hint,.save-indicator { font-size:13px; }
+.section-save-button { min-height:48px; min-width:170px; }
+.footerline { font-size:12px; }
+.mobile-menu-button,.sidebar-close,.sidebar-backdrop { display:none; }
+
+/* Tablet / smaller notebook: menu becomes an accessible off-canvas drawer. */
+@media(max-width:1100px) {
+  .app { display:block; }
+  .main { max-width:none; padding:20px clamp(16px,3vw,30px) 28px; }
+  .sidebar {
+    position:fixed; top:0; left:0; bottom:0; z-index:160;
+    height:100dvh; width:min(318px,86vw);
+    transform:translateX(-102%); visibility:hidden;
+    transition:transform .22s ease;
+    box-shadow:12px 0 36px rgba(9,35,56,.22);
+    overflow-y:auto; overscroll-behavior:contain;
+  }
+  .menu-open .sidebar { transform:translateX(0); visibility:visible; }
+  .sidebar-backdrop { position:fixed; inset:0; background:rgba(11,35,59,.55); z-index:150; }
+  .menu-open .sidebar-backdrop { display:block; }
+  .mobile-menu-button { display:inline-flex; min-width:116px; align-self:flex-start; }
+  .sidebar-close {
+    display:inline-flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22);
+    color:#fff; font-size:14px; border-radius:9px; padding:8px 12px;
+    min-height:42px; margin:0 6px; align-self:flex-end;
+  }
+  .sidebar .nav button { min-height:52px; }
+  .topline { justify-content:flex-start; }
+  .topline > .header-group { flex:1 1 360px; }
+  .topline > .actions { margin-left:auto; }
+  .form-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .field.wide { grid-column:span 2; }
+  .table-wrap { overflow-x:auto; overscroll-behavior-inline:contain; }
+  .grade-layout { grid-template-columns:minmax(0,1fr) minmax(270px,370px);gap:18px; }
+  .grade-help { grid-column:2; }
+}
+
+/* Phones: tabular rows become labelled cards, not horizontal scrolling. */
+@media(max-width:700px) {
+  .main { padding:14px 12px 20px; }
+  .topline { gap:10px; }
+  .topline > .header-group { flex-basis:100%; order:2; }
+  .mobile-menu-button { order:0; }
+  .topline > .actions { width:auto; margin-left:auto; order:1; }
+  .eyebrow { font-size:11px; }
+  h1 { font-size:23px; margin-top:4px; }
+  h2 { font-size:19px; }
+  .pagebar { margin-top:19px; }
+  .pagebar .intro { font-size:13px; }
+  .panel { border-radius:11px; }
+  .panel-head { padding:14px 15px; }
+  .panel-head h3 { font-size:17px; }
+  .panel-head .inline-row { width:100%; }
+  .panel-body { padding:15px; }
+  .form-grid { grid-template-columns:minmax(0,1fr); gap:14px; }
+  .field.wide,.field.full { grid-column:1/-1; }
+  .field input,.field select,.field textarea { font-size:16px; }
+  .plo-item { grid-template-columns:64px minmax(0,1fr); }
+  .switchbar { width:100%; }
+  .switchbar button { flex:1 1 0; padding:10px 8px; }
+  /* Preserve semantic table markup and delegated input events. */
+  .table-wrap { overflow:visible; padding:10px; background:#f7fafc; }
+  .editor-table,.instructor-editor,.table-CLOs,.table-LecturePlans,
+  .table-LabPlans,.table-Assessments,.table-Resources {
+    width:100%; min-width:0; display:block;
+  }
+  .editor-table thead { display:none; }
+  .editor-table tbody { display:grid; grid-template-columns:minmax(0,1fr); gap:13px; }
+  .editor-table tbody tr {
+    display:block; min-width:0; border:1px solid #d7e3eb;
+    border-radius:11px; background:white; padding:13px;
+    box-shadow:0 3px 10px rgba(16,44,74,.035);
+  }
+  .editor-table tbody tr td {
+    display:block; width:100%; min-width:0; max-width:100%;
+    padding:0; border:0; background:transparent!important; margin:0 0 14px;
+  }
+  .editor-table tbody tr td:last-child { margin-bottom:0; }
+  .editor-table tbody tr td[data-label]:not(.row-no)::before {
+    content:attr(data-label); display:block; color:#465d72; font-weight:700;
+    font-size:14px; line-height:1.5; margin-bottom:6px;
+  }
+  .editor-table tbody tr td.row-no {
+    width:100%; margin:0 0 13px; padding:0 0 9px;
+    border-bottom:1px solid #ebf0f4; font-size:15px; color:#0b6d6a;
+    font-weight:800; line-height:1.45;
+  }
+  .editor-table tbody tr td.row-no::before { content:'รายการที่ '; }
+  .editor-table td input:not([type=checkbox]),
+  .editor-table td select,.editor-table td textarea,
+  .editor-table td .editable-choice select,
+  .editor-table td .editable-choice .editable-custom-input {
+    width:100%; min-width:0!important; max-width:100%!important; font-size:16px;
+    min-height:46px;
+  }
+  .editor-table td textarea,.weekly-topic { width:100%; min-width:0; min-height:85px; }
+  .editor-table td .narrow,.editor-table td .long,.editor-table td .small {
+    width:100%!important; max-width:100%!important; min-width:0!important;
+  }
+  .teacher-multi,.teacher-multi>select,.teacher-custom,.manual-teacher,
+  .plo-picker,.editable-choice { width:100%;max-width:100%;min-width:0; }
+  .teacher-custom input { min-width:0!important; }
+  .teacher-custom button,.editor-table .del { min-width:44px; min-height:44px; }
+  .instructor-editor td select { min-width:0; }
+  .instructor-editor .teacher-department { max-width:none; }
+  .instructor-editor td.teacher-check { text-align:left; }
+  .editor-table tr:has(>td.empty) { box-shadow:none;border-style:dashed; }
+  .editor-table td.empty { font-size:14px; padding:14px 3px; }
+  .grade-layout { display:grid; grid-template-columns:minmax(0,1fr);gap:16px; }
+  .grade-table-wrap { max-width:100%; width:100%; }
+  .grade-help { grid-column:1; margin-top:0; }
+  .grade-table td,.grade-table th { font-size:14px; }
+  .section-save-footer {
+    position:sticky;bottom:0;z-index:45; margin:16px -12px 0;
+    border-radius:11px 11px 0 0; padding:10px 12px max(10px,env(safe-area-inset-bottom));
+    gap:9px; min-height:76px;
+  }
+  .section-save-title { font-size:14px; }
+  .section-save-hint { display:none; }
+  .save-indicator { font-size:12px; }
+  .section-save-button { min-width:125px; min-height:48px; font-size:15px; padding:10px 12px; }
+  .footerline { line-height:1.6; padding:10px 0; }
+}
+@media(max-width:400px) {
+  .topline > .header-group { flex-basis:100%; order:2; }
+  .mobile-menu-button { order:0; }
+  .topline > .actions { order:1; width:auto; margin-left:auto; }
+  h1 { font-size:21px; }
+  .section-save-button { min-width:110px; padding:9px; }
+  .panel-head .btn-mini { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .sidebar { transition:none; }
+  html:focus-within { scroll-behavior:auto; }
+}
+
+/* Phase 2 DOCX action uses the same sticky footer; responsive and accessible. */
+.footer-action-buttons{display:flex;gap:10px;align-items:center;flex:0 0 auto;flex-wrap:wrap;justify-content:flex-end}
+.footer-action-buttons .section-save-button{min-width:150px}
+@media(max-width:700px){
+  .section-save-footer{gap:8px;align-items:center}
+  .footer-action-buttons{gap:7px;max-width:100%;flex-wrap:nowrap}
+  .footer-action-buttons .section-save-button{font-size:14px;min-width:0;min-height:46px;padding:10px 12px;white-space:nowrap}
+  .section-save-copy{flex:1 1 100%;min-width:0}
+}
+@media(max-width:400px){
+ .section-save-footer{padding:9px 11px max(9px,env(safe-area-inset-bottom));flex-wrap:wrap}
+ .section-save-copy{display:none}
+ .footer-action-buttons{display:grid;grid-template-columns:1fr 1fr;width:100%}
+ .footer-action-buttons .section-save-button{font-size:13px;padding:9px 6px;width:100%;min-width:0}
+}
+
+/* Avoid status toast covering JSON/DOCX buttons in sticky footer. */
+.toast{bottom:108px}
+@media(max-width:400px){.toast{bottom:78px}}
+
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar">
-  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v1.0</div></div></div>
+<aside class="sidebar" id="sidebar" aria-label="เมนูหมวดข้อมูล">
+  <button type="button" class="sidebar-close" data-action="close-menu" aria-label="ปิดเมนูหมวดข้อมูล">✕ ปิดเมนู</button>
+  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v2.0.0</div></div></div>
   <div><div class="sidebar-label">WORKSPACE</div><nav class="nav" id="nav" aria-label="เมนูกรอกข้อมูล"></nav></div>
   <div class="sidebar-bottom"><span class="dot"></span>ทำงานในเครื่องของผู้ใช้งาน<br>Faculty of Science · University of Phayao<br>JSON Contract 1.0.0</div>
 </aside>
+<div class="sidebar-backdrop" data-action="close-menu" aria-hidden="true"></div>
 <main class="main">
  <div class="topline">
-  <div><div class="eyebrow">ACADEMIC TOOLS / COURSE PLANNING</div><h1>Smart Syllabus Generator</h1><p class="header-desc">ระบบจัดทำรายละเอียดรายวิชาออนไลน์ · ประมวลผลใน Browser ไม่ใช้ Backend</p></div>
-  <div class="actions">
-    <button type="button" class="btn" data-action="drafts">▤ Draft ของฉัน</button>
-    <button type="button" class="btn" data-action="new">＋ สร้างใหม่</button>
-    <button type="button" class="btn" data-action="import">⇧ นำเข้า JSON</button>
-    <button type="button" class="btn" data-action="backup">⇩ สำรอง Draft JSON</button>
-    <button type="button" class="btn btn-navy" data-action="save">☑ บันทึก Draft</button>
-  </div>
- </div>
- <div class="hero"><div><div class="meta">COURSE SYLLABUS · ACADEMIC YEAR</div><h2 id="hero-course">เริ่มต้นสร้าง Course Syllabus</h2><p class="sub" id="hero-sub">Faculty of Science · University of Phayao</p></div><div class="offering"><span>OFFERING ID (AUTO)</span><strong id="offering-label">—</strong><span>สำหรับนำเข้าระบบ Blazor ในอนาคต</span></div></div>
- <div class="stats"><div class="stat"><div><div class="hint">อาจารย์ผู้สอน</div><div class="number" id="s-instructors">0</div></div><div class="symbol">♙</div></div><div class="stat"><div><div class="hint">Course Learning Outcomes</div><div class="number" id="s-clos">0</div></div><div class="symbol">◎</div></div><div class="stat"><div><div class="hint">แผนสอน (รายการ)</div><div class="number" id="s-plans">0</div></div><div class="symbol">▦</div></div><div class="stat"><div><div class="hint">น้ำหนักคะแนนรวม</div><div class="number" id="s-weight">0%</div></div><div class="symbol">◫</div></div></div>
- <div class="pagebar"><div><div class="eyebrow" id="tab-number">SECTION 1 / 6</div><h2 id="tab-title">ข้อมูลรายวิชา</h2><p class="intro" id="tab-desc">ข้อมูลรายวิชา</p></div><div class="inline-row"><span class="pill neutral" id="save-status">กำลังโหลด...</span><button type="button" class="btn" data-action="demo">◈ ข้อมูลตัวอย่าง</button><button type="button" class="btn" data-action="validate">✓ ตรวจสอบ</button><button type="button" class="btn btn-primary" data-action="export">⇩ ส่งออก JSON</button></div></div>
+  <button id="mobile-menu-button" class="btn mobile-menu-button" data-action="mobile-menu" type="button" aria-controls="sidebar" aria-expanded="false">☰ หมวดข้อมูล</button>
+  <div class="header-group"><div class="eyebrow">ACADEMIC TOOLS / COURSE PLANNING</div><h1>Smart Syllabus Generator</h1><p class="header-desc">ระบบจัดทำรายละเอียดรายวิชาออนไลน์ · ประมวลผลใน Browser ไม่ใช้ Backend</p></div>
+  <div class="actions" role="group" aria-label="เครื่องมือจัดการไฟล์ JSON">
+    <button type="button" class="btn" data-action="import">⇧ เปิด JSON</button>
+  </div> </div>
+ <div class="pagebar"><div><div class="eyebrow" id="tab-number">SECTION 1 / 6</div><h2 id="tab-title">ข้อมูลรายวิชา</h2><p class="intro" id="tab-desc">ข้อมูลรายวิชา</p></div></div>
  <div id="panel-content" aria-live="polite"></div>
- <section id="validation" class="validate-area" aria-live="polite"><div class="results-head"><h2 id="issue-heading">ผลตรวจสอบ</h2><span class="pill neutral">คลิกเพื่อไปยังแท็บที่เกี่ยวข้อง</span></div><div class="issues" id="issue-list"></div></section>
- <div class="footerline">© Faculty of Science, University of Phayao · Browser-only draft · Storage: <span id="storage-label">—</span> · ไม่อัปโหลดข้อมูลไปยัง Server</div>
+ <div class="section-save-footer" role="region" aria-label="บันทึกไฟล์ข้อมูลรายวิชา">
+   <div class="section-save-copy"><span class="section-save-title">บันทึกข้อมูลทั้งหมด</span><span class="section-save-hint">บันทึก JSON หรือสร้างเอกสาร Word ได้ทุกเวลา · ไม่จำเป็นต้องตรวจสอบก่อน</span><span id="save-status" class="save-indicator" role="status" aria-live="polite">ยังไม่ได้บันทึก JSON</span></div>
+   <div class="footer-action-buttons"><button type="button" class="btn section-save-button" data-action="save">⇩ บันทึก JSON</button><button type="button" class="btn btn-primary section-save-button" data-action="docx">▤ สร้าง DOCX</button></div>
+ </div>
+ <div class="footerline">© Faculty of Science, University of Phayao · Browser-only · <span id="storage-label">บันทึกเป็นไฟล์ JSON เท่านั้น</span> · ไม่อัปโหลดข้อมูลไปยัง Server</div>
 </main>
 </div>
-<div id="drawer" class="drawer-back hidden"><div class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title"><div class="topline"><div><h2 id="drawer-title">Draft ที่บันทึกไว้</h2><p class="muted">เก็บใน Browser ของเครื่องและโปรไฟล์นี้เท่านั้น</p></div><button class="btn btn-mini" data-action="close-drawer" aria-label="ปิด">✕ ปิด</button></div><div class="notice warn" style="margin-top:20px">ข้อมูลนี้จะไม่ซิงก์ระหว่างอุปกรณ์ หากเปลี่ยนเครื่องหรือล้างข้อมูล Browser อาจสูญหาย กรุณา Export JSON เป็นระยะ</div><div id="draft-list"></div></div></div>
 <input id="file-import" class="hidden" type="file" accept=".json,application/json">
 <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 <script type="application/json" id="contract-json">{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://up.ac.th/syllabus/schema/1.0.0","title":"Smart Excel Syllabus Canonical Contract (proposed for Blazor)","description":"Contract v1.0 for independent Excel source and future REG view. SQL DDL is a proposed migration, not a snapshot of existing database.","type":"object","additionalProperties":false,"required":["SchemaVersion","OfferingId","SourceType","ExtractedAt","CourseInfo","Curriculum","Instructors","PLOs","CLOs","ClassMeetings","Exams","StudentGroups","LecturePlans","LabPlans","Assessments","GradeScale","Resources"],"properties":{"SchemaVersion":{"const":"1.0.0"},"OfferingId":{"type":"string","pattern":"^[A-Za-z0-9_-]+-[0-9]+-[0-9]{4}-SEC[A-Za-z0-9]+$"},"SourceType":{"type":"string","enum":["ExcelManual","RegView","BlazorManual"]},"ExtractedAt":{"type":"string","format":"date-time"},"CourseInfo":{"type":"object","additionalProperties":false,"properties":{"CourseCode":{"type":"string"},"CourseTitleTh":{"type":"string"},"CourseTitleEn":{"type":"string"},"CourseDescriptionTh":{"type":"string"},"CourseDescriptionEn":{"type":"string"},"Credits":{"type":"string"},"LectureHours":{"type":"integer"},"LabHours":{"type":"integer"},"SelfStudyHours":{"type":"integer"},"AcademicYear":{"type":"integer"},"Semester":{"type":"string"},"Section":{"type":"string"},"FacultyName":{"type":"string"},"UniversityName":{"type":"string"},"TeachingLanguage":{"type":"string"},"DeliveryMode":{"type":"string"},"Prerequisites":{"type":"string"},"Remarks":{"type":"string"}},"required":["CourseCode","CourseTitleTh","Credits","AcademicYear","Semester","Section"]},"Curriculum":{"type":"object","additionalProperties":false,"properties":{"CurriculumCode":{"type":"string"},"CurriculumName":{"type":"string"},"CurriculumRevisionYear":{"type":"integer"},"ProgramCode":{"type":"string"},"ProgramName":{"type":"string"},"DegreeLevel":{"type":"string"},"DepartmentName":{"type":"string"}},"required":[]},"Instructors":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"StaffId":{"type":"string"},"IsResponsibleInstructor":{"type":"boolean"},"Prefix":{"type":"string"},"FirstName":{"type":"string"},"LastName":{"type":"string"},"DisplayName":{"type":"string"},"Email":{"type":"string"},"Department":{"type":"string"},"LecturePercent":{"type":"number"},"LabPercent":{"type":"number"},"Notes":{"type":"string"}},"required":["IsResponsibleInstructor"]}},"PLOs":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"PloCode":{"type":"string"},"DescriptionTh":{"type":"string"},"DescriptionEn":{"type":"string"},"Category":{"type":"string"},"Notes":{"type":"string"}},"required":["PloCode","DescriptionTh"]}},"CLOs":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"CloCode":{"type":"string"},"DescriptionTh":{"type":"string"},"BloomLevel":{"type":"string"},"MappedPloCodes":{"type":"array","items":{"type":"string"},"uniqueItems":true},"Notes":{"type":"string"}},"required":["CloCode","DescriptionTh"]}},"ClassMeetings":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"DayOfWeek":{"type":"string"},"StartTime":{"type":"string","pattern":"^([01][0-9]|2[0-3]):[0-5][0-9]$"},"EndTime":{"type":"string","pattern":"^([01][0-9]|2[0-3]):[0-5][0-9]$"},"RoomCode":{"type":"string"},"DeliveryType":{"type":"string"},"Notes":{"type":"string"}},"required":[]}},"Exams":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"ExamTypeCode":{"type":"string"},"ExamDate":{"type":"string","format":"date"},"StartTime":{"type":"string","pattern":"^([01][0-9]|2[0-3]):[0-5][0-9]$"},"EndTime":{"type":"string","pattern":"^([01][0-9]|2[0-3]):[0-5][0-9]$"},"RoomCode":{"type":"string"},"Notes":{"type":"string"}},"required":[]}},"StudentGroups":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"StudentProgramName":{"type":"string"},"StudentYearLevel":{"type":"integer"},"RegisteredStudentCount":{"type":"integer"},"StudentCurriculumCode":{"type":"string"},"StudentCurriculumRevisionYear":{"type":"integer"},"Notes":{"type":"string"}},"required":[]}},"LecturePlans":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"WeekNumber":{"type":"integer"},"Topic":{"type":"string"},"LearningActivities":{"type":"string"},"TeachingMethods":{"type":"string"},"MappedCloCodes":{"type":"array","items":{"type":"string"},"uniqueItems":true},"AssessmentMethods":{"type":"string"},"Notes":{"type":"string"}},"required":["WeekNumber","Topic"]}},"LabPlans":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"WeekNumber":{"type":"integer"},"Topic":{"type":"string"},"LearningActivities":{"type":"string"},"TeachingMethods":{"type":"string"},"MappedCloCodes":{"type":"array","items":{"type":"string"},"uniqueItems":true},"AssessmentMethods":{"type":"string"},"Notes":{"type":"string"}},"required":["WeekNumber","Topic"]}},"Assessments":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"AssessmentCode":{"type":"string"},"AssessmentName":{"type":"string"},"AssessmentType":{"type":"string"},"WeightPercent":{"type":"number"},"MappedCloCodes":{"type":"array","items":{"type":"string"},"uniqueItems":true},"Notes":{"type":"string"}},"required":["AssessmentName","WeightPercent"]}},"GradeScale":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"Grade":{"type":"string"},"MinimumScore":{"type":"number"},"MaximumScore":{"type":"number"},"Notes":{"type":"string"}},"required":[]}},"Resources":{"type":"array","items":{"type":"object","additionalProperties":false,"properties":{"ResourceType":{"type":"string"},"Title":{"type":"string"},"Author":{"type":"string"},"Year":{"type":"integer"},"Url":{"type":"string"},"Notes":{"type":"string"}},"required":[]}}}}</script>
-<script type="application/json" id="demo-json">{"SchemaVersion":"1.0.0","OfferingId":"244442-1-2569-SEC01","SourceType":"ExcelManual","ExtractedAt":"2026-10-28T08:10:15+00:00","CourseInfo":{"CourseCode":"244442","CourseTitleTh":"ไมโครคอนโทรลเลอร์และการเขียนโปรแกรม","CourseTitleEn":"Microcontroller and Programming","CourseDescriptionTh":"ศึกษาพื้นฐานไมโครคอนโทรลเลอร์ การเชื่อมต่ออุปกรณ์และการเขียนโปรแกรม (ข้อมูลสมมติสำหรับทดสอบเท่านั้น)","Credits":"3(2-2-5)","LectureHours":2,"LabHours":2,"SelfStudyHours":5,"AcademicYear":2569,"Semester":"1","Section":"01","FacultyName":"คณะวิทยาศาสตร์","UniversityName":"มหาวิทยาลัยพะเยา","TeachingLanguage":"ไทย"},"Curriculum":{"CurriculumName":"หลักสูตรตัวอย่าง (แทนที่ด้วยข้อมูลจริง)","ProgramName":"ฟิสิกส์"},"Instructors":[{"StaffId":"DEMO001","IsResponsibleInstructor":true,"Prefix":"ผศ.ดร.","FirstName":"ตัวอย่าง","LastName":"ผู้สอน","DisplayName":"ผศ.ดร. ตัวอย่าง ผู้สอน","Email":"demo@example.invalid","Department":"คณะวิทยาศาสตร์","LecturePercent":100.0,"LabPercent":100.0,"Notes":"ข้อมูลสมมติเท่านั้น"}],"PLOs":[{"PloCode":"PLO1","DescriptionTh":"ประยุกต์ความรู้ด้านวิทยาศาสตร์แก้ปัญหา (ตัวอย่างสมมติ)"}],"CLOs":[{"CloCode":"CLO1","DescriptionTh":"ออกแบบโปรแกรมไมโครคอนโทรลเลอร์พื้นฐาน (ตัวอย่างสมมติ)","BloomLevel":"Apply","MappedPloCodes":["PLO1"]}],"ClassMeetings":[{"DayOfWeek":"จันทร์","StartTime":"09:00","EndTime":"11:00","RoomCode":"DEMO-LAB","DeliveryType":"Lecture","Notes":"ตัวอย่าง"}],"Exams":[{"ExamTypeCode":"M","ExamDate":"2027-01-15","StartTime":"09:00","EndTime":"12:00","RoomCode":"DEMO-ROOM","Notes":"ตัวอย่าง ไม่ใช่ตารางสอบจริง"}],"StudentGroups":[{"StudentProgramName":"ฟิสิกส์","StudentYearLevel":2,"RegisteredStudentCount":25,"StudentCurriculumCode":"DEMO-CURR","StudentCurriculumRevisionYear":2568,"Notes":"ข้อมูลสมมติ"}],"LecturePlans":[{"WeekNumber":1,"Topic":"หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 1","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":2,"Topic":"หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 2","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":3,"Topic":"หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 3","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":4,"Topic":"หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 4","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":5,"Topic":"หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 5","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":6,"Topic":"หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 6","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":7,"Topic":"หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 7","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":8,"Topic":"หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 8","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":9,"Topic":"หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 9","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":10,"Topic":"หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 10","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":11,"Topic":"หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 11","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":12,"Topic":"หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 12","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":13,"Topic":"หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 13","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":14,"Topic":"หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 14","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":15,"Topic":"หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 15","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"}],"LabPlans":[{"WeekNumber":1,"Topic":"หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 1","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":2,"Topic":"หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 2","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":3,"Topic":"หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 3","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":4,"Topic":"หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 4","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":5,"Topic":"หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 5","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":6,"Topic":"หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 6","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":7,"Topic":"หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 7","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":8,"Topic":"หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 8","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":9,"Topic":"หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 9","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":10,"Topic":"หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 10","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":11,"Topic":"หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 11","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":12,"Topic":"หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 12","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":13,"Topic":"หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 13","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":14,"Topic":"หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 14","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"},{"WeekNumber":15,"Topic":"หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)","LearningActivities":"กิจกรรมสัปดาห์ที่ 15","TeachingMethods":"สาธิตและลงมือปฏิบัติ","MappedCloCodes":["CLO1"],"AssessmentMethods":"ใบงาน","Notes":"ข้อมูลสมมติ"}],"Assessments":[{"AssessmentCode":"AS01","AssessmentName":"ใบงานและปฏิบัติการ","AssessmentType":"Practical","WeightPercent":60.0,"MappedCloCodes":["CLO1"],"Notes":"ตัวอย่าง"},{"AssessmentCode":"AS02","AssessmentName":"โครงงาน","AssessmentType":"Project","WeightPercent":40.0,"MappedCloCodes":["CLO1"],"Notes":"ตัวอย่าง"}],"GradeScale":[{"Grade":"A","MinimumScore":80.0,"MaximumScore":100.0},{"Grade":"B+","MinimumScore":75.0,"MaximumScore":79.99},{"Grade":"B","MinimumScore":70.0,"MaximumScore":74.99},{"Grade":"C+","MinimumScore":65.0,"MaximumScore":69.99},{"Grade":"C","MinimumScore":60.0,"MaximumScore":64.99},{"Grade":"D+","MinimumScore":55.0,"MaximumScore":59.99},{"Grade":"D","MinimumScore":50.0,"MaximumScore":54.99},{"Grade":"F","MinimumScore":0.0,"MaximumScore":49.99}],"Resources":[{"ResourceType":"Textbook","Title":"หนังสือ/แหล่งเรียนรู้ตัวอย่าง","Year":2026,"Notes":"ข้อมูลสมมติ"}]}</script>
+<script type="application/json" id="demo-json">{"SchemaVersion":"1.0.0","OfferingId":"244442-1-2569-SEC01","SourceType":"ExcelManual","ExtractedAt":"2026-10-28T08:10:15+00:00","CourseInfo":{"CourseCode":"244442","CourseTitleTh":"ไมโครคอนโทรลเลอร์และการเขียนโปรแกรม","CourseTitleEn":"Microcontroller and Programming","CourseDescriptionTh":"ศึกษาพื้นฐานไมโครคอนโทรลเลอร์ การเชื่อมต่ออุปกรณ์และการเขียนโปรแกรม (ข้อมูลสมมติสำหรับทดสอบเท่านั้น)","Credits":"3","LectureHours":2,"LabHours":2,"SelfStudyHours":5,"AcademicYear":2569,"Semester":"1","Section":"01","FacultyName":"คณะวิทยาศาสตร์","UniversityName":"มหาวิทยาลัยพะเยา","TeachingLanguage":"ไทย","CourseDescriptionEn":"Introduction to microcontrollers, programming, peripheral interfacing, and basic applications (sample data only)."},"Curriculum":{"CurriculumName":"หลักสูตรวิทยาศาสตรบัณฑิต","ProgramName":"สาขาวิชาฟิสิกส์","CurriculumCode":"BS-PHYSICS","DegreeLevel":"วิทยาศาสตรบัณฑิต"},"Instructors":[{"StaffId":"DEMO001","IsResponsibleInstructor":true,"Prefix":"ผศ.ดร.","FirstName":"ตัวอย่าง","LastName":"ผู้สอน","DisplayName":"ผศ.ดร. ตัวอย่าง ผู้สอน","Email":"demo@example.invalid","Department":"คณะวิทยาศาสตร์","LecturePercent":100.0,"LabPercent":100.0,"Notes":"ข้อมูลสมมติเท่านั้น"}],"PLOs":[{"PloCode":"PLO1","DescriptionTh":"ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ","Category":"Knowledge / Communication","Notes":""},{"PloCode":"PLO2","DescriptionTh":"ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน","Category":"Practical / Digital / AI","Notes":""},{"PloCode":"PLO3","DescriptionTh":"ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม","Category":"Ethics","Notes":""},{"PloCode":"PLO4","DescriptionTh":"ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก","Category":"Communication / Teamwork","Notes":""},{"PloCode":"PLO5","DescriptionTh":"ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต","Category":"Lifelong Learning","Notes":""},{"PloCode":"PLO6","DescriptionTh":"ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้","Category":"Design Thinking","Notes":""},{"PloCode":"PLO7","DescriptionTh":"ผู้เรียนสามารถอธิบายหลักการทางฟิสิกส์พื้นฐานได้","Category":"Knowledge","Notes":""},{"PloCode":"PLO8","DescriptionTh":"ผู้เรียนสามารถทำการทดลองทางฟิสิกส์ด้วยกระบวนวิธีทางวิทยาศาสตร์ได้","Category":"Knowledge/ Practical","Notes":""},{"PloCode":"PLO9","DescriptionTh":"ผู้เรียนสามารถวิเคราะห์ผลการทดลองหรือข้อมูลทางฟิสิกส์ได้","Category":"Knowledge/ Practical","Notes":""},{"PloCode":"PLO10","DescriptionTh":"ผู้เรียนสามารถวิพากษ์ผลการทดลองทางฟิสิกส์ได้","Category":"Knowledge/ Practical","Notes":""},{"PloCode":"PLO11","DescriptionTh":"ผู้เรียนสามารถสร้างนวัตกรรมหรืองานวิจัยที่เกิดประโยชน์","Category":"Knowledge/ Practical/ Innovation","Notes":""}],"CLOs":[{"CloCode":"CLO1","DescriptionTh":"ออกแบบโปรแกรมไมโครคอนโทรลเลอร์พื้นฐาน (ตัวอย่างสมมติ)","BloomLevel":"Apply","MappedPloCodes":["PLO7"]}],"ClassMeetings":[{"DayOfWeek":"จันทร์","StartTime":"09:00","EndTime":"11:00","RoomCode":"DEMO-LAB","DeliveryType":"Lecture","Notes":"ตัวอย่าง"}],"Exams":[{"ExamTypeCode":"M","ExamDate":"2027-01-15","StartTime":"09:00","EndTime":"12:00","RoomCode":"DEMO-ROOM","Notes":"ตัวอย่าง ไม่ใช่ตารางสอบจริง"}],"StudentGroups":[{"StudentProgramName":"ฟิสิกส์","StudentYearLevel":2,"RegisteredStudentCount":25,"StudentCurriculumCode":"DEMO-CURR","StudentCurriculumRevisionYear":2568,"Notes":"ข้อมูลสมมติ"}],"LecturePlans":[{"WeekNumber":1,"Topic":"หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 1","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":2,"Topic":"หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 2","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":3,"Topic":"หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 3","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":4,"Topic":"หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 4","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":5,"Topic":"หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 5","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":6,"Topic":"หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 6","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":7,"Topic":"หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 7","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":8,"Topic":"หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 8","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":9,"Topic":"หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 9","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":10,"Topic":"หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 10","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":11,"Topic":"หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 11","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":12,"Topic":"หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 12","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":13,"Topic":"หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 13","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":14,"Topic":"หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 14","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":15,"Topic":"หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 15","TeachingMethods":"การบรรยายเชิงปฏิสัมพันธ์","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"}],"LabPlans":[{"WeekNumber":1,"Topic":"หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 1","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":2,"Topic":"หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 2","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":3,"Topic":"หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 3","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":4,"Topic":"หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 4","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":5,"Topic":"หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 5","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":6,"Topic":"หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 6","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":7,"Topic":"หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 7","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":8,"Topic":"หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 8","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":9,"Topic":"หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 9","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":10,"Topic":"หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 10","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":11,"Topic":"หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 11","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":12,"Topic":"หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 12","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":13,"Topic":"หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 13","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":14,"Topic":"หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 14","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"},{"WeekNumber":15,"Topic":"หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 15","TeachingMethods":"การฝึกปฏิบัติในห้องปฏิบัติการ","MappedCloCodes":["CLO1"],"Notes":"ผศ.ดร. ตัวอย่าง ผู้สอน"}],"Assessments":[{"AssessmentCode":"AS01","AssessmentName":"ใบงานและปฏิบัติการ","AssessmentType":"การสอบปฏิบัติ","WeightPercent":60.0,"MappedCloCodes":["CLO1"],"Notes":"ตัวอย่าง"},{"AssessmentCode":"AS02","AssessmentName":"โครงงาน","AssessmentType":"โครงงาน","WeightPercent":40.0,"MappedCloCodes":["CLO1"],"Notes":"ตัวอย่าง"}],"GradeScale":[{"Grade":"A","MinimumScore":80.0,"MaximumScore":100.0},{"Grade":"B+","MinimumScore":75.0,"MaximumScore":79.99},{"Grade":"B","MinimumScore":70.0,"MaximumScore":74.99},{"Grade":"C+","MinimumScore":65.0,"MaximumScore":69.99},{"Grade":"C","MinimumScore":60.0,"MaximumScore":64.99},{"Grade":"D+","MinimumScore":55.0,"MaximumScore":59.99},{"Grade":"D","MinimumScore":50.0,"MaximumScore":54.99},{"Grade":"F","MinimumScore":0.0,"MaximumScore":49.99}],"Resources":[{"ResourceType":"ตำราเรียน","Title":"หนังสือ/แหล่งเรียนรู้ตัวอย่าง","Year":2026,"Notes":"ข้อมูลสมมติ"}]}</script>
+<script type="application/json" id="curricula-json">{"schema_version":"1.0.0","curricula":[{"curriculum_id":"BS-PHYSICS","program_name":"หลักสูตรวิทยาศาสตรบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ","category":"Knowledge / Communication","note":""},{"plo_id":"PLO2","description":"ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน","category":"Practical / Digital / AI","note":""},{"plo_id":"PLO3","description":"ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม","category":"Ethics","note":""},{"plo_id":"PLO4","description":"ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก","category":"Communication / Teamwork","note":""},{"plo_id":"PLO5","description":"ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต","category":"Lifelong Learning","note":""},{"plo_id":"PLO6","description":"ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้","category":"Design Thinking","note":""},{"plo_id":"PLO7","description":"ผู้เรียนสามารถอธิบายหลักการทางฟิสิกส์พื้นฐานได้","category":"Knowledge","note":""},{"plo_id":"PLO8","description":"ผู้เรียนสามารถทำการทดลองทางฟิสิกส์ด้วยกระบวนวิธีทางวิทยาศาสตร์ได้","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO9","description":"ผู้เรียนสามารถวิเคราะห์ผลการทดลองหรือข้อมูลทางฟิสิกส์ได้","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO10","description":"ผู้เรียนสามารถวิพากษ์ผลการทดลองทางฟิสิกส์ได้","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO11","description":"ผู้เรียนสามารถสร้างนวัตกรรมหรืองานวิจัยที่เกิดประโยชน์","category":"Knowledge/ Practical/ Innovation","note":""}],"major":"สาขาวิชาฟิสิกส์"},{"curriculum_id":"BS-CHEMISTRY","program_name":"หลักสูตรวิทยาศาสตรบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"ผู้เรียนสามารถใช้ภาษาในการสื่อสารและนำเสนอองค์ความรู้ทางเคมีได้ทั้งภาษาไทยและอังกฤษ","category":"Knowledge / Communication","note":""},{"plo_id":"PLO2","description":"ผู้เรียนสามารถใช้เทคโนโลยีในการสืบค้น วิเคราะห์ นำเสนอข้อมูลทางเคมีได้อย่างเหมาะสม","category":"Practical / Digital / AI","note":""},{"plo_id":"PLO3","description":"ผู้เรียนแสดงออกถึงการเป็นผู้ตรงต่อเวลา ซื่อสัตย์ มีวินัย ประพฤติตนตามหลักความปลอดภัยในห้องปฏิบัติการเคมีได้อย่างเหมาะสม","category":"Ethics","note":""},{"plo_id":"PLO4","description":"ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก","category":"Communication / Teamwork","note":""},{"plo_id":"PLO5","description":"ผู้เรียนสามารถเรียนรู้ได้ด้วยตนเองในการปฏิบัติงานทางเคมีได้ และนำองค์ความรู้ที่ได้มาใช้ในการแก้ไขปัญหา","category":"Knowledge/ Practical/ Innovation","note":""},{"plo_id":"PLO6","description":"ผู้เรียนสามารถอธิบายทฤษฎีทางวิทยาศาสตร์พื้นฐาน คณิตศาสตร์ และเคมีได้อย่างถูกต้อง","category":"Knowledge ","note":""},{"plo_id":"PLO7","description":"ผู้เรียนสามารถนำความรู้ทางเคมีมาออกแบบการทดลอง วิเคราะห์และอภิปรายผลจากการทดลองทางเคมี","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO8","description":"ผู้เรียนสามารถทำปฏิบัติการทางเคมีร่วมกับการใช้เครื่องมือวิเคราะห์ทางเคมีได้อย่างถูกต้อง","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO9","description":"ผู้เรียนสามารถนำความรู้ทางเคมีมาประยุกต์ใช้ในการศึกษาทรัพยากรธรรมชาติและภูมิปัญญาท้องถิ่น ด้วยกรอบแนวคิดการสร้างนวัตกรรม","category":"Knowledge/ Practical","note":""}],"major":"สาขาวิชาเคมี"},{"curriculum_id":"BS-BIOLOGY","program_name":"หลักสูตรวิทยาศาสตรบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"ผู้เรียนปฏิบัติตนอย่างมีคุณธรรมจริยธรรมและเป็นพลเมืองที่ดีของสังคม\nSub PLO 1.1 ผู้เรียนแสดงพฤติกรรมอย่างมีคุณธรรมและจริยธรรม\nSub PLO 1.2 ผู้เรียนทำงานร่วมกับผู้อื่นและรับผิดชอบต่อตนเองและท้องถิ่น\nSub PLO 1.3 ผู้เรียนแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคม","category":"Ethics / Communication/ Teamwork","note":""},{"plo_id":"PLO2","description":"ผู้เรียนอธิบายความรู้ หลักการทางวิทยาศาสตร์ คณิตศาสตร์ และชีววิทยา","category":"Knowledge","note":""},{"plo_id":"PLO3","description":"ผู้เรียนอธิบายคุณค่าของทรัพยากรทางชีวภาพที่มีในท้องถิ่น เพื่อการอนุรักษ์และใช้ประโยชน์อย่างยั่งยืน","category":"Knowledge / Communication","note":""},{"plo_id":"PLO4","description":"ผู้เรียนใช้เทคโนโลยีสารสนเทศและใช้ภาษาเพื่อการสื่อสารได้ดี นำไปสู่ทักษะการเรียนรู้ตลอดชีวิต\nSub PLO 4.1 ผู้เรียนใช้เทคโนโลยีสารสนเทศเพื่อการค้นคว้าอย่างรู้เท่าทัน\nSub PLO 4.2 ผู้เรียนใช้ทักษะด้านภาษาเพื่อการสื่อสารได้ดี","category":"Communication/ Lifelong Learning/ Practical / Digital / AI","note":""},{"plo_id":"PLO5","description":"ผู้เรียนใช้ความรู้ทางชีววิทยา วิทยาศาสตร์ คณิตศาสตร์ และสถิติ ในการวิเคราะห์และดำเนินการวิจัยทางชีววิทยาด้วยกระบวนการคิดเชิงออกแบบได้","category":"Knowledge/ Practical/ Design Thinking","note":""}],"major":"สาขาวิชาชีววิทยา"},{"curriculum_id":"BS-MATHEMATICS","program_name":"หลักสูตรวิทยาศาสตรบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ","category":"Knowledge / Communication","note":""},{"plo_id":"PLO2","description":"ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน","category":"Practical / Digital / AI","note":""},{"plo_id":"PLO3","description":"ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม","category":"Ethics","note":""},{"plo_id":"PLO4","description":"ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก","category":"Communication / Teamwork","note":""},{"plo_id":"PLO5","description":"ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต","category":"Lifelong Learning","note":""},{"plo_id":"PLO6","description":"ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้","category":"Design Thinking","note":""},{"plo_id":"PLO7","description":"ผู้เรียนสามารถอธิบายและสรุปหลักการพื้นฐานหรือทฤษฎีทางคณิตศาสตร์ได้อย่างถูกต้อง","category":"Knowledge","note":""},{"plo_id":"PLO8","description":"ผู้เรียนสามารถใช้หลักการและทักษะกระบวนการทางคณิตศาสตร์ในการแก้ปัญหาได้อย่างเป็นระบบ","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO9","description":"ผู้เรียนสามารถนำเครื่องมือทางคณิตศาสตร์ไปประยุกต์แก้ปัญหาในศาสตร์อื่น ๆ ที่เกี่ยวข้องได้และถ่ายทอดองค์ความรู้โดยใช้เทคโนโลยีได้อย่างเหมาะสม","category":"Knowledge/ Practical/ Digital / AI","note":""},{"plo_id":"PLO10","description":"ผู้เรียนมีความรับผิดชอบต่อตนเอง ชุมชน และสังคม","category":"Ethics/ Practical","note":""}],"major":"สาขาวิชาคณิตสาสตร์"},{"curriculum_id":"BS-EXERCISE AND SPORT SCIENCE","program_name":"หลักสูตรวิทยาศาสตรบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"ผู้เรียนสามารถนำความรู้ในด้านวิทยาศาสตร์การออกกำลังกายและการกีฬาเพื่อส่งเสริมสุขภาพของตนเองและผู้อื่นได้","category":"Knowledge/ Practical / Communication","note":""},{"plo_id":"PLO2","description":"ผู้เรียนสามารถวิเคราะห์ ประเมินสมรรถภาพทางกายและสมรรถนะทางการกีฬา โดยใช้กระบวนการ เครื่องมือ เทคโนโลยีทางวิทยาศาสตร์การออกกำลังกายและการกีฬาได้","category":"Knowledge/ Practical / Digital / AI","note":""},{"plo_id":"PLO3","description":"ผู้เรียนสามารถออกแบบการฝึกการออกกำลังกายและการกีฬาได้อย่างเหมาะสม โดยใช้พื้นฐานทักษะทางวิทยาศาสตร์การออกกำลังกายและการกีฬาอย่างมีจรรยาบรรณ","category":"Knowledge/ Practical / Communication","note":""},{"plo_id":"PLO4","description":"ผู้เรียนสามารถให้คำแนะนำ โดยใช้หลักการทางวิทยาศาสตร์การออกกำลังกายและการกีฬาทั้งแบบไทยและสากล","category":"Ethics/ Knowledge/ Practical / Communication","note":""}],"major":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"},{"curriculum_id":"MS-APPLIED CHEMISTRY","program_name":"หลักสูตรวิทยาศาสตรมหาบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"บัณฑิตสามารถทำวิจัยโดยบูรณาการความรู้ทางเคมีประยุกต์และเทคโนโลยีดิจิทัลอย่างมีจรรยาบรรณ","category":"Knowledge/ Practical / Digital / AI/ Ethics","note":""},{"plo_id":"PLO2","description":"บัณฑิตสามารถวิเคราะห์และแก้ปัญหาอุตสาหกรรมและชุมชนด้วยความรู้และทักษะทางเคมีประยุกต์อย่างยั่งยืน","category":"Knowledge/ Practical / Communication","note":""},{"plo_id":"PLO3","description":"บัณฑิตสามารถสื่อสารทางวิชาการและภาษาอังกฤษในการนำเสนอทางเคมีประยุกต์ได้","category":"Communication/ Knowledge/ Practical","note":""},{"plo_id":"PLO4","description":"บัณฑิตสามารถติดตามองค์ความรู้ เพื่อนำไปใช้ในการพัฒนางานทางเคมีประยุกต์ได้","category":"Lifelong Learning/ Ethics/ Knowledge/ Practical","note":""}],"major":"สาขาวิชาเคมี"},{"curriculum_id":"MS-BIOLOGY PLAN1-THESIS","program_name":"หลักสูตรวิทยาศาสตรมหาบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"สามารถเสนอแนวทางการพัฒนาและสร้างประโยชน์ทางชีววิทยาอย่างเป็นระบบ โดยใช้เทคนิคและเครื่องมือทางชีววิทยาที่เหมาะสมให้แก่ชุมชนโดยบูรณาการกับศาสตร์อื่นได้","category":"Knowledge/ Practical / Communication","note":""},{"plo_id":"PLO2","description":"สามารถออกแบบและดำเนินการวิจัยทางด้านชีววิทยาด้วยจรรณยาบรรณและเคารพสิทธิ์เพื่อสร้างคุณค่าของทรัพยากรท้องถิ่น","category":"Knowledge/ Practical / Ethics/ Communication","note":""},{"plo_id":"PLO3","description":"ติดตามและประยุกต์ใช้ความรู้ทางชีววิทยาในการใช้ประโยชน์ อนุรักษ์ และพัฒนาทรัพยากรชีวภาพของท้องถิ่นอย่างยั่งยืน เพื่อยกระดับคุณภาพชีวิตและความสมดุลของระบบนิเวศ","category":"Lifelong Learning/ Communication/ Knowledge/ Practical","note":""},{"plo_id":"PLO4","description":"สื่อสารและนำเสนอข้อมูลทางชีววิทยาต่อสังคมวิชาการและชุมชนท้องถิ่นได้อย่างมีประสิทธิภาพและมีจริยธรรมทางวิชาการ","category":"Communication/ Ethics/ Knowledge/ Practical","note":""}],"major":"สาขาวิชาชีววิทยา"},{"curriculum_id":"MS-BIOLOGY PLAN2-IS","program_name":"หลักสูตรวิทยาศาสตรมหาบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"สามารถเสนอแนวทางแก้ปัญหาและสร้างประโยชน์ให้แก่ชุมชนโดยบูรณาการกับศาสตร์อื่นได้","category":"Knowledge/ Practical / Communication","note":""},{"plo_id":"PLO2","description":"สามารถสร้างความรู้จากงานวิจัยบนฐานของทรัพยากรในท้องถิ่นเพื่อการพัฒนาที่ยั่งยืน","category":"Knowledge/ Practical / Ethics/ Communication","note":""},{"plo_id":"PLO3","description":"ติดตามองค์ความรู้ทางด้านชีววิทยาโดยใช้เทคโนโลยีและการเรียนรู้ตลอดชีวิตเพื่อการพัฒนาตนเอง","category":"Lifelong Learning/ Communication/ Knowledge/ Practical","note":""},{"plo_id":"PLO4","description":"ผลิต เผยแพร่ และสื่อสารข้อมูลทางชีววิทยาต่อสาธารณะบนพื้นฐานของจรรยาบรรณนักวิจัย","category":"Communication/ Ethics/ Knowledge/ Practical","note":""}],"major":"สาขาวิชาชีววิทยา"},{"curriculum_id":"MS-MATHEMATICS","program_name":"หลักสูตรวิทยาศาสตรมหาบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"บัณฑิตสามารถใช้หลักเหตุและผลในการดำเนินการวิจัยทางคณิตศาสตร์ได้","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO2","description":"บัณฑิตสามารถนำเสนอผลงานวิจัยทางคณิตศาสตร์ที่มีคุณภาพบนพื้นฐานจริยธรรมวิจัย","category":"Knowledge/ Practical / Ethics/ Communication","note":""},{"plo_id":"PLO3","description":"บัณฑิตสามารถใช้องค์ความรู้ทางคณิตศาสตร์และเทคโนโลยีในการแก้ปัญหาทางคณิตศาสตร์หรือปัญหาจากชุมชนได้","category":"Communication/ Knowledge/ Practical","note":""}],"major":"สาขาวิชาคณิตศาสตร์"},{"curriculum_id":"MS-SPORT SCIENCE AND PHYSICAL EDUCATION PLAN1-THESIS","program_name":"หลักสูตรวิทยาศาสตรมหาบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"สามารถบูรณาการความรู้และความเข้าใจเชิงลึกในศาสตร์ด้านวิทยาศาสตร์การกีฬาและพลศึกษาในการวางแผนการพัฒนาสุขภาพและคุณภาพชีวิต","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO2","description":"สามารถการออกแบบและประยุกต์ใช้เทคโนโลยีหรือนวัตกรรมเพื่อจัดการและพัฒนางานทางด้านวิทยาศาสตร์การกีฬาและพลศึกษาของบุคคลและชุมชนอย่างยั่งยืน","category":"Knowledge/ Practical/ Innovation /Digital / AI/  Lifelong Learning","note":""},{"plo_id":"PLO3","description":"สามารถออกแบบการพัฒนางานวิจัยทางด้านวิทยาศาสตร์การกีฬาและพลศึกษา โดยใช้กระบวนการวิจัยอย่างมีประสิทธิภาพ","category":"Knowledge/ Practical ","note":""},{"plo_id":"PLO4","description":"สามารถทำงานร่วมกับผู้อื่นหรือสหวิชาชีพได้อย่างมืออาชีพและมีความรับผิดชอบ","category":"Communication/ Ethics/  Teamwork/ Practical","note":""}],"major":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"},{"curriculum_id":"MS-SPORT SCIENCE AND PHYSICAL EDUCATION PLAN2-IS","program_name":"หลักสูตรวิทยาศาสตรมหาบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"สามารถบูรณาการความรู้และความเข้าใจเชิงลึกในศาสตร์ด้านวิทยาศาสตร์การกีฬาและพลศึกษาในการวางแผนการพัฒนาสุขภาพและคุณภาพชีวิต","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO2","description":"สามารถการออกแบบและประยุกต์ใช้เทคโนโลยีหรือนวัตกรรมเพื่อจัดการและพัฒนางานทางด้านวิทยาศาสตร์การกีฬาและพลศึกษาของบุคคลและชุมชนอย่างยั่งยืน","category":"Knowledge/ Practical/ Innovation /Digital / AI/  Lifelong Learning","note":""},{"plo_id":"PLO3","description":"สามารถออกแบบการพัฒนางานวิจัยทางด้านวิทยาศาสตร์การกีฬาและพลศึกษา โดยใช้กระบวนการวิจัยอย่างมีประสิทธิภาพ","category":"Knowledge/ Practical ","note":""},{"plo_id":"PLO4","description":"สามารถทำงานร่วมกับผู้อื่นหรือสหวิชาชีพได้อย่างมืออาชีพและมีความรับผิดชอบ","category":"Communication/ Ethics/  Teamwork/ Practical","note":""}],"major":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"},{"curriculum_id":"PhD-BIOLOGY","program_name":"หลักสูตรปรัชญาดุษฎีบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":" ใช้เทคโนโลยีสารสนเทศ เครื่องมือ และนวัตกรรมด้านวิทยาศาสตร์ที่ทันสมัยในการจัดการและแก้ไขปัญหาตามบริบทที่เหมาะสมและทันต่อสถานการณ์","category":"Knowledge/ Practical/ Innovation /Digital / AI","note":""},{"plo_id":"PLO2","description":"วางแผนดำเนินงาน สังเคราะห์ผลงานวิจัยและทฤษฎีเพื่อการออกแบบกระบวนวิจัยในบริบทใหม่ที่ซับซ้อนและเหมาะสมกับสถานการณ์ที่เปลี่ยนแปลงไป","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO3","description":"ประยุกต์ใช้ความรู้และเทคโนโลยีในการวิเคราะห์ การสร้างองค์ความรู้ใหม่จากการวิจัยหรือจัดการประเด็นปัญหาด้วยการวินิจฉัยอย่างถูกต้อง","category":"Knowledge/ Practical/ Innovation /Digital / AI","note":""},{"plo_id":"PLO4","description":"บูรณาการทักษะการวิจัยรอบด้านและการบริหารจัดการงานวิจัย เพื่อนำไปสู่การพัฒนาอาชีพและการใช้ประโยชน์ด้านสังคม เศรษฐกิจ และสิ่งแวดล้อม","category":"Knowledge/ Practical/ Communication","note":""},{"plo_id":"PLO5","description":"ปฏิบัติตนเป็นแบบอย่างที่ดีตามจรรยาบรรณทางวิชากา","category":"Ethics","note":""},{"plo_id":"PLO6","description":"สื่อสารข้อมูลองค์ความรู้จากงานวิจัยแก่ผู้ที่สนใจได้อย่างเหมาะสม และสร้างเครือข่ายความร่วมมือทั้งในระดับชุมชน และผลงานวิจัยเชิงประจักษ์ระดับสากล","category":"Communication/ Ethics/ Teamwork/ Practical","note":""}],"major":"สาขาวิชาชีววิทยา"},{"curriculum_id":"PhD-MATHEMATICS","program_name":"หลักสูตรปรัชญาดุษฎีบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"บัณฑิตสามารถสร้างองค์ความรู้ใหม่จากฐานปัญหาได้อย่างถูกต้องตามหลักการทางคณิตศาสตร์","category":"Knowledge/ Practical","note":""},{"plo_id":"PLO2","description":"บัณฑิตสามารถผลิตและเผยแพร่ผลงานวิจัยทางคณิตศาสตร์ที่มีคุณภาพในระดับนานาชาติบนพื้นฐานจริยธรรมวิจัยได้อย่างเหมาะสม","category":"Knowledge/ Practical/ Ethics","note":""},{"plo_id":"PLO3","description":"บัณฑิตสามารถใช้เทคโนโลยีร่วมกับหลักการทางคณิตศาสตร์เพื่อแก้ปัญหาที่ซับซ้อนหรือปัญหาจากชุมชนได้","category":"Knowledge/ Practical /Digital / AI/ Communication","note":""}],"major":"สาขาวิชาคณิตศาสตร์"},{"curriculum_id":"PhD-SPORT SCIENCE AND PHYSICAL EDUCATION","program_name":"หลักสูตรปรัชญาดุษฎีบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"สร้างความรู้ใหม่ทางวิทยาศาสตร์การกีฬาและพลศึกษา ผ่านกระบวนการวิจัยขั้นสูง เพื่อบูรณาการการกีฬาและพัฒนาสังคมสุขภาวะ มุ่งสู่ความเป็นเลิศทางการกีฬาและความยั่งยืนของสังคม","category":"Knowledge/ Practical/ Communication","note":""},{"plo_id":"PLO2","description":"ขับเคลื่อนความเป็นเลิศทางการกีฬาและการยกระดับสุขภาวะของสังคมอย่างเป็นระบบ","category":"Knowledge/ Practical/ Communication","note":""},{"plo_id":"PLO3","description":"ติดตามและประยุกต์ใช้เทคโนโลยีดิจิทัลและปัญญาประดิษฐ์อย่างมีประสิทธิภาพ เพื่อพัฒนาและยกระดับระบบการกีฬาและสุขภาวะบนฐานข้อมูลและหลักฐานเชิงวิทยาศาสตร์","category":"Knowledge/ Practical /Digital / AI/ Communication","note":""},{"plo_id":"PLO4","description":"สร้างสังคมสุขภาวะ ด้วยศาสตร์วิทยาศาสตร์การกีฬาและพลศึกษาอย่างมืออาชีพ มีจริยธรรม มีความรับผิดชอบ และสามารถทำงานร่วมกับภาคส่วนต่างๆ ในระดับชาติและสากล","category":"Knowledge/ Practical / Ethics","note":""}],"major":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"},{"curriculum_id":"PhD-APPLIED SCIENCE","program_name":"หลักสูตรปรัชญาดุษฎีบัณฑิต","faculty":"คณะวิทยาศาสตร์","university":"มหาวิทยาลัยพะเยา","plos":[{"plo_id":"PLO1","description":"ผู้เรียนสามารถสืบค้นและรวบรวมข้อมูลอย่างเป็นระบบ โดยใช้หลักฐานเชิงประจักษ์","category":"Knowledge/ Practical/Digital ","note":""},{"plo_id":"PLO2","description":"ผู้เรียนสามารถนำเสนอผลงานวิชาการด้วยภาษาอังกฤษ ","category":"Knowledge/ Practical/ Communication","note":""},{"plo_id":"PLO3","description":"ผู้เรียนสามารถเขียนบทความวิชาการเพื่อตีพิมพ์ในวารสารวิชาการระดับนานาชาติได้","category":"Knowledge/ Practical / Communication","note":""},{"plo_id":"PLO4","description":"ผู้เรียนสามารถสังเคราะห์องค์ความรู้หรือพัฒนานวัตกรรมที่สามารถใช้ประโยชน์ เพื่อการพัฒนาชุมชนและประเทศอย่างยั่งยืน","category":"Knowledge/ Practical / Communication","note":""},{"plo_id":"PLO5","description":"ผู้เรียนสามารถสื่อสารและถ่ายทอดองค์ความรู้ สามารถทำงานร่วมกับผู้อื่นหรือชุมชนได้","category":"Knowledge/ Practical /Communication/ Teamwork","note":""},{"plo_id":"PLO6","description":"ผู้เรียนสามารถปฏิบัติตามจรรยาบรรณของนักวิจัย","category":"Ethics","note":""}],"major":""}]}</script>
+<script type="application/json" id="instructors-json">{"schema_version":"1.0.0","instructors":[{"title_prefix":"รศ.ดร.","name":"สิทธิศักดิ์  ปิ่นมงคลกุล","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"สุกัญญา สืบแสน","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"บุญช่วง บุญสุข","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"รศ.ดร.","name":"นุจิรา ทาตัน","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"ทิพย์วรรณ สรรพสัตย","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"รศ.ดร.","name":"ภพเก้า พุทธรักษ์","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"รศ.ดร.","name":"จตุพร  ตั้งจิตรวิทยากูล","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"เนรัฐชลา  สุวรรณคนธ์","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"พลินจรีย์  รังสยาธร","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"สิริวัฒน์  บุญชัยศรี","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"อาทิตย์  นันทขว้าง","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ดร.","name":"เสาวลักษณ์  บุญมา","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ดร.","name":"ชัชวาล  วงค์ชัย","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ดร.","name":"ประลองยุทธ  ศรีปาลวิทย์","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ผศ.ดร.","name":"วิภาศิริ สุนทรชัย","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"อ.","name":"ธันยาภรณ์ ตั้งเจริญชัย","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"อ.","name":"พันธิตรา กมล","department":"สาขาวิชาชีววิทยา","note":""},{"title_prefix":"ดร.","name":"สมฤทธิ์  อุ่นอ้าย","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ผศ.ดร.","name":"ปิยชนน์  เกษสุวรรณ","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"รศ.ดร.","name":"เอกสิทธิ์  วงศ์ราษฎร์","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"รศ.ดร.","name":"อนุรักษ์ ประสาทเขตร์การ","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"รศ.ดร.","name":"ไวพจน์ งามสอาด","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"รศ.ดร.","name":"อารักษ์ กลิ่นบำรุง","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"วัชราวุฒิ กฤตินธรรม","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"นิยม โฮ่งสิทธิ์","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"สิริกมล แสงมีอานุภาพ","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"พิมพ์ใจ แสงความสว่าง","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"พงศพัศ แรงดี","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"ศุภกร จันเลน","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"ชลธิชา กฤษณ์เพ็ชร์","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"อ.","name":"ไพศาล  ดวงจักร์ ณ อยุธยา","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"อ.","name":"ว่าที่ร้อยตรีมนัส ภูทวี","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"อ.","name":"กฤษดา เหลืองทองคำ","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"ดร.","name":"ฐิตินันต์  กาศโอสถ","department":"สาขาวิชาฟิสิกส์","note":""},{"title_prefix":"รศ.ดร.","name":"รัชนาพร โชคชัยสิริ","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"ชัยพัฒน์ ลาพินี","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"รักสกุล แก่นเรณู","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"กัลยา จำปาทอง","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"เริงฤทัย ศิริรักษ์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"สรชัย คำแสน","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"รศ.ดร.","name":"วิศณุสรรค์ ชาติอารยะวดี","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"รศ.ดร.","name":"สาโรจน์ จีนประชา","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"รศ.ดร.","name":"จิตระยุทธ์ จิตอ่อนน้อม","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"พิทักษ์ นาสมใจ","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"ณัชชา อินทร์จันทร์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"บัลวี ยศน้อย","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"บุณฑริกา เทพสุคนธ์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"นฤมล เสทธยะ","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"จักรีสิทธิ์ จินดาวงศ์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"จุฑารัตน์ ก๋าวินจันทร์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"เอกสุรีย์ ศักดิ์ศรชัย","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"คงเดช สวาสดิ์พันธ์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"รัติยา ณ อุบล","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"ณัฐพร พุทธวงศ์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"ธนิษฐา เสมอใจ","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"วิไลวรรณ ภาคทอง","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"พักตร์วิภา เชาว์พานิช","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"ลลิตา รัตนจิระวงศ์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"วรรณฤดี แก้วมีศรี","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"อ.","name":"มนัส ใจมะสิทธิ์","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"วีระชัย ศิลประกอบ","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"รศ.ดร.","name":"วิจิตรา จิตอ่อนน้อม","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"ศุภชัย วันประโคน","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ดร.","name":"สุทธาสินี กตัญญู","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"ผกาสุคนธ์ เมฆรัตนชัย","department":"สาขาวิชาเคมี","note":""},{"title_prefix":"ผศ.ดร.","name":"ธิติ เกตุคำ","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"ธนกฤต เทียนหวาน","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"ประสิทธิ์ ช่อลำเจียก","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"อัยเรศ เอี่ยมพันธ์","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"วัชรภรณ์ ช่อลำเจียก","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"ดำรงศักดิ์ แย้มบางหวาย","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"กมลรัตน์ แนมมณี","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"กรรณิการ์ ขำพึ่งสน","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"รศ.ดร.","name":"ดร.มานะ  ดงอนนท์","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.ดร.","name":"เอื้อมพร วิทยารัฐ","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.ดร.","name":"พีรพงษ์ สืบแสน","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.ดร.","name":"พัชรพรรณ จำนงนิจ","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.ดร.","name":"ธนพงษ์ พรมใหม่","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.ดร.","name":"ศิริลักษณ์ ดงอนนท์","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ดร.","name":"ธีรพงษ์ หล้าอินเชื้อ","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ดร.","name":"พชร ใจโลกา","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ดร.","name":"ศิริวรรณ อินทวิชัย","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ดร.","name":"ศรัณยา ฟองจันทร์","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ดร.","name":"สืบกุล กาญจนสุกร","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.","name":"นิโลบล  คำยันต์","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.ดร.","name":"ชนม์เจริญ ชัยรัตน์สิริพงศ์","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"อ.","name":"อภิสิทธิ์ เมืองมา","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"อ.","name":"กุลธิดา เมืองมา","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ผศ.","name":"ณัฐวุฒิ พลอาสา","department":"สาขาวิชาคณิตศาสตร์","note":""},{"title_prefix":"ดร.","name":"พัทธวรรณ ละโป้","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ดร.","name":"พิเชษฐ์ ชัยเลิศ","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ผศ.ดร.","name":"ก.รวีวุฒิ ระงับเหตุ","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ดร.","name":"พัชรินทร์ ตั้งชัยสุริยา","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ผศ.ดร.","name":"ปราณี อยู่ศิริ","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ผศ.ดร.","name":"มณินทร รักษ์บำรุง","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ผศ.ดร.","name":"กฤษดา  ตามประดิษฐ์","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ผศ.ดร.","name":"อภิรักษ์ วงษ์เหมภูมิ","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ดร.","name":"อทิติ วลัญช์เพียร","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"ดร.","name":"ปิติรัฐ คงทองคำ","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""},{"title_prefix":"อ.","name":"ปรัชญา วังตระกูล","department":"สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา","note":""}]}</script>
 <script>
-/* Syllabus Generator Web v1.0.0 — all operations stay in this browser. */
+/* Smart Syllabus Generator: self-contained browser DOCX generator.
+   No CDN, server, npm dependencies or mutation of syllabus JSON.
+   Produces valid WordprocessingML in a ZIP archive (STORE method). */
+(function(root, factory){
+  const api=factory();
+  if(typeof module==='object' && module.exports)module.exports=api;
+  if(root)root.SyllabusDocx=api;
+})(typeof window!=='undefined'?window:undefined, function(){
+'use strict';
+const encoder=new TextEncoder();
+const TYPE='application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+const asText=v=>v==null?'':String(v);
+const value=v=>asText(v).trim()||'—';
+const xml=v=>asText(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+const list=v=>Array.isArray(v)?v.filter(x=>x!=null&&x!=='').join(', '):asText(v);
+function r(text){const parts=asText(text).replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n');return parts.map((t,i)=>(i?'<w:br/>':'')+`<w:t xml:space="preserve">${xml(t)}</w:t>`).join('');}
+function p(text,style='Normal'){
+  return `<w:p><w:pPr><w:pStyle w:val="${style}"/></w:pPr><w:r>${r(text)}</w:r></w:p>`;
+}
+function tc(text,width,heading=false){
+ const shading=heading?'D9EAF3':'FFFFFF';
+ return `<w:tc><w:tcPr><w:tcW w:w="${width}" w:type="dxa"/><w:shd w:fill="${shading}"/><w:tcMar><w:top w:w="84" w:type="dxa"/><w:left w:w="95" w:type="dxa"/><w:bottom w:w="84" w:type="dxa"/><w:right w:w="95" w:type="dxa"/></w:tcMar></w:tcPr>${p(value(text),heading?'TableHead':'TableBody')}</w:tc>`;
+}
+function table(heads,rows,widths){
+ if(!rows?.length)return p('ไม่มีข้อมูล');
+ if(!widths){const one=Math.floor(9400/heads.length);widths=heads.map((_,i)=>i===heads.length-1?9400-one*(heads.length-1):one);}
+ const grid=widths.map(w=>`<w:gridCol w:w="${w}"/>`).join('');
+ const row=(cells,heading=false)=>`<w:tr>${heading?'<w:trPr><w:tblHeader w:val="true"/></w:trPr>':''}${heads.map((_,i)=>tc(cells[i],widths[i],heading)).join('')}</w:tr>`;
+ return `<w:tbl><w:tblPr><w:tblW w:w="9400" w:type="dxa"/><w:tblLayout w:type="fixed"/><w:tblBorders><w:top w:val="single" w:sz="4" w:color="C6D4E0"/><w:left w:val="single" w:sz="4" w:color="C6D4E0"/><w:bottom w:val="single" w:sz="4" w:color="C6D4E0"/><w:right w:val="single" w:sz="4" w:color="C6D4E0"/><w:insideH w:val="single" w:sz="4" w:color="D7E2EA"/><w:insideV w:val="single" w:sz="4" w:color="D7E2EA"/></w:tblBorders></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${row(heads,true)}${rows.map(x=>row(x)).join('')}</w:tbl>`;
+}
+const heading=(text)=>p(text,'Heading1');
+const subheading=(text)=>p(text,'Heading2');
+function displayDate(v){if(!v)return '—';return String(v);}
+function cleanCourseData(data){if(!data||typeof data!=='object')throw Error('ไม่มีข้อมูลรายวิชา');const s=data.SchemaVersion;if(s!=='1.0.0')throw Error('รองรับ SchemaVersion 1.0.0 เท่านั้น');return data;}
+function documentXML(data){
+ data=cleanCourseData(data);
+ const ci=data.CourseInfo||{}, cur=data.Curriculum||{},plos=data.PLOs||[],clos=data.CLOs||[];
+ const teachers=data.Instructors||[],lecture=data.LecturePlans||[],lab=data.LabPlans||[],assess=data.Assessments||[],grades=data.GradeScale||[],resource=data.Resources||[];
+ const meeting=data.ClassMeetings||[], exams=data.Exams||[],students=data.StudentGroups||[];
+ const required=!!(ci.CourseCode && ci.CourseTitleTh && ci.AcademicYear && ci.Semester);
+ const credits=[value(ci.Credits),'(',asText(ci.LectureHours||0),'-',asText(ci.LabHours||0),'-',asText(ci.SelfStudyHours||0),')'].join('');
+ const b=[];
+ b.push(p('รายละเอียดรายวิชา','Title'));
+ b.push(p('Course Syllabus','Subtitle'));
+ b.push(p('คณะวิทยาศาสตร์ · มหาวิทยาลัยพะเยา','Centered'));
+ b.push(p(value(ci.CourseCode)+'  '+value(ci.CourseTitleTh),'CourseTitle'));
+ if(ci.CourseTitleEn)b.push(p(ci.CourseTitleEn,'Centered'));
+ if(!required)b.push(p('ฉบับร่าง — ข้อมูลส่วนหัวรายวิชายังไม่ครบ กรุณาตรวจสอบก่อนใช้งาน','Warning'));
+ b.push(heading('1. ข้อมูลรายวิชา'));
+ b.push(table(['รายการ','รายละเอียด'],[
+ ['รหัสรายวิชา',value(ci.CourseCode)],['ชื่อรายวิชาภาษาไทย',value(ci.CourseTitleTh)],['ชื่อรายวิชาภาษาอังกฤษ',value(ci.CourseTitleEn)],['หน่วยกิต',credits],['ปีการศึกษา / ภาคเรียน',`${value(ci.AcademicYear)} / ${value(ci.Semester)}`],['กลุ่มเรียน',value(ci.Section)],['หลักสูตร',value(cur.CurriculumName)],['สาขาวิชา',value(cur.ProgramName)]
+ ],[2400,7000]));
+ b.push(subheading('คำอธิบายรายวิชา (ภาษาไทย)'));b.push(p(value(ci.CourseDescriptionTh)));
+ b.push(subheading('Course Description (English)'));b.push(p(value(ci.CourseDescriptionEn)));
+ b.push(heading('2. ผลลัพธ์การเรียนรู้ระดับหลักสูตร (PLOs)'));
+ b.push(table(['PLO','ผลลัพธ์การเรียนรู้'],plos.map(x=>[x.PloCode,x.DescriptionTh]),[1080,8320]));
+ b.push(heading('3. ผู้รับผิดชอบรายวิชาและผู้สอน'));
+ b.push(table(['ลำดับ','ชื่อผู้สอน','สาขาวิชา','บทบาท'],teachers.map((x,i)=>[i+1,x.DisplayName||[x.Prefix,x.FirstName,x.LastName].filter(Boolean).join(' '),x.Department,x.IsResponsibleInstructor?'ผู้รับผิดชอบรายวิชา':'ผู้สอน']),[800,3430,3050,2120]));
+ b.push(heading('4. ผลลัพธ์การเรียนรู้ระดับรายวิชา (CLOs)'));
+ b.push(table(['CLO','ผลลัพธ์การเรียนรู้ระดับรายวิชา','เชื่อมโยง PLO'],clos.map(x=>[x.CloCode,x.DescriptionTh,list(x.MappedPloCodes)]),[950,6650,1800]));
+ const weekly=(name,rows)=>{
+  b.push(heading(name));
+  b.push(table(['สัปดาห์','หัวข้อ / กิจกรรมการเรียนรู้','วิธีการสอน','CLO','ผู้สอน'],rows.map(x=>[x.WeekNumber,[x.Topic,x.LearningActivities].filter(Boolean).join('\n'),x.TeachingMethods,list(x.MappedCloCodes),asText(x.Notes).replace(/;\s*/g,'\n')]),[900,3150,1800,950,2600]));
+ };
+ weekly('5. แผนการสอนภาคบรรยาย (Lecture)',lecture);
+ weekly('6. แผนการสอนภาคปฏิบัติการ (Lab)',lab);
+ b.push(heading('7. การวัดและประเมินผล'));
+ b.push(table(['รายการวัดและประเมินผล','ประเภทประเมิน','น้ำหนัก (%)','CLO'],assess.map(x=>[x.AssessmentName,x.AssessmentType,x.WeightPercent,list(x.MappedCloCodes)]),[3600,3000,1350,1450]));
+ if(assess.length){const sum=assess.reduce((s,x)=>s+(Number(x.WeightPercent)||0),0);b.push(p(`น้ำหนักรวม ${sum}%`));}
+ b.push(heading('8. เกณฑ์การตัดเกรด'));
+ b.push(table(['ระดับเกรด','คะแนนขั้นต่ำ (≥)','คะแนนสูงสุด'],grades.map(x=>[x.Grade,x.MinimumScore==null?'':x.MinimumScore,x.MaximumScore==null?'':x.MaximumScore]),[2300,3550,3550]));
+ b.push(heading('9. หนังสือและแหล่งเรียนรู้'));
+ b.push(table(['ประเภทแหล่งเรียนรู้','ชื่อเรื่อง / แหล่งเรียนรู้','ผู้แต่ง / ปี / URL'],resource.map(x=>[x.ResourceType,x.Title,[x.Author,x.Year,x.Url].filter(Boolean).join(' · ')]),[2400,4000,3000]));
+ if(meeting.length||exams.length||students.length){
+  b.push(heading('ภาคผนวก: ข้อมูลตารางเรียนและนิสิต'));
+  if(meeting.length){b.push(subheading('ตารางเรียน'));b.push(table(['วัน','เวลา','ห้อง'],meeting.map(x=>[x.DayOfWeek,`${x.StartTime||''}–${x.EndTime||''}`,x.RoomCode]),[2200,3300,3900]));}
+  if(exams.length){b.push(subheading('ตารางสอบ'));b.push(table(['ประเภท','วันที่','เวลา / ห้อง'],exams.map(x=>[x.ExamTypeCode,displayDate(x.ExamDate),`${x.StartTime||''}–${x.EndTime||''} ${x.RoomCode||''}`]),[2000,2600,4800]));}
+  if(students.length){b.push(subheading('กลุ่มนิสิต'));b.push(table(['สาขาวิชา','ชั้นปี','จำนวนนิสิต'],students.map(x=>[x.StudentProgramName,x.StudentYearLevel,x.RegisteredStudentCount]),[5200,1700,2500]));}
+ }
+ return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${b.join('')}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1080" w:right="1150" w:bottom="1080" w:left="1150" w:header="540" w:footer="540" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+}
+function stylesXML(){
+ const style=(id,name,size,attrs='')=>`<w:style w:type="paragraph" w:styleId="${id}"><w:name w:val="${name}"/><w:basedOn w:val="Normal"/><w:pPr>${attrs}</w:pPr><w:rPr><w:rFonts w:ascii="TH Sarabun New" w:hAnsi="TH Sarabun New" w:eastAsia="TH Sarabun New" w:cs="TH Sarabun New"/><w:sz w:val="${size}"/><w:szCs w:val="${size}"/>${['Title','CourseTitle','Heading1','Heading2','TableHead'].includes(id)?'<w:b/>':''}</w:rPr></w:style>`;
+ const space=(before,after)=>`<w:spacing w:before="${before}" w:after="${after}" w:line="320" w:lineRule="auto"/>`;
+ return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="TH Sarabun New" w:hAnsi="TH Sarabun New" w:cs="TH Sarabun New" w:eastAsia="TH Sarabun New"/><w:sz w:val="30"/><w:szCs w:val="30"/><w:lang w:val="th-TH" w:eastAsia="th-TH"/></w:rPr></w:rPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:pPr>${space(0,70)}</w:pPr></w:style>${style('Title','Title',44,`<w:jc w:val="center"/>${space(200,90)}`)}${style('Subtitle','Subtitle',28,`<w:jc w:val="center"/>${space(0,100)}`)}${style('CourseTitle','Course Title',36,`<w:jc w:val="center"/>${space(90,70)}`)}${style('Centered','Centered',29,'<w:jc w:val="center"/>')}${style('Heading1','Heading 1',35,`<w:keepNext/>${space(250,130)}`)}${style('Heading2','Heading 2',31,`<w:keepNext/>${space(160,75)}`)}${style('TableHead','Table heading',25,space(0,0))}${style('TableBody','Table body',25,space(0,0))}${style('Warning','Draft warning',27,space(40,80))}</w:styles>`;
+}
+function crc32(bytes){let crc=0xFFFFFFFF;for(let i=0;i<bytes.length;i++){crc^=bytes[i];for(let j=0;j<8;j++)crc=(crc&1)?(0xEDB88320^(crc>>>1)):(crc>>>1);}return (crc^0xFFFFFFFF)>>>0;}
+function little16(v){return [v&255,(v>>>8)&255];}function little32(v){return [v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255];}
+function zipFiles(files){
+ const local=[],central=[];let offset=0,count=0;
+ for(const [name,content] of Object.entries(files)){
+  const n=encoder.encode(name),d=encoder.encode(content),c=crc32(d),sz=d.length;
+  const l=new Uint8Array([0x50,0x4b,3,4,...little16(20),...little16(0x0800),...little16(0),...little16(0),...little16(0),...little32(c),...little32(sz),...little32(sz),...little16(n.length),...little16(0)]);
+  local.push(l,n,d);
+  central.push(new Uint8Array([0x50,0x4b,1,2,...little16(20),...little16(20),...little16(0x0800),...little16(0),...little16(0),...little16(0),...little32(c),...little32(sz),...little32(sz),...little16(n.length),...little16(0),...little16(0),...little16(0),...little16(0),...little32(0),...little32(offset)]),n);
+  offset+=l.length+n.length+d.length;count++;
+ }
+ const clen=central.reduce((n,x)=>n+x.length,0);
+ const end=new Uint8Array([0x50,0x4b,5,6,...little16(0),...little16(0),...little16(count),...little16(count),...little32(clen),...little32(offset),...little16(0)]);
+ return new Blob([...local,...central,end],{type:TYPE});
+}
+function makeDocx(data){
+ const files={
+  '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>`,
+  '_rels/.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>`,
+  'word/document.xml':documentXML(data),
+  'word/styles.xml':stylesXML(),
+  'word/_rels/document.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdStyles" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+  'docProps/core.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>Course Syllabus</dc:title><dc:creator>Smart Syllabus Generator</dc:creator></cp:coreProperties>`,
+  'docProps/app.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"><Application>Smart Syllabus Generator Web</Application></Properties>`
+ };
+ return zipFiles(files);
+}
+return {makeDocx,documentXML,TYPE};
+});
+
+</script>
+<script>
+/* Syllabus Generator Web Phase 2 v2.0.0 / JSON Contract v1.0.0 — all operations stay in this browser. */
 (() => {
 'use strict';
 const contract = JSON.parse(document.getElementById('contract-json').textContent);
 const demo = JSON.parse(document.getElementById('demo-json').textContent);
+const curriculumMaster = JSON.parse(document.getElementById('curricula-json').textContent).curricula;
+const instructorMaster = JSON.parse(document.getElementById('instructors-json').textContent).instructors;
+let allDepartments = false;
+const normalizeName = s=>String(s||'').replace(/\s+/g,' ').trim();
+const teacherDisplay = t=>normalizeName([t.title_prefix,t.name].filter(Boolean).join(' '));
+const curriculumLabel = c=>[c.major||'ไม่ระบุสาขา',c.program_name,c.curriculum_id].filter(Boolean).join(' · ');
+const selectedCurriculum=()=>curriculumMaster.find(c=>c.curriculum_id===state.Curriculum.CurriculumCode);
+function curriculumDepartment(){const curr=selectedCurriculum();if(!curr)return '';
+  const label=curr.curriculum_id||'';
+  if(label.includes('MATHEMATICS'))return 'สาขาวิชาคณิตศาสตร์'; // match the staff department spelling in the supplied master
+  return curr.major||'';
+}
+function activeTeacherDepartment(){return curriculumDepartment()||'';}
+function masterTeacherIndex(rec){return instructorMaster.findIndex(t=>normalizeName(teacherDisplay(t))===normalizeName(rec.DisplayName)&&normalizeName(t.department)===normalizeName(rec.Department));}
+function selectCurriculum(id){
+ const c=curriculumMaster.find(x=>x.curriculum_id===id); const old=state.Curriculum.CurriculumCode||'';
+ if(!c)return;
+ if(id!==old && state.PLOs.some(p=>isPopulated('PLOs',p)) && !confirm('เปลี่ยนหลักสูตรจะปรับรายการ PLO ตามหลักสูตรใหม่ และอาจกระทบการเชื่อมโยง CLO ยืนยันหรือไม่?'))return false;
+ state.Curriculum={...state.Curriculum,CurriculumCode:c.curriculum_id,CurriculumName:c.program_name,ProgramName:c.major||'',DegreeLevel:c.program_name.replace(/^หลักสูตร/,'').trim(),DepartmentName:c.major||''};
+ state.CourseInfo.FacultyName=c.faculty||state.CourseInfo.FacultyName;
+ state.CourseInfo.UniversityName=c.university||state.CourseInfo.UniversityName;
+ state.PLOs=(c.plos||[]).map(p=>({...blankRecord('PLOs'),PloCode:p.plo_id,DescriptionTh:p.description,Category:p.category||'',Notes:p.note||''}));
+ allDepartments=false;
+ return true;
+}
+
 const SECTION_KEYS=['CourseInfo','Curriculum','Instructors','PLOs','CLOs','ClassMeetings','Exams','StudentGroups','LecturePlans','LabPlans','Assessments','GradeScale','Resources'];
 const TABS=[
- {id:'course',name:'ข้อมูลรายวิชา',en:'Course Info',desc:'ข้อมูลรายวิชา หลักสูตร ตารางเรียน ตารางสอบ กลุ่มนิสิต และห้องเรียน'},
- {id:'plos',name:'PLOs',en:'Program Learning Outcomes',desc:'ผลลัพธ์การเรียนรู้ของหลักสูตรตามปีปรับปรุงหลักสูตร'},
- {id:'instructors',name:'ผู้สอน',en:'Instructors',desc:'อาจารย์ผู้สอน ผู้รับผิดชอบ และสัดส่วนการสอนบรรยาย/ปฏิบัติ'},
+ {id:'course',name:'ข้อมูลรายวิชา',en:'Course Info',desc:'ข้อมูลรายวิชา หน่วยกิต และคำอธิบายรายวิชา'},
+ {id:'plos',name:'PLOs',en:'Program Learning Outcomes',desc:'เลือกหลักสูตรเพื่อแสดง PLOs จากข้อมูลหลักสูตร'},
+ {id:'instructors',name:'ผู้สอน',en:'Instructors',desc:'เลือกผู้สอนจากรายชื่อสาขาวิชา และกำหนดผู้รับผิดชอบรายวิชา'},
  {id:'clos',name:'CLOs',en:'Course Learning Outcomes',desc:'ผลลัพธ์การเรียนรู้ระดับรายวิชา พร้อมเชื่อมโยงรหัส PLO'},
  {id:'weekly',name:'แผนการสอน',en:'Weekly Plan',desc:'แผนบรรยายและปฏิบัติการ แยกตาราง 15 สัปดาห์'},
  {id:'assessment',name:'การประเมิน',en:'Assessments',desc:'รายการวัดผล น้ำหนักคะแนน เกณฑ์ตัดเกรด และแหล่งเรียนรู้'}];
 const MAP={
- CourseCode:'รหัสรายวิชา',CourseTitleTh:'ชื่อรายวิชา (ไทย)',CourseTitleEn:'ชื่อรายวิชา (อังกฤษ)',CourseDescriptionTh:'คำอธิบายรายวิชา (ไทย)',CourseDescriptionEn:'คำอธิบายรายวิชา (อังกฤษ)',Credits:'หน่วยกิต',LectureHours:'ชั่วโมงบรรยาย/สัปดาห์',LabHours:'ชั่วโมงปฏิบัติ/สัปดาห์',SelfStudyHours:'ชั่วโมงศึกษาด้วยตนเอง/สัปดาห์',AcademicYear:'ปีการศึกษา (พ.ศ.)',Semester:'ภาคเรียน',Section:'กลุ่มเรียน',FacultyName:'คณะ',UniversityName:'มหาวิทยาลัย',TeachingLanguage:'ภาษาที่ใช้สอน',DeliveryMode:'รูปแบบการสอน',Prerequisites:'รายวิชาบังคับก่อน',Remarks:'หมายเหตุ',CurriculumCode:'รหัสหลักสูตร',CurriculumName:'ชื่อหลักสูตร',CurriculumRevisionYear:'ปีปรับปรุงหลักสูตร (พ.ศ.)',ProgramCode:'รหัสสาขาวิชา',ProgramName:'ชื่อสาขาวิชา',DegreeLevel:'ระดับปริญญา',DepartmentName:'หน่วยงาน',StaffId:'รหัสบุคลากร',IsResponsibleInstructor:'ผู้รับผิดชอบ',Prefix:'คำนำหน้า',FirstName:'ชื่อ',LastName:'นามสกุล',DisplayName:'ชื่อแสดงผล',Email:'อีเมล',Department:'หน่วยงาน',LecturePercent:'สัดส่วนบรรยาย %',LabPercent:'สัดส่วนปฏิบัติ %',Notes:'หมายเหตุ',PloCode:'รหัส PLO',DescriptionTh:'คำอธิบาย (ไทย)',DescriptionEn:'คำอธิบาย (อังกฤษ)',Category:'หมวดหมู่',CloCode:'รหัส CLO',BloomLevel:'Bloom Level',MappedPloCodes:'PLO ที่เชื่อมโยง',MappedCloCodes:'CLO ที่เชื่อมโยง',DayOfWeek:'วันเรียน',StartTime:'เวลาเริ่ม',EndTime:'เวลาสิ้นสุด',RoomCode:'รหัสห้อง',DeliveryType:'ประเภทเรียน',ExamTypeCode:'ประเภทสอบ',ExamDate:'วันสอบ (ค.ศ.)',StudentProgramName:'สาขานิสิต',StudentYearLevel:'ชั้นปี',RegisteredStudentCount:'จำนวนนิสิต',StudentCurriculumCode:'รหัสหลักสูตรนิสิต',StudentCurriculumRevisionYear:'ปีปรับปรุงหลักสูตรนิสิต',WeekNumber:'สัปดาห์',Topic:'หัวข้อ',LearningActivities:'กิจกรรมการเรียนรู้',TeachingMethods:'วิธีสอน',AssessmentMethods:'การวัดผล',AssessmentCode:'รหัสประเมิน',AssessmentName:'รายการประเมิน',AssessmentType:'ประเภทประเมิน',WeightPercent:'น้ำหนัก %',Grade:'เกรด',MinimumScore:'คะแนนต่ำสุด',MaximumScore:'คะแนนสูงสุด',ResourceType:'ประเภทสื่อ',Title:'ชื่อหนังสือ / แหล่งเรียนรู้',Author:'ผู้แต่ง',Year:'ปี',Url:'URL'};
-const SELECT={Semester:['1','2','3'],DegreeLevel:['วิทยาศาสตรบัณฑิต','วิทยาศาสตรมหาบัณฑิต','วิทยาศาสตรดุษฎีบัณฑิต','ปรัชญาดุษฎีบัณฑิต'],Prefix:['อ.','ดร.','ผศ.','ผศ.ดร.','รศ.','รศ.ดร.','ศ.','ศ.ดร.'],BloomLevel:['Remember','Understand','Apply','Analyze','Evaluate','Create'],DayOfWeek:['จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์','อาทิตย์'],DeliveryType:['Lecture','Lab','Other'],ExamTypeCode:['M','F','Other'],AssessmentType:['Quiz','Assignment','Midterm','Final','Practical','Project','Presentation','Participation','Other'],TeachingLanguage:['ไทย','อังกฤษ','ไทย/อังกฤษ'],DeliveryMode:['Onsite','Online','Hybrid'],ResourceType:['Textbook','Article','Website','Video','Other']};
+ CourseCode:'รหัสรายวิชา',CourseTitleTh:'ชื่อรายวิชา (ไทย)',CourseTitleEn:'ชื่อรายวิชา (อังกฤษ)',CourseDescriptionTh:'คำอธิบายรายวิชา (ไทย)',CourseDescriptionEn:'คำอธิบายรายวิชา (อังกฤษ)',Credits:'หน่วยกิต',LectureHours:'ชั่วโมงบรรยาย/สัปดาห์',LabHours:'ชั่วโมงปฏิบัติ/สัปดาห์',SelfStudyHours:'ชั่วโมงศึกษาด้วยตนเอง/สัปดาห์',AcademicYear:'ปีการศึกษา (พ.ศ.)',Semester:'ภาคเรียน',Section:'กลุ่มเรียน',FacultyName:'คณะ',UniversityName:'มหาวิทยาลัย',TeachingLanguage:'ภาษาที่ใช้สอน',DeliveryMode:'รูปแบบการสอน',Prerequisites:'รายวิชาบังคับก่อน',Remarks:'หมายเหตุ',CurriculumCode:'รหัสหลักสูตร',CurriculumName:'ชื่อหลักสูตร',CurriculumRevisionYear:'ปีปรับปรุงหลักสูตร (พ.ศ.)',ProgramCode:'รหัสสาขาวิชา',ProgramName:'ชื่อสาขาวิชา',DegreeLevel:'ระดับปริญญา',DepartmentName:'หน่วยงาน',StaffId:'รหัสบุคลากร',IsResponsibleInstructor:'ผู้รับผิดชอบ',Prefix:'คำนำหน้า',FirstName:'ชื่อ',LastName:'นามสกุล',DisplayName:'ชื่อแสดงผล',Email:'อีเมล',Department:'หน่วยงาน',LecturePercent:'สัดส่วนบรรยาย %',LabPercent:'สัดส่วนปฏิบัติ %',Notes:'หมายเหตุ',PloCode:'รหัส PLO',DescriptionTh:'คำอธิบาย (ไทย)',DescriptionEn:'คำอธิบาย (อังกฤษ)',Category:'หมวดหมู่',CloCode:'CLO',BloomLevel:'Bloom Level',MappedPloCodes:'PLO ที่เชื่อมโยง',MappedCloCodes:'CLO ที่เชื่อมโยง',DayOfWeek:'วันเรียน',StartTime:'เวลาเริ่ม',EndTime:'เวลาสิ้นสุด',RoomCode:'รหัสห้อง',DeliveryType:'ประเภทเรียน',ExamTypeCode:'ประเภทสอบ',ExamDate:'วันสอบ (ค.ศ.)',StudentProgramName:'สาขานิสิต',StudentYearLevel:'ชั้นปี',RegisteredStudentCount:'จำนวนนิสิต',StudentCurriculumCode:'รหัสหลักสูตรนิสิต',StudentCurriculumRevisionYear:'ปีปรับปรุงหลักสูตรนิสิต',WeekNumber:'สัปดาห์',Topic:'หัวข้อ / กิจกรรมการเรียนรู้',LearningActivities:'กิจกรรมการเรียนรู้',TeachingMethods:'วิธีสอน',AssessmentMethods:'การวัดผล',AssessmentCode:'รหัสประเมิน',AssessmentName:'รายการประเมิน',AssessmentType:'ประเภทประเมิน',WeightPercent:'น้ำหนัก %',Grade:'เกรด',MinimumScore:'คะแนนต่ำสุด',MaximumScore:'คะแนนสูงสุด',ResourceType:'ประเภทแหล่งเรียนรู้',Title:'ชื่อหนังสือ / แหล่งเรียนรู้',Author:'ผู้แต่ง',Year:'ปี',Url:'URL'};
+const SELECT={DegreeLevel:['วิทยาศาสตรบัณฑิต','วิทยาศาสตรมหาบัณฑิต','วิทยาศาสตรดุษฎีบัณฑิต','ปรัชญาดุษฎีบัณฑิต'],Prefix:['อ.','ดร.','ผศ.','ผศ.ดร.','รศ.','รศ.ดร.'],DayOfWeek:['จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์','อาทิตย์']};
+const LECTURE_METHODS=['การบรรยาย','การบรรยายเชิงปฏิสัมพันธ์','การอภิปรายกลุ่ม','การเรียนรู้แบบใช้ปัญหาเป็นฐาน (PBL)','การเรียนรู้แบบใช้โครงงานเป็นฐาน (PjBL)','การเรียนรู้แบบกรณีศึกษา','การเรียนรู้แบบสืบเสาะหาความรู้','การเรียนรู้แบบร่วมมือ','ห้องเรียนกลับด้าน (Flipped Classroom)','การสาธิต','การเรียนรู้แบบผสมผสาน','การนำเสนอและอภิปราย','การเรียนรู้ด้วยตนเอง','การฝึกปฏิบัติคำนวณและแก้โจทย์','การเรียนรู้ผ่านสื่อดิจิทัล','กำหนดเอง'];
+const LAB_METHODS=['การสาธิตขั้นตอนปฏิบัติ','การฝึกปฏิบัติในห้องปฏิบัติการ','การทดลองและเก็บข้อมูล','การปฏิบัติแบบรายบุคคล','การปฏิบัติแบบกลุ่ม','การฝึกใช้เครื่องมือและอุปกรณ์','การออกแบบและดำเนินการทดลอง','การเรียนรู้แบบโครงงาน','การแก้ปัญหาจากสถานการณ์จริง','การเรียนรู้แบบฐานกิจกรรม','การฝึกทักษะผ่านสถานการณ์จำลอง','การศึกษาภาคสนาม','การประเมินผลจากชิ้นงาน','การทำเวิร์กช็อป','การเรียนรู้แบบสืบเสาะหาความรู้','กำหนดเอง'];
+const ASSESSMENT_TYPES=['การสอบย่อย','การบ้าน / แบบฝึกหัด','การสอบกลางภาค','การสอบปลายภาค','การสอบปฏิบัติ','ปฏิบัติการ','รายงาน','โครงงาน','การนำเสนอ','การมีส่วนร่วมในชั้นเรียน','การประเมินชิ้นงาน','การประเมินทักษะปฏิบัติ','การสังเกตพฤติกรรม','แฟ้มสะสมผลงาน','การประเมินตนเอง','การประเมินโดยเพื่อน','กำหนดเอง'];
+const RESOURCE_TYPES=['ตำราเรียน','หนังสือ','หนังสืออิเล็กทรอนิกส์','เอกสารประกอบการสอน','บทความวิชาการ','บทความวิจัย','วารสาร','เว็บไซต์','วิดีโอการสอน','สื่อออนไลน์','คู่มือปฏิบัติการ','ฐานข้อมูลวิชาการ','ซอฟต์แวร์และเครื่องมือ','สื่อการเรียนรู้แบบเปิด','กำหนดเอง'];
+const GRADE_ABC=['A','B+','B','C+','C','D+','D','F'];
+const GRADE_SU=['S','U'];
+const VISIBLE_COLS={CLOs:['CloCode','DescriptionTh','MappedPloCodes'],LecturePlans:['WeekNumber','Topic','TeachingMethods','MappedCloCodes','Notes'],LabPlans:['WeekNumber','Topic','TeachingMethods','MappedCloCodes','Notes'],Assessments:['AssessmentName','AssessmentType','WeightPercent','MappedCloCodes'],GradeScale:['Grade','MinimumScore','MaximumScore'],Resources:['ResourceType','Title','Author','Year','Url']};
+let manualTeacherRows=new Set();
+function visibleCols(group){return VISIBLE_COLS[group]||Object.keys(dataFields(group));}
+// Native HTML datalist filters the options by the prefilled value, hiding most
+// choices after JSON import. Use a true select for the complete, stable list.
+function choicesFor(group,key){
+ if(key==='TeachingMethods')return group==='LecturePlans'?LECTURE_METHODS:LAB_METHODS;
+ if(key==='AssessmentType')return ASSESSMENT_TYPES;
+ return RESOURCE_TYPES;
+}
+function editableChoiceMarkup(group,key,value,scope,row,attr){
+ const choices=choicesFor(group,key).filter(v=>v!=='กำหนดเอง');
+ const saved=String(value??'');
+ const custom=!!saved && !choices.includes(saved);
+ const current=custom?'__custom__':saved;
+ const description=key==='TeachingMethods'?'วิธีการสอน':key==='AssessmentType'?'ประเภทประเมิน':'ประเภทแหล่งเรียนรู้';
+ const attrs=`data-group="${group}" data-key="${key}" data-scope="${scope}" data-row="${row}"`;
+ return `<div class="editable-choice"><select data-action="choice-select" ${attrs} aria-label="เลือก${description}"><option value="" ${!current?'selected':''}>— เลือกรายการ —</option>${choices.map(v=>`<option value="${escapeHtml(v)}" ${current===v?'selected':''}>${escapeHtml(v)}</option>`).join('')}<option value="__custom__" ${custom?'selected':''}>กำหนดเอง</option></select><input type="text" class="editable-custom-input ${custom?'':'hidden'}" data-action="choice-custom" ${attrs} value="${custom?escapeHtml(saved):''}" placeholder="ระบุ${description}ด้วยตนเอง" aria-label="ระบุ${description}ด้วยตนเอง" ${custom?'':'disabled'}></div>`;
+}
+function gradeMode(){if(!state.GradeScale.length)return '';return state.GradeScale.some(x=>GRADE_SU.includes(x.Grade))&&!state.GradeScale.some(x=>GRADE_ABC.includes(x.Grade))?'su':'abc';}
+
+
 const WIDE=new Set(['CourseTitleTh','CourseTitleEn','CourseDescriptionTh','CourseDescriptionEn','CurriculumName','Remarks','Prerequisites']);
 const TEXTAREA=new Set(['CourseDescriptionTh','CourseDescriptionEn','Remarks','Notes','DescriptionTh','DescriptionEn','Topic','LearningActivities','TeachingMethods','AssessmentMethods','Title']);
 const TABLE_WIDTH={DescriptionTh:'long',DescriptionEn:'long',Topic:'long',LearningActivities:'long',TeachingMethods:'long',AssessmentMethods:'small',AssessmentName:'long',MappedPloCodes:'small',MappedCloCodes:'small',Notes:'small',LecturePercent:'narrow',LabPercent:'narrow',WeekNumber:'narrow',WeightPercent:'narrow',MinimumScore:'narrow',MaximumScore:'narrow',StaffId:'small',Email:'long',RegisteredStudentCount:'narrow',Year:'narrow'};
@@ -69,14 +606,17 @@ const escapeHtml=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const dataFields=group=>(contract.properties[group]?.type==='object'?contract.properties[group]:contract.properties[group]?.items).properties;
 const blankRecord=(group)=>Object.fromEntries(Object.entries(dataFields(group)).map(([k,v])=>[k,v.type==='boolean'?false:v.type==='array'?[]:'']));
 const nowISO=()=>new Date().toISOString();
-function blankData(){return {SchemaVersion:'1.0.0',OfferingId:'',SourceType:'BlazorManual',ExtractedAt:nowISO(),CourseInfo:{...blankRecord('CourseInfo'),FacultyName:'คณะวิทยาศาสตร์',UniversityName:'มหาวิทยาลัยพะเยา',TeachingLanguage:'ไทย',Semester:'1'},Curriculum:blankRecord('Curriculum'),Instructors:[],PLOs:[],CLOs:[],ClassMeetings:[],Exams:[],StudentGroups:[],LecturePlans:Array.from({length:15},(_,i)=>({...blankRecord('LecturePlans'),WeekNumber:i+1})),LabPlans:Array.from({length:15},(_,i)=>({...blankRecord('LabPlans'),WeekNumber:i+1})),Assessments:[],GradeScale:[],Resources:[]};}
-let state=blankData(), currentId=null, currentTab='course', weeklyKind='LecturePlans', showingErrors=false, saveTimer=null, saving=false, suppressSave=false;
-let storageMode=''; let db=null;
-const uuid=()=>typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():`draft-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-async function initStore(){if(!('indexedDB'in window)){storageMode='localStorage';return;}try{db=await new Promise((resolve,reject)=>{const req=indexedDB.open('up-syllabus-drafts-v1',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('drafts'))req.result.createObjectStore('drafts',{keyPath:'id'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);req.onblocked=()=>reject(new Error('IndexedDB blocked'));}); storageMode='IndexedDB';}catch(e){storageMode='localStorage';}}
-function storeOperation(type,value){return new Promise((resolve,reject)=>{try{let t=db.transaction('drafts',type==='get'?'readonly':'readwrite'),s=t.objectStore('drafts'),r=type==='list'?s.getAll():type==='get'?s.get(value):type==='put'?s.put(value):s.delete(value);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);}catch(e){reject(e);}});}
-function lsAll(){try{return JSON.parse(localStorage.getItem('up-syllabus-drafts-v1')||'[]');}catch(e){return [];}}
-async function store(type, value){if(storageMode==='IndexedDB'){return storeOperation(type,value);}let list=lsAll();if(type==='list')return list;if(type==='get')return list.find(x=>x.id===value);if(type==='delete')list=list.filter(x=>x.id!==value);if(type==='put')list=[...list.filter(x=>x.id!==value.id),value];try{localStorage.setItem('up-syllabus-drafts-v1',JSON.stringify(list));}catch(e){toast('พื้นที่เก็บข้อมูลไม่พร้อม กรุณาสำรองเป็น JSON');throw e;}return value;}
+// Rows that should visibly display an empty editing row when there is no saved data.
+const STARTER_ROW_GROUPS=['CLOs','Assessments','Resources'];
+function ensureStarterRows(data){
+ for(const group of STARTER_ROW_GROUPS){if(!Array.isArray(data[group])||data[group].length===0)data[group]=[blankRecord(group)];}
+ return data;
+}
+function blankData(){return {SchemaVersion:'1.0.0',OfferingId:'',SourceType:'BlazorManual',ExtractedAt:nowISO(),CourseInfo:{...blankRecord('CourseInfo'),FacultyName:'คณะวิทยาศาสตร์',UniversityName:'มหาวิทยาลัยพะเยา'},Curriculum:blankRecord('Curriculum'),Instructors:[],PLOs:[],CLOs:[blankRecord('CLOs')],ClassMeetings:[],Exams:[],StudentGroups:[],LecturePlans:Array.from({length:15},(_,i)=>({...blankRecord('LecturePlans'),WeekNumber:i+1})),LabPlans:Array.from({length:15},(_,i)=>({...blankRecord('LabPlans'),WeekNumber:i+1})),Assessments:[blankRecord('Assessments')],GradeScale:[],Resources:[blankRecord('Resources')]};}
+// JSON-only model: nothing is saved to IndexedDB/localStorage.
+// Users explicitly download a JSON file and re-open it for further edits.
+let state=blankData(), currentTab='course', weeklyKind='LecturePlans', showingErrors=false;
+let unsavedChanges=false, lastLoadedFile='';
 function isPopulated(group,r){return Object.entries(r||{}).some(([k,v])=>k!=='WeekNumber'&&(Array.isArray(v)?v.length>0:typeof v==='boolean'?false:String(v??'').trim()!==''));}
 function normalizedInput(v,type){if(type==='boolean')return Boolean(v);if(type==='array')return String(v??'').split(/[,;\n]/).map(s=>s.trim().toUpperCase()).filter(Boolean).filter((x,i,a)=>a.indexOf(x)===i);if(type==='number'||type==='integer')return v===''?'':Number(v);return String(v??'');}
 function inputValue(v){return Array.isArray(v)?v.join(', '):v??'';}
@@ -84,56 +624,336 @@ function cleanedRecord(group,r,requiredOnly=false){const prop=dataFields(group),
 function safePart(v){return String(v??'').trim().toUpperCase().replace(/\s+/g,'').replace(/[^A-Z0-9_-]/g,'');}
 function offeringId(){const c=state.CourseInfo||{},a=safePart(c.CourseCode),b=safePart(c.Semester),y=String(c.AcademicYear||'').trim(),sec=safePart(c.Section).replace(/^SEC/,'');return a&&b&&/^\d{4}$/.test(y)&&sec?`${a}-${b}-${y}-SEC${sec}`:'';}
 function payload(){const d={SchemaVersion:'1.0.0',OfferingId:offeringId(),SourceType:'BlazorManual',ExtractedAt:nowISO()};for(const group of SECTION_KEYS){if(group==='CourseInfo'||group==='Curriculum'){d[group]=cleanedRecord(group,state[group]);}else d[group]=(state[group]||[]).filter(r=>isPopulated(group,r)).map(r=>cleanedRecord(group,r));}return d;}
-function fromPayload(obj){const d=blankData();for(const group of SECTION_KEYS){const input=obj?.[group];if(group==='CourseInfo'||group==='Curriculum')d[group]={...blankRecord(group),...((input&&typeof input==='object'&&!Array.isArray(input))?input:{})};else if(Array.isArray(input)) d[group]=input.map(x=>({...blankRecord(group),...x}));}for(const group of ['LecturePlans','LabPlans']){if(!d[group].length)d[group]=Array.from({length:15},(_,i)=>({...blankRecord(group),WeekNumber:i+1}));}return d;}
-function getArrayType(group,key){return dataFields(group)[key]?.type;}
-function inputElement(group,key,value,scope,row,table=false){const spec=dataFields(group)[key],type=spec.type;const attr=`${scope==='object'?`id="f-${group}-${key}"`:``} data-group="${group}" data-key="${key}" data-scope="${scope}" ${row!==undefined?`data-row="${row}"`:''}`;let className=table?(TABLE_WIDTH[key]||''):'';let hint=(type==='array')?'คั่นด้วยเครื่องหมาย ,':'';if(type==='boolean')return `<input aria-label="${escapeHtml(MAP[key]||key)}" class="check" type="checkbox" ${value?'checked':''} ${attr}>`;
-if(SELECT[key]){return `<select aria-label="${escapeHtml(MAP[key]||key)}" class="${className}" ${attr}><option value="">— เลือก —</option>${SELECT[key].map(item=>`<option value="${escapeHtml(item)}" ${String(value)===String(item)?'selected':''}>${escapeHtml(item)}</option>`).join('')}${value&&!SELECT[key].includes(String(value))?`<option value="${escapeHtml(value)}" selected>${escapeHtml(value)}</option>`:''}</select>`;}
-if(TEXTAREA.has(key)){return `<textarea aria-label="${escapeHtml(MAP[key]||key)}" class="${className}" ${attr} placeholder="${hint||''}">${escapeHtml(inputValue(value))}</textarea>`;}
-const htmlType=(type==='integer'||type==='number')?'number':key==='ExamDate'?'date':key==='Email'?'email':key==='Url'?'url':'text';const step=type==='integer'?'1':type==='number'?'0.01':undefined;let ph=(type==='array')?'CLO1, CLO2':key==='StartTime'?'09:00':key==='EndTime'?'12:00':key==='Credits'?'3(2-2-5)':key==='Section'?'01':key==='AcademicYear'?'2569':'';
-return `<input aria-label="${escapeHtml(MAP[key]||key)}" type="${htmlType}" class="${className}" ${step?`step="${step}"`:''} ${type==='number'||type==='integer'?`min="0"`:''} ${attr} value="${escapeHtml(inputValue(value))}" placeholder="${escapeHtml(ph)}">`;
+function fromPayload(obj){
+ const d=blankData();
+ for(const group of SECTION_KEYS){
+  const input=obj?.[group];
+  if(group==='CourseInfo'||group==='Curriculum')d[group]={...blankRecord(group),...((input&&typeof input==='object'&&!Array.isArray(input))?input:{})};
+  else if(Array.isArray(input))d[group]=input.map(x=>({...blankRecord(group),...x}));
+ }
+ // Earlier Drafts may already contain invalid browser-restored sentinel values.
+ // Clear only the known invalid 1/0 values, preserving correctly entered year/term.
+ const info=d.CourseInfo;
+ if(['0','1'].includes(String(info.AcademicYear??'').trim()))info.AcademicYear='';
+ if(String(info.Semester??'').trim()==='0')info.Semester='';
+ const oldCredit=String(info.Credits||'');
+ if(/^\d+\s*\(\s*\d+\s*[-–]\s*\d+\s*[-–]\s*\d+\s*\)$/.test(oldCredit))info.Credits=oldCredit.split('(')[0].trim();
+ // Do not resurface a phantom instructor row from pre-v1.3.3 Drafts.
+ d.Instructors=d.Instructors.filter(r=>isPopulated('Instructors',r));
+ for(const group of ['LecturePlans','LabPlans']){
+  if(!d[group].length)d[group]=Array.from({length:15},(_,i)=>({...blankRecord(group),WeekNumber:i+1}));
+ }
+ return ensureStarterRows(d);
 }
-function formPanel(group,title,desc){const rows=Object.entries(dataFields(group)),v=state[group]||{},required=contract.properties[group].required||[];return `<section class="panel" id="group-${group}"><div class="panel-head"><div><h3>${escapeHtml(title)}</h3><div class="subhead">${escapeHtml(desc)}</div></div><span class="pill neutral">${rows.length} fields</span></div><div class="panel-body"><div class="form-grid">${rows.map(([key,spec])=>`<div class="field ${WIDE.has(key)?'wide':''} ${/Description/.test(key)?'full':''}"><label for="f-${group}-${key}">${escapeHtml(MAP[key]||key)}${required.includes(key)?' <span class="required">*</span>':''}</label>${inputElement(group,key,v[key],'object')}<span class="micro">${escapeHtml(key)}</span></div>`).join('')}</div></div></section>`;}
-function tablePanel(group,title,desc,actions=''){const props=dataFields(group), rows=state[group]||[], count=rows.filter(r=>isPopulated(group,r)).length;return `<section class="panel" id="group-${group}"><div class="panel-head"><div><h3>${escapeHtml(title)} <span class="pill neutral">${count} รายการ</span></h3><div class="subhead">${escapeHtml(desc)}</div></div><div class="inline-row">${actions}<button class="btn btn-mini btn-primary" data-action="add" data-group="${group}">＋ เพิ่มรายการ</button></div></div><div class="table-wrap"><table class="editor-table"><thead><tr><th style="width:36px">#</th>${Object.keys(props).map(k=>`<th>${escapeHtml(MAP[k]||k)}</th>`).join('')}<th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td>${Object.keys(props).map(key=>`<td>${inputElement(group,key,r[key],'table',i,true)}</td>`).join('')}<td><button class="del" data-action="delete" data-group="${group}" data-row="${i}" title="ลบแถว ${i+1}" aria-label="ลบแถว ${i+1}">×</button></td></tr>`).join(''):`<tr><td colspan="${Object.keys(props).length+2}" class="empty">ยังไม่มีข้อมูล กด “เพิ่มรายการ” เพื่อเริ่มกรอก</td></tr>`}</tbody></table></div><div class="table-note">${group==='LecturePlans'||group==='LabPlans'?'มีช่องสัปดาห์ไว้ล่วงหน้า 15 สัปดาห์ • แถวที่กรอกเฉพาะเลขสัปดาห์จะไม่นำไปส่งออก JSON':group==='PLOs'?'รหัส PLO ต้องตรงกับรหัสที่ใช้เชื่อมโยงใน CLO':group==='CLOs'?'MappedPloCodes ใส่รหัสหลายรายการคั่นด้วย , เช่น PLO1,PLO2':group==='Instructors'?'กำหนดผู้รับผิดชอบรายวิชาเพียง 1 คน • ใช้ StaffId หรือ Email เพื่อระบุผู้สอน':group==='Assessments'?'น้ำหนักรวมทุกการประเมินต้องเท่ากับ 100%':'เว้นแถวเปล่าไว้ได้ โดยจะไม่ถูกส่งออกเป็นรายการ'}</div></section>`;}
-function coursePage(){return `<div class="section-stack">${formPanel('CourseInfo','ข้อมูลรายวิชา / Course Info','ใช้ข้อมูลตามทะเบียนรายวิชา; ปีการศึกษาใช้ พ.ศ. และ Section เช่น 01')}${formPanel('Curriculum','หลักสูตรที่เปิดรายวิชา','ใช้ชื่อหลักสูตรและปีปรับปรุงตามเอกสารหลักสูตรจริง')}${tablePanel('ClassMeetings','ตารางเรียน / ห้องเรียน','เพิ่มได้หลายวันหรือหลายห้องตามกลุ่มเรียน')}${tablePanel('Exams','ตารางสอบ','ใช้วันที่แบบ ค.ศ. YYYY-MM-DD และประเภทสอบ M (กลางภาค) หรือ F (ปลายภาค)')}${tablePanel('StudentGroups','กลุ่มนิสิตที่ลงทะเบียน','เก็บเฉพาะข้อมูลรวม ไม่เก็บข้อมูลส่วนบุคคลของนิสิต')}</div>`;}
-function weeklyPage(){return `<div class="section-stack"><div class="notice">วางแผนการสอนแยกบรรยายและปฏิบัติการ สัปดาห์ที่ 1–15 มีให้ล่วงหน้า คุณสามารถเพิ่มสัปดาห์ได้ และกรอกรหัส CLO เช่น CLO1, CLO2</div><div class="inline-row"><div class="switchbar"><button data-action="week-switch" data-value="LecturePlans" class="${weeklyKind==='LecturePlans'?'active':''}">บรรยาย (Lecture)</button><button data-action="week-switch" data-value="LabPlans" class="${weeklyKind==='LabPlans'?'active':''}">ปฏิบัติการ (Lab)</button></div><span class="pill neutral">${weeklyKind==='LecturePlans'?'Lecture Plan':'Laboratory Plan'}</span></div>${tablePanel(weeklyKind,weeklyKind==='LecturePlans'?'แผนการสอนภาคบรรยาย':'แผนการสอนภาคปฏิบัติ', 'หัวข้อ กิจกรรมการเรียนรู้ วิธีสอน การประเมิน และรหัส CLO', `<button class="btn btn-mini" data-action="fill-weeks" data-group="${weeklyKind}">＋ เติมให้ครบ 15 สัปดาห์</button>`)}</div>`;}
-function assessmentPage(){return `<div class="section-stack"><div class="notice warn">น้ำหนักคะแนนของรายการประเมินต้องรวม 100% และรหัส CLO ต้องมีอยู่ในแท็บ CLOs เกณฑ์ตัดเกรดเป็นข้อมูลที่กำหนดเองตามรายวิชา โปรดตรวจสอบความถูกต้องก่อนเผยแพร่</div>${tablePanel('Assessments','รายการวัดและประเมินผล','น้ำหนักคะแนนเป็นตัวเลขเต็ม เช่น 25 หมายถึง 25%')}${tablePanel('GradeScale','เกณฑ์ตัดเกรด','กำหนดช่วงคะแนนตามที่รายวิชาใช้จริง',`<button class="btn btn-mini" data-action="grade-demo">ใส่เกณฑ์ตัวอย่าง</button>`)}${tablePanel('Resources','หนังสือและแหล่งเรียนรู้','ตำรา งานวิจัย เว็บไซต์ และแหล่งข้อมูลเพิ่มเติม')}</div>`;}
-function render(){const t=TABS.find(x=>x.id===currentTab);el('nav').innerHTML=TABS.map((x,i)=>`<button class="${x.id===currentTab?'active':''}" data-action="tab" data-value="${x.id}"><span class="num">${i+1}</span><span>${escapeHtml(x.name)}</span></button>`).join('');el('tab-title').textContent=t.name;el('tab-desc').textContent=t.desc;el('tab-number').textContent=`SECTION ${TABS.findIndex(x=>x.id===currentTab)+1} / 6`;
-switch(currentTab){case 'course':el('panel-content').innerHTML=coursePage();break;case 'plos':el('panel-content').innerHTML=`<div class="section-stack"><div class="notice">PLO ต้องใช้ข้อมูลที่ได้รับอนุมัติตามหลักสูตรและปีปรับปรุงจริง ขณะนี้ยังไม่เชื่อม REG หรือ Curriculum Master</div>${tablePanel('PLOs','ผลลัพธ์การเรียนรู้ระดับหลักสูตร','เพิ่มรหัสและคำอธิบาย PLO ที่ใช้จริง')}</div>`;break;case 'instructors':el('panel-content').innerHTML=`<div class="section-stack"><div class="notice">ระบุผู้รับผิดชอบรายวิชา 1 คน และกรอก Lecture% / Lab% ให้รวม 100 แยกตามภาคที่มีชั่วโมงสอน</div>${tablePanel('Instructors','ผู้รับผิดชอบรายวิชาและผู้สอน','ชื่อ อีเมล StaffId หน่วยงาน สัดส่วนการสอน')}</div>`;break;case 'clos':el('panel-content').innerHTML=`<div class="section-stack"><div class="notice">อ้างอิง PLO ด้วยรหัสที่สร้างไว้ในแท็บ PLOs เช่น PLO1, PLO2 (คั่นด้วย ,)</div>${tablePanel('CLOs','ผลลัพธ์การเรียนรู้รายวิชา','คำอธิบาย CLO ระดับ Bloom และความเชื่อมโยง PLO')}</div>`;break;case 'weekly':el('panel-content').innerHTML=weeklyPage();break;case 'assessment':el('panel-content').innerHTML=assessmentPage();break;}
+function getArrayType(group,key){return dataFields(group)[key]?.type;}
+// Compatible with the existing JSON contract: multiple weekly instructors are saved
+// in the pre-existing Notes string separated by semicolons; no new schema fields.
+function splitTeacherNames(value){return [...new Set(String(value||'').split(/[;,\n]/).map(normalizeName).filter(Boolean))];}
+function setWeeklyTeachers(group,row,items){
+ const record=state[group]?.[row];if(!record)return;
+ record.Notes=[...new Set(items.map(normalizeName).filter(Boolean))].join('; ');
+ render();scheduleSave();
+}
+function updateGradeCutoffs(mode){
+ const grades=mode==='su'?GRADE_SU:GRADE_ABC;
+ const existing=new Map(state.GradeScale.map(x=>[x.Grade,x]));
+ // A/F/S/U have fixed order. Inactive grade mode is excluded from JSON.
+ state.GradeScale=grades.map((grade,i)=>{
+   const old=existing.get(grade)||{};
+   const out={...blankRecord('GradeScale'),...old,Grade:grade};
+   if(i===grades.length-1)out.MinimumScore=0;
+   const min=Number(out.MinimumScore);
+   const upper= i===0 ? 100 : Number(existing.get(grades[i-1])?.MinimumScore);
+   if(out.MinimumScore!=='' && Number.isFinite(min) && (i===0 || (existing.get(grades[i-1])?.MinimumScore!=='' && Number.isFinite(upper)))){
+     out.MaximumScore=i===0?100:Math.max(0,Math.round((upper-.01)*100)/100);
+   }else out.MaximumScore='';
+   return out;
+ });
+}
+function gradeCutoffTable(){
+ const mode=gradeMode(),abc=mode==='abc',su=mode==='su';
+ const cutoff=(grade,enabled)=>{
+   const rec=state.GradeScale.find(x=>x.Grade===grade);
+   const terminal=grade==='F'||grade==='U';
+   return `<tr class="${enabled?'':'inactive'}"><td class="grade-label">${grade}</td><td class="grade-op">${terminal?'':'≥'}</td><td>${terminal?'<span class="terminal-grade">—</span>':`<input type="number" min="0" max="100" step="0.01" data-action="grade-cutoff" data-value="${grade}" aria-label="คะแนนขั้นต่ำเกรด ${grade}" value="${enabled&&rec&&rec.MinimumScore!==''?escapeHtml(rec.MinimumScore):''}" ${enabled?'':'disabled'}>`}</td></tr>`;
+ };
+ return `<div class="grade-table-wrap"><table class="grade-table"><thead><tr><th>เกรด</th><th colspan="2">คะแนนสอบ</th></tr></thead><tbody>${GRADE_ABC.map(g=>cutoff(g,abc)).join('')}${GRADE_SU.map(g=>cutoff(g,su)).join('')}</tbody></table></div><div class="grade-help">ระบุคะแนนขั้นต่ำที่ได้เกรดนั้น เช่น A ≥ 80 · F และ U ต่ำกว่าเกรดก่อนหน้าโดยอัตโนมัติ</div>`;
+}
+function inputElement(group,key,value,scope,row,table=false){
+ const spec=dataFields(group)[key], type=spec.type;
+ const attr=`${scope==='object'?`id="f-${group}-${key}"`:''} data-group="${group}" data-key="${key}" data-scope="${scope}" ${row!==undefined?`data-row="${row}"`:''}`;
+ const cls=table?(TABLE_WIDTH[key]||''):'';
+ if(type==='boolean')return `<input aria-label="${escapeHtml(MAP[key]||key)}" class="check" type="checkbox" ${value?'checked':''} ${attr}>`;
+ if(group==='CLOs'&&key==='MappedPloCodes'){
+   const candidates=state.PLOs||[],selected=Array.isArray(value)?value:[];
+   return `<div class="plo-picker"><select aria-label="เพิ่ม PLO ที่เชื่อมโยง" data-action="plo-add" data-row="${row}"><option value="">＋ เลือก PLO</option>${candidates.filter(x=>!selected.includes(x.PloCode)).map(x=>`<option value="${escapeHtml(x.PloCode)}">${escapeHtml(x.PloCode)} — ${escapeHtml(x.DescriptionTh||'').slice(0,85)}</option>`).join('')}</select><div class="chips">${selected.map(x=>`<button type="button" class="chip" data-action="plo-remove" data-row="${row}" data-value="${escapeHtml(x)}" title="ลบ ${escapeHtml(x)}">${escapeHtml(x)} ×</button>`).join('')}</div></div>`;
+ }
+ if((group==='LecturePlans'||group==='LabPlans')&&key==='Topic'){
+   const rec=state[group][row]||{};
+   const txt=[rec.Topic,rec.LearningActivities].filter(x=>String(x||'').trim()).join('\n');
+   return `<textarea class="long weekly-topic" ${attr} aria-label="หัวข้อและกิจกรรมการเรียนรู้" placeholder="ระบุหัวข้อและกิจกรรมการเรียนรู้">${escapeHtml(txt)}</textarea>`;
+ }
+ if((group==='LecturePlans'||group==='LabPlans')&&key==='Notes'){
+   const names=[...new Set(state.Instructors.map(x=>normalizeName(x.DisplayName)).filter(Boolean))];
+   const selected=splitTeacherNames(value);
+   return `<div class="teacher-multi" data-teacher-group="${group}" data-teacher-row="${row}"><select data-action="weekly-teacher-add" data-group="${group}" data-row="${row}" aria-label="เพิ่มผู้สอนในสัปดาห์ ${row+1}"><option value="">＋ เลือกผู้สอนเพื่อเพิ่ม</option>${names.filter(x=>!selected.includes(x)).map(name=>`<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('')}</select><div class="teacher-chips">${selected.map(name=>`<button type="button" class="chip" data-action="weekly-teacher-remove" data-group="${group}" data-row="${row}" data-value="${escapeHtml(name)}" title="นำ ${escapeHtml(name)} ออก">${escapeHtml(name)} ×</button>`).join('')}</div><div class="teacher-custom"><input type="text" data-action="weekly-teacher-custom" data-group="${group}" data-row="${row}" aria-label="พิมพ์ชื่อผู้สอนเพิ่มเติม" placeholder="ชื่อผู้สอนที่ไม่มีในรายการ"><button type="button" data-action="weekly-teacher-add-custom" data-group="${group}" data-row="${row}" class="btn btn-mini">เพิ่ม</button></div></div>`;
+ }
+ if((group==='LecturePlans'||group==='LabPlans')&&key==='TeachingMethods'||group==='Assessments'&&key==='AssessmentType'||group==='Resources'&&key==='ResourceType'){
+   return editableChoiceMarkup(group,key,value,scope,row,attr);
+ }
+ // Course information is always entered using plain text fields (no asterisk, number spinner or semester select).
+ if(group!=='CourseInfo'&&SELECT[key])return `<select aria-label="${escapeHtml(MAP[key]||key)}" class="${cls}" ${attr}><option value="">— เลือก —</option>${SELECT[key].map(item=>`<option value="${escapeHtml(item)}" ${String(value)===String(item)?'selected':''}>${escapeHtml(item)}</option>`).join('')}${value&&!SELECT[key].includes(String(value))?`<option value="${escapeHtml(value)}" selected>${escapeHtml(value)}</option>`:''}</select>`;
+ if(TEXTAREA.has(key))return `<textarea aria-label="${escapeHtml(MAP[key]||key)}" class="${cls}" ${attr}>${escapeHtml(inputValue(value))}</textarea>`;
+ const htmlType=group==='CourseInfo'?'text':(type==='integer'||type==='number'?'number':key==='Url'?'url':'text');
+ const step=type==='integer'?'1':type==='number'?'0.01':undefined;
+ const placeholder=group==='CourseInfo'?'':(type==='array'?'CLO1, CLO2':'');
+ return `<input aria-label="${escapeHtml(MAP[key]||key)}" type="${htmlType}" class="${cls}" ${group==='CourseInfo'?'inputmode="text" autocomplete="off"':step?`step="${step}"`:''} ${group!=='CourseInfo'&&(type==='number'||type==='integer')?'min="0"':''} ${attr} value="${escapeHtml(inputValue(value))}" placeholder="${placeholder}">`;
+}
+
+
+function fieldMarkup(group,key){const v=state[group]||{},required=contract.properties[group].required||[];return `<div class="field ${WIDE.has(key)?'wide':''} ${/Description/.test(key)?'full':''}"><label for="f-${group}-${key}">${escapeHtml(MAP[key]||key)}</label>${inputElement(group,key,v[key],'object')}<span class="micro">${escapeHtml(key)}</span></div>`;}
+function formPanel(group,title,desc,keys=Object.keys(dataFields(group)),id=`group-${group}`){return `<section class="panel" id="${id}"><div class="panel-head"><div><h3>${escapeHtml(title)}</h3><div class="subhead">${escapeHtml(desc)}</div></div><span class="pill neutral">${keys.length} ช่องข้อมูล</span></div><div class="panel-body"><div class="form-grid">${keys.map(key=>fieldMarkup(group,key)).join('')}</div></div></section>`;}
+const COURSE_GROUPS=[
+ {id:'group-CourseInfo',title:'01 · ข้อมูลรายวิชาและภาคเรียน',desc:'ปีการศึกษาและภาคเรียนเป็นคนละช่อง โดยภาคเรียนอาจเป็น 1 หรือ 2',keys:['CourseCode','CourseTitleTh','CourseTitleEn','AcademicYear','Semester','Section']},
+ {id:'course-credits',title:'02 · หน่วยกิตและชั่วโมงเรียน',desc:'จำนวนหน่วยกิตและชั่วโมงสอนต่อสัปดาห์',keys:['Credits','LectureHours','LabHours','SelfStudyHours']},
+ {id:'course-descriptions',title:'03 · คำอธิบายรายวิชา',desc:'คำอธิบายรายวิชาภาษาไทยและภาษาอังกฤษ',keys:['CourseDescriptionTh','CourseDescriptionEn']}
+];
+function curriculumSelectMarkup(){return `<div class="field full"><label for="curriculum-pick">เลือกหลักสูตร</label><select id="curriculum-pick" data-action="curriculum-select" aria-label="เลือกหลักสูตร"><option value="">— เลือกหลักสูตรที่ใช้ PLO —</option>${curriculumMaster.map(c=>`<option value="${escapeHtml(c.curriculum_id)}" ${state.Curriculum.CurriculumCode===c.curriculum_id?'selected':''}>${escapeHtml(curriculumLabel(c))}</option>`).join('')}</select><span class="micro">ข้อมูลจาก curriculum_plos.json · เลือกแล้วระบบเติม PLO ให้อัตโนมัติ</span></div>`;}
+function plosPage(){const selected=selectedCurriculum();const plos=state.PLOs||[];return `<div class="section-stack"><section class="panel"><div class="panel-head"><div><h3>เลือกหลักสูตรสำหรับ PLOs</h3><div class="subhead">ใช้รายการที่ให้ไว้โดยไม่ต้องพิมพ์ PLO เอง</div></div><span class="pill neutral">${curriculumMaster.length} หลักสูตร</span></div><div class="panel-body"><div class="form-grid">${curriculumSelectMarkup()}</div>${selected?`<div class="master-summary">${escapeHtml(selected.program_name)} · ${escapeHtml(selected.major||'ไม่ระบุสาขา')} · ${plos.length} PLOs</div>`:''}</div></section>${plos.length?`<section class="panel"><div class="panel-head"><div><h3>ผลลัพธ์การเรียนรู้ระดับหลักสูตร</h3><div class="subhead">แสดงข้อมูลจาก ${selected?'ไฟล์หลักสูตรที่เลือก':'Draft ที่นำเข้า'} · ดูอย่างเดียว</div></div><span class="pill neutral">${plos.length} รายการ</span></div><div class="plo-list">${plos.map(p=>`<div class="plo-item"><strong class="plo-code">${escapeHtml(p.PloCode)}</strong><div><div class="plo-description">${escapeHtml(p.DescriptionTh)}</div>${p.Category?`<div class="plo-category">${escapeHtml(p.Category)}</div>`:''}</div></div>`).join('')}</div></section>`:'<div class="notice">กรุณาเลือกหลักสูตรด้านบน ระบบจะแสดง PLOs ของหลักสูตรนั้นโดยอัตโนมัติ</div>'}</div>`;}
+function instructorSelectMarkup(rec,row){
+ const picked=masterTeacherIndex(rec),dept=activeTeacherDepartment(),visible=instructorMaster.map((x,i)=>({...x,i})).filter(x=>allDepartments||!dept||normalizeName(x.department)===normalizeName(dept)||x.i===picked);
+ const manual=manualTeacherRows.has(row)||(picked===-1&&!!rec.DisplayName);
+ return `<select data-action="instructor-select" data-row="${row}" aria-label="เลือกอาจารย์ผู้สอน แถว ${row+1}"><option value="">— เลือกผู้สอน —</option>${visible.map(t=>`<option value="${t.i}" ${!manual&&t.i===picked?'selected':''}>${escapeHtml(teacherDisplay(t))}${allDepartments||!dept?' · '+escapeHtml(t.department):''}</option>`).join('')}<option value="__manual__" ${manual?'selected':''}>＋ ไม่พบรายชื่อ / กรอกเอง</option></select>${manual?`<div class="manual-teacher"><input type="text" data-action="teacher-manual-name" data-row="${row}" value="${escapeHtml(rec.DisplayName||'')}" placeholder="คำนำหน้า ชื่อ นามสกุล"><input type="text" data-action="teacher-manual-department" data-row="${row}" value="${escapeHtml(rec.Department||'')}" placeholder="สาขาวิชา / หน่วยงาน"></div>`:rec.DisplayName?`<div class="teacher-current">${escapeHtml(rec.DisplayName)}</div>`:''}`;
+}
+function instructorsPage(){const dept=activeTeacherDepartment(),rows=state.Instructors,chosen=rows.filter(x=>isPopulated('Instructors',x)).length;
+ const controls=`<section class="panel"><div class="panel-head"><div><h3>กรองรายชื่อผู้สอนตามหลักสูตร</h3><div class="subhead">ข้อมูลจาก instructors.json หรือเพิ่มผู้สอนที่ไม่อยู่ในรายการได้</div></div></div><div class="panel-body"><div class="form-grid">${curriculumSelectMarkup()}<div class="field wide"><label for="teacher-dept">ตัวกรองรายชื่อผู้สอน</label><select id="teacher-dept" data-action="teacher-scope"><option value="matched" ${!allDepartments?'selected':''}>${dept?escapeHtml('สาขา: '+dept):'ทุกสาขาวิชา (ยังไม่เลือกหลักสูตร)'}</option><option value="all" ${allDepartments?'selected':''}>แสดงรายชื่อทุกสาขาวิชา</option></select></div></div></div></section>`;
+ return `<div class="section-stack">${controls}<section class="panel" id="group-Instructors"><div class="panel-head"><div><h3>ผู้รับผิดชอบรายวิชาและผู้สอน <span class="pill neutral">${chosen} คน</span></h3><div class="subhead">เลือกจากรายชื่อ หรือเลือก “ไม่พบรายชื่อ / กรอกเอง” · ผู้รับผิดชอบรายวิชาต้องมี 1 คน</div></div><button type="button" class="btn btn-mini btn-primary" data-action="add" data-group="Instructors">＋ เพิ่มผู้สอน</button></div><div class="table-wrap"><table class="editor-table instructor-editor"><thead><tr><th style="width:38px">#</th><th>ชื่อผู้สอน</th><th>สาขาวิชา</th><th>ผู้รับผิดชอบ</th><th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td><td data-label="ชื่อผู้สอน">${instructorSelectMarkup(r,i)}</td><td data-label="สาขาวิชา"><span class="teacher-department">${escapeHtml(r.Department||'—')}</span></td><td class="teacher-check" data-label="ผู้รับผิดชอบ">${inputElement('Instructors','IsResponsibleInstructor',r.IsResponsibleInstructor,'table',i,true)}</td><td data-label="ลบรายการ"><button class="del" data-action="delete" data-group="Instructors" data-row="${i}" aria-label="ลบผู้สอนแถว ${i+1}">×</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">ยังไม่มีผู้สอน กด “เพิ่มผู้สอน” เพื่อเริ่มกรอก</td></tr>'}</tbody></table></div><div class="table-note">Master รายชื่อยังไม่มี StaffId และ Email · ระบบไม่สมมติรหัสบุคลากรหรืออีเมลขึ้นมา</div></section></div>`;
+}
+
+
+function tablePanel(group,title,desc,actions=''){
+ const keys=visibleCols(group),rows=state[group]||[],count=rows.filter(r=>isPopulated(group,r)).length;
+ const label=key=>group==='LecturePlans'||group==='LabPlans'?(key==='Notes'?'ผู้สอน':MAP[key]||key):MAP[key]||key;
+ return `<section class="panel" id="group-${group}"><div class="panel-head"><div><h3>${escapeHtml(title)} <span class="pill neutral">${count} รายการ</span></h3><div class="subhead">${escapeHtml(desc)}</div></div><div class="inline-row">${actions}<button class="btn btn-mini btn-primary" data-action="add" data-group="${group}">＋ เพิ่มรายการ</button></div></div><div class="table-wrap"><table class="editor-table section-table table-${group}"><thead><tr><th style="width:36px">#</th>${keys.map(k=>`<th>${escapeHtml(label(k))}</th>`).join('')}<th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td>${keys.map(key=>`<td data-label="${escapeHtml(label(key))}">${inputElement(group,key,r[key],'table',i,true)}</td>`).join('')}<td data-label="ลบรายการ"><button class="del" data-action="delete" data-group="${group}" data-row="${i}" title="ลบแถว ${i+1}" aria-label="ลบแถว ${i+1}">×</button></td></tr>`).join(''):`<tr><td colspan="${keys.length+2}" class="empty">ยังไม่มีข้อมูล กด “เพิ่มรายการ” เพื่อเริ่มกรอก</td></tr>`}</tbody></table></div><div class="table-note">${group==='LecturePlans'||group==='LabPlans'?'มีช่องสัปดาห์ไว้ 15 สัปดาห์ · เลือกวิธีสอนและผู้สอนจากรายการหรือพิมพ์เพิ่มเติมได้':group==='CLOs'?'เลือก PLO ได้หลายรายการโดยกดเพิ่มทีละรหัส และกด × เพื่อนำออก':group==='Assessments'?'น้ำหนักรวมการประเมินต้องเท่ากับ 100% · CLO คั่นด้วยเครื่องหมายจุลภาค':'กรอกข้อมูลตามที่รายวิชาใช้จริง'}</div></section>`;
+}
+
+
+function coursePage(){return `<div class="section-stack"><div class="notice">ข้อมูลจะอยู่ในหน้านี้จนกว่าจะปิดหรือรีเฟรช หากต้องการกลับมาทำต่อให้กด “บันทึก JSON” แล้วเก็บไฟล์ไว้ เมื่อเปิดครั้งถัดไปให้กด “เปิด JSON” · ระบุหน่วยกิตเป็นตัวเลขเดียว เช่น 3 และชั่วโมงเรียนเป็น 2, 2, 5 ระบบจะจัดรูปแบบ 3(2-2-5) ในขั้นตอนสร้าง DOCX</div>${COURSE_GROUPS.map(g=>formPanel('CourseInfo',g.title,g.desc,g.keys,g.id)).join('')}</div>`;}
+
+function weeklyPage(){return `<div class="section-stack"><div class="notice">กรอกหัวข้อและกิจกรรมในช่องเดียว · เลือกชื่อผู้สอนได้หลายคนต่อสัปดาห์ และเพิ่มรายชื่ออื่นเองได้</div><div class="inline-row"><div class="switchbar"><button data-action="week-switch" data-value="LecturePlans" class="${weeklyKind==='LecturePlans'?'active':''}">บรรยาย (Lecture)</button><button data-action="week-switch" data-value="LabPlans" class="${weeklyKind==='LabPlans'?'active':''}">ปฏิบัติการ (Lab)</button></div><span class="pill neutral">${weeklyKind==='LecturePlans'?'Lecture Plan':'Laboratory Plan'}</span></div>${tablePanel(weeklyKind,weeklyKind==='LecturePlans'?'แผนการสอนภาคบรรยาย':'แผนการสอนภาคปฏิบัติ','หัวข้อ/กิจกรรม วิธีสอน รหัส CLO และผู้สอน',`<button class="btn btn-mini" data-action="fill-weeks" data-group="${weeklyKind}">＋ เติมให้ครบ 15 สัปดาห์</button>`)}</div>`;}
+function assessmentPage(){return `<div class="section-stack"><div class="notice warn">น้ำหนักคะแนนประเมินรวม 100% · CLO ที่เชื่อมโยงคั่นด้วยจุลภาค · กำหนดเกณฑ์คะแนนขั้นต่ำตามระบบเกรดที่ใช้</div>${tablePanel('Assessments','รายการวัดและประเมินผล','ประเภทประเมินเป็นภาษาไทย เลือกจากรายการหรือระบุเองได้')}<section class="panel"><div class="panel-head"><div><h3>เกณฑ์ตัดเกรด</h3><div class="subhead">กรอกเฉพาะคะแนนขั้นต่ำของแต่ละเกรดตามตัวอย่าง ไม่ต้องระบุคะแนนสูงสุด</div></div></div><div class="panel-body grade-layout"><div class="field grade-mode-field"><label for="grade-mode">ระบบเกรด</label><select id="grade-mode" data-action="grade-mode"><option value="" ${!gradeMode()?'selected':''}>— เลือกระบบเกรด —</option><option value="abc" ${gradeMode()==='abc'?'selected':''}>A, B+, B, C+, C, D+, D, F</option><option value="su" ${gradeMode()==='su'?'selected':''}>S / U</option></select><span class="micro">เลือกแล้วจึงกรอกคะแนนขั้นต่ำในตาราง</span></div>${gradeCutoffTable()}</div></section>${tablePanel('Resources','หนังสือและแหล่งเรียนรู้','ประเภทแหล่งเรียนรู้ภาษาไทย เลือกจากรายการหรือระบุเองได้')}</div>`;}
+
+
+function render(){const t=TABS.find(x=>x.id===currentTab);el('nav').innerHTML=TABS.map((x,i)=>`<button class="${x.id===currentTab?'active':''}" data-action="tab" data-value="${x.id}" ${x.id===currentTab?'aria-current="step"':''}><span class="num">${i+1}</span><span>${escapeHtml(x.name)}</span></button>`).join('');el('tab-title').textContent=t.name;el('tab-desc').textContent=t.desc;el('tab-number').textContent=`SECTION ${TABS.findIndex(x=>x.id===currentTab)+1} / 6`;
+switch(currentTab){case 'course':el('panel-content').innerHTML=coursePage();break;case 'plos':el('panel-content').innerHTML=plosPage();break;case 'instructors':el('panel-content').innerHTML=instructorsPage();break;case 'clos':el('panel-content').innerHTML=`<div class="section-stack"><div class="notice">เลือกรหัส PLO ที่เชื่อมโยงจากหลักสูตรในแท็บ PLOs สามารถเลือกหลายรหัสต่อ CLO ได้</div>${tablePanel('CLOs','ผลลัพธ์การเรียนรู้รายวิชา','คำอธิบาย CLO และ PLO ที่เชื่อมโยง')}</div>`;break;case 'weekly':el('panel-content').innerHTML=weeklyPage();break;case 'assessment':el('panel-content').innerHTML=assessmentPage();break;}
 refreshHeader();}
-function refreshHeader(){const c=state.CourseInfo;el('hero-course').textContent=c.CourseTitleTh||'เริ่มต้นสร้าง Course Syllabus';el('hero-sub').textContent=[c.CourseCode,c.CourseTitleEn].filter(Boolean).join(' • ')||'ข้อมูลรายวิชาและแผนการสอน — มหาวิทยาลัยพะเยา';el('offering-label').textContent=offeringId()||'ยังไม่ระบุรหัส';el('s-instructors').textContent=state.Instructors.filter(x=>isPopulated('Instructors',x)).length;el('s-clos').textContent=state.CLOs.filter(x=>isPopulated('CLOs',x)).length;el('s-plans').textContent=state.LecturePlans.filter(x=>isPopulated('LecturePlans',x)).length+state.LabPlans.filter(x=>isPopulated('LabPlans',x)).length;const total=state.Assessments.filter(x=>isPopulated('Assessments',x)).reduce((n,x)=>n+(Number(x.WeightPercent)||0),0);el('s-weight').textContent=`${Math.round(total*100)/100}%`;el('s-weight').style.color=Math.abs(total-100)<.01?'var(--green)':total>100?'var(--red)':'var(--ink)';el('storage-label').textContent=storageMode||'กำลังตรวจสอบ';}
+
+function refreshHeader(){el('storage-label').textContent='บันทึกเป็นไฟล์ JSON เท่านั้น';}
 function toast(message){const root=el('toast');root.textContent=message;root.classList.remove('hidden');clearTimeout(toast._timer);toast._timer=setTimeout(()=>root.classList.add('hidden'),3800);}
-function scheduleSave(){el('save-status').textContent='มีการเปลี่ยนแปลง…';clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveDraft(false),900);}
-async function saveDraft(notify=true){clearTimeout(saveTimer);if(suppressSave)return;if(saving){scheduleSave();return;}saving=true;try{if(!currentId)currentId=uuid();const p={id:currentId,updatedAt:nowISO(),name:[state.CourseInfo.CourseCode,state.CourseInfo.CourseTitleTh].filter(Boolean).join(' · ')||'รายวิชาใหม่',data:payload()};await store('put',p);el('save-status').textContent=`บันทึกใน ${storageMode} แล้ว`;if(notify)toast('บันทึก Draft ใน Browser แล้ว (ยังไม่ได้ส่งข้อมูลขึ้น Server)');}catch(e){el('save-status').textContent='บันทึกไม่ได้ — กรุณา Export JSON';}finally{saving=false;}}
-function tab(id){currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
-function onInput(event){const t=event.target;if(!t.dataset.group)return;let {group,key,scope,row}=t.dataset,v=t.type==='checkbox'?t.checked:t.value,typ=getArrayType(group,key);if(scope==='object')state[group][key]=normalizedInput(v,typ);else{if(!state[group][Number(row)])return;state[group][Number(row)][key]=normalizedInput(v,typ);}refreshHeader();scheduleSave();if(showingErrors){el('validation').classList.remove('visible');showingErrors=false;}}
+// Keep the existing event handlers but replace autosave with an unsaved-changes indicator.
+function scheduleSave(){
+  unsavedChanges=true;
+  el('save-status').textContent='ยังไม่ได้บันทึกการแก้ไขลง JSON';
+}
+function resetSavedStatus(text){
+  unsavedChanges=false;
+  el('save-status').textContent=text;
+}
+function confirmDiscard(){
+  return !unsavedChanges || confirm('มีข้อมูลที่ยังไม่ได้บันทึกเป็นไฟล์ JSON หากดำเนินการต่อการแก้ไขเหล่านี้จะหายไป ต้องการดำเนินการต่อหรือไม่?');
+}
+function syncMobileMenu(){
+  const mobile=window.matchMedia('(max-width: 1100px)').matches;
+  const sidebar=el('sidebar');
+  const open=mobile&&document.documentElement.classList.contains('menu-open');
+  if(sidebar)sidebar.inert=mobile&&!open;
+  const button=el('mobile-menu-button');
+  if(button)button.setAttribute('aria-expanded',String(open));
+  if(!mobile)document.documentElement.classList.remove('menu-open');
+}
+function closeMobileMenu(){document.documentElement.classList.remove('menu-open');syncMobileMenu();}
+function openMobileMenu(){document.documentElement.classList.add('menu-open');syncMobileMenu();}
+function tab(id){closeMobileMenu();currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
+function onInput(event){const t=event.target;
+// A select always shows ALL choices even when the imported JSON has a value.
+// Only the optional custom input accepts free text; never save the sentinel.
+if(t.dataset.action==='choice-select'){
+ if(event.type!=='change')return;
+ const {group,key,row}=t.dataset;
+ const record=state[group]?.[Number(row)];if(!record)return;
+ const custom=t.parentElement.querySelector('[data-action="choice-custom"]');
+ if(t.value==='__custom__'){
+   record[key]='';
+   if(custom){custom.classList.remove('hidden');custom.disabled=false;custom.value='';custom.focus();}
+ }else{
+   record[key]=t.value;
+   if(custom){custom.value='';custom.classList.add('hidden');custom.disabled=true;}
+ }
+ scheduleSave();return;
+}
+if(t.dataset.action==='choice-custom'){
+ const {group,key,row}=t.dataset;
+ const record=state[group]?.[Number(row)];if(!record)return;
+ record[key]=t.value;
+ scheduleSave();return;
+}
+if(t.dataset.action==='curriculum-select'&&event.type==='change'){
+  if(!t.value){t.value=state.Curriculum.CurriculumCode||'';return;}
+  if(selectCurriculum(t.value)){el('validation')?.classList.remove('visible');showingErrors=false;render();scheduleSave();}else{t.value=state.Curriculum.CurriculumCode||'';}return;
+}
+if(t.dataset.action==='teacher-scope'&&event.type==='change'){allDepartments=t.value==='all';render();return;}
+if(t.dataset.action==='grade-mode'&&event.type==='change'){
+ const mode=t.value;
+ if(!mode)return;
+ if(state.GradeScale.length&&!confirm('การเปลี่ยนรูปแบบเกรดจะแทนที่เกณฑ์เดิม กรุณาบันทึก JSON หากต้องการเก็บข้อมูลเดิม ยืนยันหรือไม่?')){render();return;}
+ state.GradeScale=(mode==='su'?GRADE_SU:GRADE_ABC).map(Grade=>({...blankRecord('GradeScale'),Grade}));updateGradeCutoffs(mode);render();scheduleSave();return;
+}
+if(t.dataset.action==='weekly-teacher-custom')return;
+if(t.dataset.action==='grade-cutoff' && (event.type==='change'||event.type==='input')){
+ const grade=t.dataset.value, mode=gradeMode();
+ const record=state.GradeScale.find(x=>x.Grade===grade);
+ if(!record || grade==='F' || grade==='U' || !mode)return;
+ const raw=t.value;
+ record.MinimumScore=raw===''?'':Number(raw);
+ // Only rebuild derived maximum scores on change; avoids losing input focus.
+ if(event.type==='change'){updateGradeCutoffs(mode);render();}
+ scheduleSave();return;
+}
+if(t.dataset.action==='weekly-teacher-add'&&event.type==='change'){
+ const group=t.dataset.group,row=Number(t.dataset.row),value=normalizeName(t.value);
+ if(value)setWeeklyTeachers(group,row,[...splitTeacherNames(state[group][row].Notes),value]);return;
+}
+if(t.dataset.action==='plo-add'&&event.type==='change'){
+ if(!t.value)return;const r=state.CLOs[Number(t.dataset.row)];if(r){r.MappedPloCodes=[...new Set([...(r.MappedPloCodes||[]),t.value])];render();scheduleSave();}return;
+}
+if(t.dataset.action==='teacher-manual-name'){
+ const row=Number(t.dataset.row),r=state.Instructors[row];if(!r)return;
+ const name=t.value.trim();r.DisplayName=name;r.Prefix='';const parts=normalizeName(name).split(' ');r.LastName=parts.length>1?parts.pop():'';r.FirstName=parts.join(' ');r.StaffId='';r.Email='';scheduleSave();return;
+}
+if(t.dataset.action==='teacher-manual-department'){
+ const r=state.Instructors[Number(t.dataset.row)];if(r){r.Department=t.value;r.StaffId='';r.Email='';scheduleSave();}return;
+}
+if(t.dataset.action==='instructor-select'&&event.type==='change'){
+  const index=Number(t.value),row=Number(t.dataset.row),teacher=t.value!==''&&Number.isInteger(index)?instructorMaster[index]:null;
+  if(!state.Instructors[row])return;if(t.value==='__manual__'){manualTeacherRows.add(row);const r=state.Instructors[row];r.StaffId='';r.Email='';render();scheduleSave();return;}if(!teacher)return;manualTeacherRows.delete(row);
+  const r=state.Instructors[row];const prev=normalizeName(r.DisplayName);
+  const parts=normalizeName(teacher.name).split(' ');
+  const last=parts.length>1?parts.pop():'';
+  const first=parts.join(' ');
+  r.Prefix=teacher.title_prefix||'';r.FirstName=first;r.LastName=last;r.DisplayName=teacherDisplay(teacher);r.Department=teacher.department||'';
+  if(prev!==normalizeName(r.DisplayName)){r.StaffId='';r.Email='';}
+  el('validation')?.classList.remove('visible');showingErrors=false;render();scheduleSave();return;
+}
+if(!t.dataset.group)return;
+let {group,key,scope,row}=t.dataset,v=t.type==='checkbox'?t.checked:t.value,typ=getArrayType(group,key);if(scope==='object')state[group][key]=normalizedInput(v,typ);else{if(!state[group][Number(row)])return;state[group][Number(row)][key]=normalizedInput(v,typ);}if((group==='LecturePlans'||group==='LabPlans')&&key==='Topic'&&scope==='table')state[group][Number(row)].LearningActivities='';refreshHeader();scheduleSave();if(showingErrors){el('validation')?.classList.remove('visible');showingErrors=false;}}
 function validate(data){const errors=[], warnings=[],issue=(severity,group,message,field='')=>({severity,group,message,field,tab:GROUP_TAB[group]||'course'});const error=(g,m,f)=>errors.push(issue('error',g,m,f));const warn=(g,m,f)=>warnings.push(issue('warning',g,m,f));
 if(data.SchemaVersion!=='1.0.0')error('CourseInfo','SchemaVersion ต้องเป็น 1.0.0');
 if(!data.OfferingId||!new RegExp(contract.properties.OfferingId.pattern).test(data.OfferingId))error('CourseInfo','รหัส OfferingId ยังไม่สมบูรณ์ (CourseCode–Semester–ปี พ.ศ.–SECxx)');
 for(const group of SECTION_KEYS){const def=contract.properties[group],items=def.type==='object'?[data[group]]:(data[group]||[]),spec=def.type==='object'?def:def.items;items.forEach((r,i)=>{const title=def.type==='object'?group:`${group} แถว ${i+1}`;for(const k of spec.required||[]){const v=r?.[k];if(v===undefined||v===null||typeof v==='string'&&!v.trim())error(group,`${title}: กรุณาระบุ ${MAP[k]||k}`,k);}for(const [k,v] of Object.entries(r||{})){const prop=spec.properties[k];if(!prop){error(group,`${title}: ฟิลด์ไม่รู้จัก ${k}`,k);continue;}if(v===null){error(group,`${title}: ${MAP[k]||k} ต้องเป็นตัวเลขที่ถูกต้อง`,k);continue;}if(prop.type==='integer'&&(!Number.isInteger(v)))error(group,`${title}: ${MAP[k]||k} ต้องเป็นจำนวนเต็ม`,k);if(prop.type==='number'&&(typeof v!=='number'||!Number.isFinite(v)))error(group,`${title}: ${MAP[k]||k} ต้องเป็นตัวเลข`,k);if(prop.type==='string'&&typeof v!=='string')error(group,`${title}: ${MAP[k]||k} ต้องเป็นข้อความ`,k);if(prop.type==='boolean'&&typeof v!=='boolean')error(group,`${title}: ${MAP[k]||k} ต้องเป็นใช่/ไม่ใช่`,k);if(prop.type==='array'&&(!Array.isArray(v)||v.some(x=>typeof x!=='string')))error(group,`${title}: ${MAP[k]||k} ต้องเป็นรายการรหัส`,k);}});}
 const course=data.CourseInfo; if(course.CourseCode&&!/^[A-Za-z0-9_-]+$/.test(course.CourseCode))error('CourseInfo','รหัสรายวิชาต้องเป็นอักษรอังกฤษ ตัวเลข - หรือ _','CourseCode');if(course.AcademicYear!==undefined&&(course.AcademicYear<2400||course.AcademicYear>2700))error('CourseInfo','ปีการศึกษาควรใช้ปี พ.ศ. (เช่น 2569)','AcademicYear');if(course.Section&&!/^[A-Za-z0-9]+$/.test(course.Section))error('CourseInfo','Section ต้องไม่มีช่องว่างหรือสัญลักษณ์พิเศษ','Section');
-if(!course.CourseDescriptionTh)warn('CourseInfo','ยังไม่มีคำอธิบายรายวิชาภาษาไทย','CourseDescriptionTh');if(!data.Curriculum.CurriculumRevisionYear)warn('Curriculum','ควรระบุปีปรับปรุงหลักสูตรเพื่อป้องกันการเชื่อม PLO ผิดรุ่น','CurriculumRevisionYear');
+for(const cfg of COURSE_GROUPS)for(const key of cfg.keys){const v=state.CourseInfo[key];if(v===undefined||v===null||String(v).trim()==='')error('CourseInfo',`กรุณากรอก ${MAP[key]||key}` ,key);}
+if(course.Credits&&!/^\d+(?:\.\d+)?$/.test(course.Credits))error('CourseInfo','หน่วยกิตให้ใส่ตัวเลขเดียว เช่น 3 (ไม่ต้องใส่ 3(2-2-5))','Credits');
 const instructors=data.Instructors;if(!instructors.length)error('Instructors','ต้องระบุผู้สอนอย่างน้อย 1 คน');if(instructors.filter(x=>x.IsResponsibleInstructor).length!==1)error('Instructors','ต้องเลือกผู้รับผิดชอบรายวิชาเพียง 1 คน','IsResponsibleInstructor');
-for(const [i,x] of instructors.entries()){if(!x.StaffId&&!x.Email)error('Instructors',`ผู้สอนแถว ${i+1}: ต้องระบุ StaffId หรือ Email`,'StaffId');if(!x.DisplayName&&!(x.FirstName&&x.LastName))error('Instructors',`ผู้สอนแถว ${i+1}: กรุณาระบุชื่อแสดงผล หรือชื่อและนามสกุล`,'DisplayName');if(x.Email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x.Email))error('Instructors',`อีเมลผู้สอนแถว ${i+1} ไม่ถูกต้อง`,'Email');for(const f of ['LecturePercent','LabPercent'])if(x[f]!==undefined&&(x[f]<0||x[f]>100))error('Instructors',`สัดส่วนผู้สอนแถว ${i+1} ต้องอยู่ในช่วง 0–100`);}
-for(const [hours,key] of [['LectureHours','LecturePercent'],['LabHours','LabPercent']]){if((Number(course[hours])||0)>0){const sum=instructors.reduce((n,x)=>n+(Number(x[key])||0),0);if(Math.abs(sum-100)>.01)error('Instructors',`ผลรวม${key==='LecturePercent'?'บรรยาย':'ปฏิบัติ'}ต้องเท่ากับ 100% (ปัจจุบัน ${sum}%)`,key);}}
-const unique=(group,key)=>{const seen=new Set();for(const r of data[group]){const v=String(r[key]??'').toUpperCase();if(!v)continue;if(seen.has(v))error(group,`รหัส ${v} ซ้ำกัน`,key);seen.add(v);}return seen;};const plo=unique('PLOs','PloCode'),clo=unique('CLOs','CloCode');unique('Assessments','AssessmentCode');
+for(const [i,x] of instructors.entries()){if(!x.StaffId&&!x.Email)warn('Instructors',`ผู้สอนแถว ${i+1}: ยังไม่มี StaffId/Email ในข้อมูลต้นทาง กรุณาเติมจาก REG ก่อนนำเข้าระบบ Blazor`,'StaffId');if(!x.DisplayName&&!(x.FirstName&&x.LastName))error('Instructors',`ผู้สอนแถว ${i+1}: กรุณาระบุชื่อแสดงผล หรือชื่อและนามสกุล`,'DisplayName');if(x.Email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x.Email))error('Instructors',`อีเมลผู้สอนแถว ${i+1} ไม่ถูกต้อง`,'Email');}
+
+const unique=(group,key)=>{const seen=new Set();for(const r of data[group]){const v=String(r[key]??'').toUpperCase();if(!v)continue;if(seen.has(v))error(group,`รหัส ${v} ซ้ำกัน`,key);seen.add(v);}return seen;};const plo=unique('PLOs','PloCode'),clo=unique('CLOs','CloCode');
 for(const r of data.CLOs){for(const ref of r.MappedPloCodes||[])if(!plo.has(ref.toUpperCase()))error('CLOs',`CLO ${r.CloCode||''} อ้างอิง PLO ที่ไม่พบ: ${ref}`,'MappedPloCodes');}
 for(const group of ['LecturePlans','LabPlans','Assessments'])for(const r of data[group])for(const ref of r.MappedCloCodes||[])if(!clo.has(ref.toUpperCase()))error(group,`อ้างอิง CLO ที่ไม่พบ: ${ref}`,'MappedCloCodes');
 for(const group of ['LecturePlans','LabPlans']){const weeks=new Set();for(const r of data[group]){if(!Number.isInteger(r.WeekNumber)||r.WeekNumber<1||r.WeekNumber>52)error(group,'สัปดาห์ต้องเป็นจำนวนเต็มระหว่าง 1–52','WeekNumber');if(weeks.has(r.WeekNumber))error(group,`สัปดาห์ที่ ${r.WeekNumber} ซ้ำกัน`,'WeekNumber');weeks.add(r.WeekNumber);}if(Number(course[group==='LecturePlans'?'LectureHours':'LabHours'])>0&&data[group].length<15)warn(group,`แผน${group==='LecturePlans'?'บรรยาย':'ปฏิบัติ'}มี ${data[group].length} สัปดาห์ ควรตรวจสอบให้ครอบคลุมตามปฏิทิน`);}
 if(!data.PLOs.length)warn('PLOs','ยังไม่มี PLO ของหลักสูตร');if(!data.CLOs.length)warn('CLOs','ยังไม่มี CLO ของรายวิชา');
 const sums=data.Assessments.reduce((n,x)=>n+(Number(x.WeightPercent)||0),0);if(!data.Assessments.length)error('Assessments','ต้องมีรายการประเมินอย่างน้อย 1 รายการ');if(Math.abs(sums-100)>.01)error('Assessments',`น้ำหนักคะแนนรวมต้องเท่ากับ 100% (ปัจจุบัน ${Math.round(sums*100)/100}%)`,'WeightPercent');for(const r of data.Assessments){if(r.WeightPercent<0||r.WeightPercent>100)error('Assessments','น้ำหนักคะแนนต้องอยู่ในช่วง 0–100','WeightPercent');}
 const clock=(v)=>!v||/^([01]\d|2[0-3]):[0-5]\d$/.test(v);for(const g of ['ClassMeetings','Exams'])for(const r of data[g]){if(!clock(r.StartTime)||!clock(r.EndTime))error(g,'เวลาให้กรอก HH:MM แบบ 24 ชั่วโมง');if(r.StartTime&&r.EndTime&&r.StartTime>=r.EndTime)error(g,'เวลาเริ่มต้องน้อยกว่าเวลาสิ้นสุด');if(g==='Exams'&&r.ExamDate&&!/^\d{4}-\d{2}-\d{2}$/.test(r.ExamDate))error(g,'วันที่สอบต้องเป็น YYYY-MM-DD');}
-for(const r of data.GradeScale){if(r.MinimumScore!==undefined&&r.MaximumScore!==undefined&&(r.MinimumScore>r.MaximumScore||r.MinimumScore<0||r.MaximumScore>100))error('GradeScale','ช่วงคะแนนเกรดไม่ถูกต้อง');}if(!data.GradeScale.length)warn('GradeScale','ยังไม่มีเกณฑ์ตัดเกรด');
+if(!data.GradeScale.length)warn('GradeScale','ยังไม่เลือกรูปแบบเกรด A–F หรือ S/U');
+else {
+ const grades=data.GradeScale.map(x=>x.Grade),mode=grades.some(x=>GRADE_SU.includes(x))?'su':'abc', expected=mode==='su'?GRADE_SU:GRADE_ABC;
+ if(grades.length!==expected.length || grades.some((g,i)=>g!==expected[i]))error('GradeScale','รูปแบบเกรดต้องเป็นชุด A–F หรือ S/U เท่านั้น','Grade');
+ for(let i=0;i<expected.length;i++){
+   const r=data.GradeScale[i]||{};
+   if(r.MinimumScore===undefined||r.MaximumScore===undefined){error('GradeScale',`กรุณากรอกคะแนนขั้นต่ำของเกรด ${expected[i]||'?'} ให้ครบ`,'MinimumScore');continue;}
+   if(r.MinimumScore<0||r.MinimumScore>100||r.MaximumScore<0||r.MaximumScore>100||r.MinimumScore>r.MaximumScore)error('GradeScale',`ช่วงคะแนนเกรด ${r.Grade} ต้องอยู่ในช่วง 0–100`,'MinimumScore');
+   if(i>0 && i<expected.length-1 && r.MinimumScore>=data.GradeScale[i-1]?.MinimumScore)error('GradeScale',`คะแนนขั้นต่ำ ${r.Grade} ต้องต่ำกว่า ${expected[i-1]}`,'MinimumScore');
+   if(i===expected.length-2 && r.MinimumScore<=0)error('GradeScale',`คะแนนขั้นต่ำ ${r.Grade} ต้องมากกว่า 0 เพื่อแยกจาก ${expected[i+1]}`,'MinimumScore');
+ }
+}
+
 return {errors,warnings};}
 function showValidation(){const r=validate(payload());showingErrors=true;el('validation').classList.add('visible');el('issue-heading').textContent=`ผลตรวจสอบ · ${r.errors.length} ข้อผิดพลาด · ${r.warnings.length} ข้อควรตรวจ`;let html=[...r.errors,...r.warnings].map(x=>`<button class="issue ${x.severity==='warning'?'warning':''}" data-action="issue-tab" data-value="${x.tab}" data-group="${x.group}"><div class="severity">${x.severity==='error'?'ERROR':'เตือน'}</div><div>${escapeHtml(x.message)}<div class="where">${escapeHtml(x.group)} ${x.field?'· '+escapeHtml(x.field):''}</div></div></button>`).join('');el('issue-list').innerHTML=html||'<div class="issue ok">✓ ข้อมูลผ่านการตรวจสอบเงื่อนไขที่กำหนด พร้อมส่งออก JSON</div>';el('validation').scrollIntoView({behavior:'smooth',block:'start'});return r;}
 function download(blob,filename){const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500);}
-function backupJSON(){const d=payload();const filename='DRAFT_'+(d.OfferingId||new Date().toISOString().slice(0,10))+'.json';download(new Blob([JSON.stringify(d,null,2)],{type:'application/json;charset=utf-8'}),filename);toast('สำรอง Draft เป็น JSON แล้ว — ไฟล์นี้อาจยังไม่ผ่าน Validation');}
-function exportJSON(){const d=payload(),r=validate(d);if(r.errors.length){showValidation();toast(`พบ ${r.errors.length} ข้อผิดพลาด กรุณาแก้ก่อนส่งออก`);return;}const filename=(d.OfferingId||'syllabus')+'.json';download(new Blob([JSON.stringify(d,null,2)],{type:'application/json;charset=utf-8'}),filename);toast('ดาวน์โหลด JSON แล้ว • แนะนำสำรองไฟล์ทุกครั้งหลังกรอกเสร็จ');}
-async function importJSON(file){if(!file)return;try{if(file.size>5*1024*1024)throw new Error('ไฟล์ใหญ่เกิน 5 MB');const s=await file.text();const obj=JSON.parse(s);if(obj.SchemaVersion!=='1.0.0')throw new Error('รองรับ SchemaVersion 1.0.0 เท่านั้น');if(!obj.CourseInfo||!Array.isArray(obj.Instructors))throw new Error('โครงสร้างข้อมูลไม่ใช่ Syllabus JSON v1');if(!confirm('นำเข้า JSON เป็น Draft ใหม่? ข้อมูล Draft ปัจจุบันจะยังคงอยู่ในรายการ Draft'))return;await saveDraft(false);state=fromPayload(obj);currentId=uuid();currentTab='course';showingErrors=false;el('validation').classList.remove('visible');render();await saveDraft(false);toast('นำเข้า JSON สำเร็จ กรุณากดตรวจสอบข้อมูลก่อนส่งออก');}catch(e){toast('ไม่สามารถนำเข้าได้: '+e.message);}finally{el('file-import').value='';}}
-async function newDraft(withDemo=false){if(!confirm(withDemo?'โหลดข้อมูลตัวอย่างสมมติเป็น Draft ใหม่?':'สร้าง Draft ใหม่? Draft เดิมจะยังถูกบันทึกไว้ใน Browser'))return;await saveDraft(false);state=withDemo?fromPayload(demo):blankData();currentId=uuid();currentTab='course';showingErrors=false;el('validation').classList.remove('visible');render();await saveDraft(false);toast(withDemo?'โหลดข้อมูลสมมติแล้ว กรุณาอย่านำไปใช้เป็นข้อมูลหลักสูตรจริง':'สร้าง Draft ใหม่แล้ว');}
-async function openDrawer(){await saveDraft(false);const all=await store('list');all.sort((a,b)=>String(b.updatedAt).localeCompare(String(a.updatedAt)));el('draft-list').innerHTML=all.length?all.map(d=>`<div class="draft-item ${currentId===d.id?'current':''}"><div><strong>${escapeHtml(d.name||'ไม่ระบุชื่อ')}</strong><small>${escapeHtml(new Date(d.updatedAt).toLocaleString('th-TH'))}</small></div><div class="inline-row"><button class="btn btn-mini" data-action="load-draft" data-value="${escapeHtml(d.id)}">เปิด</button><button class="btn btn-mini btn-danger" data-action="delete-draft" data-value="${escapeHtml(d.id)}">ลบ</button></div></div>`).join(''):'<div class="empty">ยังไม่มี Draft</div>';el('drawer').classList.remove('hidden');}
-async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)return;const {action,group,row,value}=b.dataset;if(action==='tab'){tab(value);return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;if(group==='Instructors'&&state.Instructors.length===0)d.IsResponsibleInstructor=true;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}if(action==='grade-demo'){if(state.GradeScale.some(x=>isPopulated('GradeScale',x))&&!confirm('แทนที่เกณฑ์เดิมด้วยเกณฑ์ตัวอย่างสมมติ?'))return;const g=[['A',80,100],['B+',75,79.99],['B',70,74.99],['C+',65,69.99],['C',60,64.99],['D+',55,59.99],['D',50,54.99],['F',0,49.99]];state.GradeScale=g.map(([Grade,MinimumScore,MaximumScore])=>({Grade,MinimumScore,MaximumScore,Notes:'ตัวอย่างเท่านั้น ต้องตรวจสอบเกณฑ์จริง'}));render();scheduleSave();return;}if(action==='issue-tab'){tab(value);if(group==='LabPlans'){weeklyKind='LabPlans';render();}setTimeout(()=>el('group-'+group)?.scrollIntoView({behavior:'smooth',block:'start'}),120);return;}if(action==='validate'){showValidation();return;}if(action==='export'){exportJSON();return;}if(action==='backup'){backupJSON();return;}if(action==='save'){await saveDraft(true);return;}if(action==='import'){el('file-import').click();return;}if(action==='new'){await newDraft(false);return;}if(action==='demo'){await newDraft(true);return;}if(action==='drafts'){await openDrawer();return;}if(action==='close-drawer'){el('drawer').classList.add('hidden');return;}if(action==='load-draft'){const r=await store('get',value);if(!r)return;await saveDraft(false);state=fromPayload(r.data);currentId=r.id;currentTab='course';el('drawer').classList.add('hidden');render();toast('เปิด Draft แล้ว');return;}if(action==='delete-draft'){if(!confirm('ลบ Draft นี้ออกจาก Browser อย่างถาวร?'))return;await store('delete',value);if(currentId===value){state=blankData();currentId=uuid();render();await saveDraft(false);}await openDrawer();return;}}
-async function init(){await initStore();const all=await store('list');if(all.length){all.sort((a,b)=>String(b.updatedAt).localeCompare(String(a.updatedAt)));currentId=all[0].id;state=fromPayload(all[0].data);}else{currentId=uuid();}render();if(!all.length)await saveDraft(false);el('save-status').textContent=all.length?'เรียกคืน Draft ล่าสุดแล้ว':'สร้าง Draft ใหม่แล้ว';document.addEventListener('input',onInput);document.addEventListener('change',onInput);document.addEventListener('click',clickAction);el('file-import').addEventListener('change',e=>importJSON(e.target.files?.[0]));document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveDraft(true);}if(e.key==='Escape')el('drawer').classList.add('hidden');});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&saveTimer)saveDraft(false);});window.addEventListener('beforeunload',()=>{if(saveTimer)saveDraft(false);});}
-init().catch(e=>{console.error(e);toast('เริ่มต้นแอปไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ');});
+// The same contract is used for incomplete and validated JSON. Incomplete
+// data remains importable but is NOT claimed to be schema-valid for Blazor.
+function saveJSON(){
+  const d=payload();
+  const c=state.CourseInfo||{};
+  const code=safePart(c.CourseCode)||'UNNAMED';
+  const year=/^\d{4}$/.test(String(c.AcademicYear||''))?String(c.AcademicYear):'YEAR';
+  const term=safePart(c.Semester)||'TERM';
+  const section=safePart(c.Section).replace(/^SEC/,'')||'SECTION';
+  const filename=`SYLLABUS_${code}_${year}_${term}_${section}.json`;
+  download(new Blob([JSON.stringify(d,null,2)],{type:'application/json;charset=utf-8'}),filename);
+  resetSavedStatus('เริ่มดาวน์โหลด JSON แล้ว · ตรวจสอบไฟล์ใน Downloads');
+  toast('เริ่มดาวน์โหลด '+filename+' · บันทึกได้แม้ยังตรวจสอบไม่ผ่าน');
+}
+function saveDOCX(){
+  try{
+    if(!window.SyllabusDocx)throw new Error('โมดูล DOCX ไม่พร้อมใช้งาน');
+    const c=state.CourseInfo||{};
+    const code=safePart(c.CourseCode)||'UNNAMED';
+    const year=/^\d{4}$/.test(String(c.AcademicYear||''))?String(c.AcademicYear):'YEAR';
+    const term=safePart(c.Semester)||'TERM';
+    const section=safePart(c.Section).replace(/^SEC/,'')||'SECTION';
+    const filename=`SYLLABUS_${code}_${year}_${term}_${section}.docx`;
+    const docx=window.SyllabusDocx.makeDocx(payload());
+    download(docx,filename);
+    toast('เริ่มดาวน์โหลด DOCX · ตรวจสอบรูปแบบเอกสารก่อนนำไปใช้');
+  }catch(e){console.error('DOCX generation failed',e);toast('สร้าง DOCX ไม่สำเร็จ: '+e.message);}
+}
+async function importJSON(file){
+ if(!file)return;
+ try{
+   if(file.size>5*1024*1024)throw new Error('ไฟล์ใหญ่เกิน 5 MB');
+   const obj=JSON.parse(await file.text());
+   if(obj.SchemaVersion!=='1.0.0')throw new Error('รองรับ SchemaVersion 1.0.0 เท่านั้น');
+   if(!obj.CourseInfo||typeof obj.CourseInfo!=='object'||Array.isArray(obj.CourseInfo)||!Array.isArray(obj.Instructors))throw new Error('ไม่ใช่ไฟล์ Syllabus JSON v1');
+   if(!confirmDiscard())return;
+   state=fromPayload(obj);
+   lastLoadedFile=file.name;
+   manualTeacherRows.clear();currentTab='course';weeklyKind='LecturePlans';showingErrors=false;
+   el('validation')?.classList.remove('visible');render();
+   resetSavedStatus('เปิดไฟล์ '+file.name+' แล้ว');
+   toast('เปิด JSON สำเร็จ · แก้ไขข้อมูลแล้วกดบันทึก JSON อีกครั้ง');
+ }catch(e){toast('เปิด JSON ไม่สำเร็จ: '+e.message);}
+ finally{el('file-import').value='';}
+}
+function newDraft(){
+ if(!confirmDiscard())return;
+ state=blankData();lastLoadedFile='';manualTeacherRows.clear();currentTab='course';weeklyKind='LecturePlans';showingErrors=false;
+ el('validation')?.classList.remove('visible');render();resetSavedStatus('เริ่มรายวิชาใหม่ · ยังไม่ได้บันทึก JSON');toast('เริ่มรายวิชาใหม่แล้ว');
+}
+async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)return;const {action,group,row,value}=b.dataset;if(action==='weekly-teacher-remove'){
+ const r=state[group]?.[Number(row)];if(r)setWeeklyTeachers(group,Number(row),splitTeacherNames(r.Notes).filter(x=>x!==value));return;
+}if(action==='weekly-teacher-add-custom'){
+ const root=b.closest('.teacher-multi'),input=root?.querySelector('[data-action="weekly-teacher-custom"]');
+ const name=normalizeName(input?.value);if(!name){input?.focus();return;}
+ const rec=state[group]?.[Number(row)];if(rec)setWeeklyTeachers(group,Number(row),[...splitTeacherNames(rec.Notes),name]);return;
+}if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}
+if(action==='mobile-menu'){openMobileMenu();return;}if(action==='close-menu'){closeMobileMenu();return;}
+if(action==='save'){saveJSON();return;}
+if(action==='docx'){saveDOCX();return;}
+if(action==='import'){el('file-import').click();return;}
+
+}
+function init(){
+ state=blankData();manualTeacherRows.clear();currentTab='course';
+ render();resetSavedStatus('ยังไม่ได้บันทึก JSON');syncMobileMenu();window.addEventListener('resize',syncMobileMenu);
+ document.addEventListener('input',onInput);
+ document.addEventListener('change',onInput);
+ document.addEventListener('click',clickAction);
+ el('file-import').addEventListener('change',e=>importJSON(e.target.files?.[0]));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.documentElement.classList.contains('menu-open')){closeMobileMenu();el('mobile-menu-button')?.focus();}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveJSON();}});
+ window.addEventListener('beforeunload',e=>{if(unsavedChanges){e.preventDefault();e.returnValue='';}});
+}
+
+try{init();}catch(e){console.error(e);toast('เริ่มต้นแอปไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ');}
 })();
 
 </script>

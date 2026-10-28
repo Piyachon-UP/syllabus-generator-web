@@ -8,7 +8,7 @@
     "CourseTitleTh": "ไมโครคอนโทรลเลอร์และการเขียนโปรแกรม",
     "CourseTitleEn": "Microcontroller and Programming",
     "CourseDescriptionTh": "ศึกษาพื้นฐานไมโครคอนโทรลเลอร์ การเชื่อมต่ออุปกรณ์และการเขียนโปรแกรม (ข้อมูลสมมติสำหรับทดสอบเท่านั้น)",
-    "Credits": "3(2-2-5)",
+    "Credits": "3",
     "LectureHours": 2,
     "LabHours": 2,
     "SelfStudyHours": 5,
@@ -17,11 +17,14 @@
     "Section": "01",
     "FacultyName": "คณะวิทยาศาสตร์",
     "UniversityName": "มหาวิทยาลัยพะเยา",
-    "TeachingLanguage": "ไทย"
+    "TeachingLanguage": "ไทย",
+    "CourseDescriptionEn": "Introduction to microcontrollers, programming, peripheral interfacing, and basic applications (sample data only)."
   },
   "Curriculum": {
-    "CurriculumName": "หลักสูตรตัวอย่าง (แทนที่ด้วยข้อมูลจริง)",
-    "ProgramName": "ฟิสิกส์"
+    "CurriculumName": "หลักสูตรวิทยาศาสตรบัณฑิต",
+    "ProgramName": "สาขาวิชาฟิสิกส์",
+    "CurriculumCode": "BS-PHYSICS",
+    "DegreeLevel": "วิทยาศาสตรบัณฑิต"
   },
   "Instructors": [
     {
@@ -41,7 +44,69 @@
   "PLOs": [
     {
       "PloCode": "PLO1",
-      "DescriptionTh": "ประยุกต์ความรู้ด้านวิทยาศาสตร์แก้ปัญหา (ตัวอย่างสมมติ)"
+      "DescriptionTh": "ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ",
+      "Category": "Knowledge / Communication",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO2",
+      "DescriptionTh": "ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน",
+      "Category": "Practical / Digital / AI",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO3",
+      "DescriptionTh": "ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม",
+      "Category": "Ethics",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO4",
+      "DescriptionTh": "ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก",
+      "Category": "Communication / Teamwork",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO5",
+      "DescriptionTh": "ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต",
+      "Category": "Lifelong Learning",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO6",
+      "DescriptionTh": "ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้",
+      "Category": "Design Thinking",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO7",
+      "DescriptionTh": "ผู้เรียนสามารถอธิบายหลักการทางฟิสิกส์พื้นฐานได้",
+      "Category": "Knowledge",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO8",
+      "DescriptionTh": "ผู้เรียนสามารถทำการทดลองทางฟิสิกส์ด้วยกระบวนวิธีทางวิทยาศาสตร์ได้",
+      "Category": "Knowledge/ Practical",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO9",
+      "DescriptionTh": "ผู้เรียนสามารถวิเคราะห์ผลการทดลองหรือข้อมูลทางฟิสิกส์ได้",
+      "Category": "Knowledge/ Practical",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO10",
+      "DescriptionTh": "ผู้เรียนสามารถวิพากษ์ผลการทดลองทางฟิสิกส์ได้",
+      "Category": "Knowledge/ Practical",
+      "Notes": ""
+    },
+    {
+      "PloCode": "PLO11",
+      "DescriptionTh": "ผู้เรียนสามารถสร้างนวัตกรรมหรืองานวิจัยที่เกิดประโยชน์",
+      "Category": "Knowledge/ Practical/ Innovation",
+      "Notes": ""
     }
   ],
   "CLOs": [
@@ -50,7 +115,7 @@
       "DescriptionTh": "ออกแบบโปรแกรมไมโครคอนโทรลเลอร์พื้นฐาน (ตัวอย่างสมมติ)",
       "BloomLevel": "Apply",
       "MappedPloCodes": [
-        "PLO1"
+        "PLO7"
       ]
     }
   ],
@@ -87,342 +152,282 @@
   "LecturePlans": [
     {
       "WeekNumber": 1,
-      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 1",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 1",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 2,
-      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 2",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 2",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 3,
-      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 3",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 3",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 4,
-      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 4",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 4",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 5,
-      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 5",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 5",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 6,
-      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 6",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 6",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 7,
-      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 7",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 7",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 8,
-      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 8",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 8",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 9,
-      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 9",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 9",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 10,
-      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 10",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 10",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 11,
-      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 11",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 11",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 12,
-      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 12",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 12",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 13,
-      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 13",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 13",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 14,
-      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 14",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 14",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 15,
-      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 15",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 15",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     }
   ],
   "LabPlans": [
     {
       "WeekNumber": 1,
-      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 1",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 1",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 2,
-      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 2",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 2",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 3,
-      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 3",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 3",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 4,
-      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 4",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 4",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 5,
-      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 5",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 5",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 6,
-      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 6",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 6",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 7,
-      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 7",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 7",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 8,
-      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 8",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 8",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 9,
-      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 9",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 9",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 10,
-      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 10",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 10",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 11,
-      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 11",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 11",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 12,
-      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 12",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 12",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 13,
-      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 13",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 13",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 14,
-      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 14",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 14",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     },
     {
       "WeekNumber": 15,
-      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)",
-      "LearningActivities": "กิจกรรมสัปดาห์ที่ 15",
-      "TeachingMethods": "สาธิตและลงมือปฏิบัติ",
+      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 15",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
       "MappedCloCodes": [
         "CLO1"
       ],
-      "AssessmentMethods": "ใบงาน",
-      "Notes": "ข้อมูลสมมติ"
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
     }
   ],
   "Assessments": [
     {
       "AssessmentCode": "AS01",
       "AssessmentName": "ใบงานและปฏิบัติการ",
-      "AssessmentType": "Practical",
+      "AssessmentType": "การสอบปฏิบัติ",
       "WeightPercent": 60.0,
       "MappedCloCodes": [
         "CLO1"
@@ -432,7 +437,7 @@
     {
       "AssessmentCode": "AS02",
       "AssessmentName": "โครงงาน",
-      "AssessmentType": "Project",
+      "AssessmentType": "โครงงาน",
       "WeightPercent": 40.0,
       "MappedCloCodes": [
         "CLO1"
@@ -484,7 +489,7 @@
   ],
   "Resources": [
     {
-      "ResourceType": "Textbook",
+      "ResourceType": "ตำราเรียน",
       "Title": "หนังสือ/แหล่งเรียนรู้ตัวอย่าง",
       "Year": 2026,
       "Notes": "ข้อมูลสมมติ"

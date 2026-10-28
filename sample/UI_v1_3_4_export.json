@@ -1,0 +1,487 @@
+{
+  "SchemaVersion": "1.0.0",
+  "OfferingId": "244442-1-2569-SEC01",
+  "SourceType": "BlazorManual",
+  "ExtractedAt": "2026-10-28T15:50:37.179Z",
+  "CourseInfo": {
+    "CourseCode": "244442",
+    "CourseTitleTh": "ไมโครคอนโทรลเลอร์และการเขียนโปรแกรม",
+    "CourseTitleEn": "Microcontroller and Programming",
+    "CourseDescriptionTh": "ศึกษาพื้นฐานไมโครคอนโทรลเลอร์ การเชื่อมต่ออุปกรณ์และการเขียนโปรแกรม (ข้อมูลสมมติสำหรับทดสอบเท่านั้น)",
+    "CourseDescriptionEn": "Introduction to microcontrollers, programming, peripheral interfacing, and basic applications (sample data only).",
+    "Credits": "3",
+    "LectureHours": 2,
+    "LabHours": 2,
+    "SelfStudyHours": 5,
+    "AcademicYear": 2569,
+    "Semester": "1",
+    "Section": "01",
+    "FacultyName": "คณะวิทยาศาสตร์",
+    "UniversityName": "มหาวิทยาลัยพะเยา",
+    "TeachingLanguage": "ไทย"
+  },
+  "Curriculum": {
+    "CurriculumCode": "BS-PHYSICS",
+    "CurriculumName": "หลักสูตรวิทยาศาสตรบัณฑิต",
+    "ProgramName": "สาขาวิชาฟิสิกส์",
+    "DegreeLevel": "วิทยาศาสตรบัณฑิต"
+  },
+  "Instructors": [
+    {
+      "StaffId": "DEMO001",
+      "IsResponsibleInstructor": true,
+      "Prefix": "ผศ.ดร.",
+      "FirstName": "ตัวอย่าง",
+      "LastName": "ผู้สอน",
+      "DisplayName": "ผศ.ดร. ตัวอย่าง ผู้สอน",
+      "Email": "demo@example.invalid",
+      "Department": "คณะวิทยาศาสตร์",
+      "LecturePercent": 100,
+      "LabPercent": 100,
+      "Notes": "ข้อมูลสมมติเท่านั้น"
+    }
+  ],
+  "PLOs": [
+    {
+      "PloCode": "PLO1",
+      "DescriptionTh": "ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ",
+      "Category": "Knowledge / Communication"
+    },
+    {
+      "PloCode": "PLO2",
+      "DescriptionTh": "ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน",
+      "Category": "Practical / Digital / AI"
+    },
+    {
+      "PloCode": "PLO3",
+      "DescriptionTh": "ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม",
+      "Category": "Ethics"
+    },
+    {
+      "PloCode": "PLO4",
+      "DescriptionTh": "ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก",
+      "Category": "Communication / Teamwork"
+    },
+    {
+      "PloCode": "PLO5",
+      "DescriptionTh": "ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต",
+      "Category": "Lifelong Learning"
+    },
+    {
+      "PloCode": "PLO6",
+      "DescriptionTh": "ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้",
+      "Category": "Design Thinking"
+    },
+    {
+      "PloCode": "PLO7",
+      "DescriptionTh": "ผู้เรียนสามารถอธิบายหลักการทางฟิสิกส์พื้นฐานได้",
+      "Category": "Knowledge"
+    },
+    {
+      "PloCode": "PLO8",
+      "DescriptionTh": "ผู้เรียนสามารถทำการทดลองทางฟิสิกส์ด้วยกระบวนวิธีทางวิทยาศาสตร์ได้",
+      "Category": "Knowledge/ Practical"
+    },
+    {
+      "PloCode": "PLO9",
+      "DescriptionTh": "ผู้เรียนสามารถวิเคราะห์ผลการทดลองหรือข้อมูลทางฟิสิกส์ได้",
+      "Category": "Knowledge/ Practical"
+    },
+    {
+      "PloCode": "PLO10",
+      "DescriptionTh": "ผู้เรียนสามารถวิพากษ์ผลการทดลองทางฟิสิกส์ได้",
+      "Category": "Knowledge/ Practical"
+    },
+    {
+      "PloCode": "PLO11",
+      "DescriptionTh": "ผู้เรียนสามารถสร้างนวัตกรรมหรืองานวิจัยที่เกิดประโยชน์",
+      "Category": "Knowledge/ Practical/ Innovation"
+    }
+  ],
+  "CLOs": [
+    {
+      "CloCode": "CLO1",
+      "DescriptionTh": "ออกแบบโปรแกรมไมโครคอนโทรลเลอร์พื้นฐาน (ตัวอย่างสมมติ)",
+      "BloomLevel": "Apply",
+      "MappedPloCodes": [
+        "PLO7"
+      ]
+    }
+  ],
+  "ClassMeetings": [
+    {
+      "DayOfWeek": "จันทร์",
+      "StartTime": "09:00",
+      "EndTime": "11:00",
+      "RoomCode": "DEMO-LAB",
+      "DeliveryType": "Lecture",
+      "Notes": "ตัวอย่าง"
+    }
+  ],
+  "Exams": [
+    {
+      "ExamTypeCode": "M",
+      "ExamDate": "2027-01-15",
+      "StartTime": "09:00",
+      "EndTime": "12:00",
+      "RoomCode": "DEMO-ROOM",
+      "Notes": "ตัวอย่าง ไม่ใช่ตารางสอบจริง"
+    }
+  ],
+  "StudentGroups": [
+    {
+      "StudentProgramName": "ฟิสิกส์",
+      "StudentYearLevel": 2,
+      "RegisteredStudentCount": 25,
+      "StudentCurriculumCode": "DEMO-CURR",
+      "StudentCurriculumRevisionYear": 2568,
+      "Notes": "ข้อมูลสมมติ"
+    }
+  ],
+  "LecturePlans": [
+    {
+      "WeekNumber": 1,
+      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 1",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 2,
+      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 2",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 3,
+      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 3",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 4,
+      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 4",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 5,
+      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 5",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 6,
+      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 6",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 7,
+      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 7",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 8,
+      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 8",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 9,
+      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 9",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 10,
+      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 10",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 11,
+      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 11",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 12,
+      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 12",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 13,
+      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 13",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 14,
+      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 14",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 15,
+      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 15",
+      "TeachingMethods": "การบรรยายเชิงปฏิสัมพันธ์",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    }
+  ],
+  "LabPlans": [
+    {
+      "WeekNumber": 1,
+      "Topic": "หัวข้อสัปดาห์ที่ 1 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 1",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 2,
+      "Topic": "หัวข้อสัปดาห์ที่ 2 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 2",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 3,
+      "Topic": "หัวข้อสัปดาห์ที่ 3 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 3",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 4,
+      "Topic": "หัวข้อสัปดาห์ที่ 4 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 4",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 5,
+      "Topic": "หัวข้อสัปดาห์ที่ 5 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 5",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 6,
+      "Topic": "หัวข้อสัปดาห์ที่ 6 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 6",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 7,
+      "Topic": "หัวข้อสัปดาห์ที่ 7 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 7",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 8,
+      "Topic": "หัวข้อสัปดาห์ที่ 8 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 8",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 9,
+      "Topic": "หัวข้อสัปดาห์ที่ 9 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 9",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 10,
+      "Topic": "หัวข้อสัปดาห์ที่ 10 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 10",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 11,
+      "Topic": "หัวข้อสัปดาห์ที่ 11 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 11",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 12,
+      "Topic": "หัวข้อสัปดาห์ที่ 12 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 12",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 13,
+      "Topic": "หัวข้อสัปดาห์ที่ 13 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 13",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 14,
+      "Topic": "หัวข้อสัปดาห์ที่ 14 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 14",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    },
+    {
+      "WeekNumber": 15,
+      "Topic": "หัวข้อสัปดาห์ที่ 15 (ตัวอย่าง)\nกิจกรรมสัปดาห์ที่ 15",
+      "TeachingMethods": "การฝึกปฏิบัติในห้องปฏิบัติการ",
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ผศ.ดร. ตัวอย่าง ผู้สอน"
+    }
+  ],
+  "Assessments": [
+    {
+      "AssessmentCode": "AS01",
+      "AssessmentName": "ใบงานและปฏิบัติการ",
+      "AssessmentType": "การสอบปฏิบัติ",
+      "WeightPercent": 60,
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ตัวอย่าง"
+    },
+    {
+      "AssessmentCode": "AS02",
+      "AssessmentName": "โครงงาน",
+      "AssessmentType": "โครงงาน",
+      "WeightPercent": 40,
+      "MappedCloCodes": [
+        "CLO1"
+      ],
+      "Notes": "ตัวอย่าง"
+    }
+  ],
+  "GradeScale": [
+    {
+      "Grade": "A",
+      "MinimumScore": 80,
+      "MaximumScore": 100
+    },
+    {
+      "Grade": "B+",
+      "MinimumScore": 75,
+      "MaximumScore": 79.99
+    },
+    {
+      "Grade": "B",
+      "MinimumScore": 70,
+      "MaximumScore": 74.99
+    },
+    {
+      "Grade": "C+",
+      "MinimumScore": 65,
+      "MaximumScore": 69.99
+    },
+    {
+      "Grade": "C",
+      "MinimumScore": 60,
+      "MaximumScore": 64.99
+    },
+    {
+      "Grade": "D+",
+      "MinimumScore": 55,
+      "MaximumScore": 59.99
+    },
+    {
+      "Grade": "D",
+      "MinimumScore": 50,
+      "MaximumScore": 54.99
+    },
+    {
+      "Grade": "F",
+      "MinimumScore": 0,
+      "MaximumScore": 49.99
+    }
+  ],
+  "Resources": [
+    {
+      "ResourceType": "ตำราเรียน",
+      "Title": "หนังสือ/แหล่งเรียนรู้ตัวอย่าง",
+      "Year": 2026,
+      "Notes": "ข้อมูลสมมติ"
+    }
+  ]
+}
