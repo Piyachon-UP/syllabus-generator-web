@@ -19,7 +19,7 @@ def run():
     p.goto('about:blank')
     p.set_content(HTML,wait_until='load')
     p.wait_for_selector('#f-CourseInfo-CourseCode')
-    assert 'v1.4.3' in p.locator('.brand-small').inner_text()
+    assert 'v2.0.0' in p.locator('.brand-small').inner_text()
     assert p.locator('[data-action="save"]').count()==1
     assert p.locator('[data-action="import"]').count()==1
     assert p.locator('[data-action="new"]').count()==0

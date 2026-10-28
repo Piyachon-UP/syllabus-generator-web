@@ -12,7 +12,7 @@ with sync_playwright() as pw:
   page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.on('dialog',lambda dialog:dialog.accept())
   page.goto('about:blank'); page.set_content(ROOT.joinpath('index.html').read_text(encoding='utf8'),wait_until='load')
   page.wait_for_selector('#f-CourseInfo-CourseCode')
-  assert 'v1.4.3' in page.locator('.brand-small').text_content()
+  assert 'v2.0.0' in page.locator('.brand-small').text_content()
   assert page.locator('[data-action="import"]').count()==1
   assert page.locator('[data-action="save"]').count()==1
   assert page.locator('[data-action="validate"]').count()==0
@@ -59,7 +59,7 @@ with sync_playwright() as pw:
    assert page.locator('.table-Assessments tbody tr td[data-label="ประเภทประเมิน"]').count()==len(json.loads(source.read_text('utf8'))['Assessments'])
    assert 'ปฏิบัติการ' in page.locator('.table-Assessments select[data-action="choice-select"]').first.locator('option').all_text_contents()
    page.screenshot(path=str(out/'UI_v1_4_3_mobile_assessment.png'))
-   with page.expect_download() as ev: page.locator('.section-save-button').click()
+   with page.expect_download() as ev: page.locator('[data-action="save"]').click()
    from tempfile import TemporaryDirectory
    with TemporaryDirectory() as tmp:
     path=Path(tmp)/'roundtrip.json';ev.value.save_as(str(path))

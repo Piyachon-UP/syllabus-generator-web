@@ -1,79 +1,68 @@
-# Smart Syllabus Generator — v1.4.3 Responsive Typography & Layout
+# Smart Syllabus Generator Web v2.0.0 — Phase 2: Browser DOCX
 
-เว็บไซต์ Static HTML/CSS/JavaScript สำหรับอาจารย์ผู้สอน ใช้กับ GitHub Pages ได้โดยไม่ต้องมี Backend หรือ Build Server และไม่ต้องติดตั้ง Python ในเครื่องผู้ใช้
+ระบบ Static Web App สำหรับคณะวิทยาศาสตร์ มหาวิทยาลัยพะเยา ใช้งานบน GitHub Pages ได้โดยไม่ต้องมี Backend หรือ Python ฝั่งผู้ใช้
 
-## หน้าจอหลัก v1.4.3
+## สิ่งที่เพิ่มจาก v1.4.3
 
-- **ด้านบน:** มีคำสั่งเดียว คือ **เปิด JSON** เพื่อเลือกไฟล์ Syllabus เดิมจากเครื่อง
-- **ด้านล่าง:** แถบ **บันทึก JSON** (Sticky Footer) แสดงอยู่ตลอดเมื่อเลื่อนหน้าและอยู่ในทุกหมวดทั้ง 6 หมวด
-- **ไม่มีปุ่มสร้างใหม่และไม่มีปุ่มตรวจสอบข้อมูล** ในรุ่นนี้ เปิด/รีเฟรชเว็บจะเริ่มฟอร์มว่าง
-- **บันทึก JSON ได้ทุกเวลา** ไม่ว่ากรอกครบหรือไม่ครบ และบันทึกข้อมูล **ทุกหมวด** เป็นไฟล์เดียว
-- ในหมวดการประเมิน Dropdown ประเภทประเมินมี **ปฏิบัติการ** เพิ่มจากรายการเดิม พร้อมตัวเลือก **กำหนดเอง**
-
-## Responsive Typography & Layout (ปรับปรุงจาก v1.4.2)
-
-- **ตัวอักษร:** Body/Input/Dropdown/ตารางหลัก 16px, Label 15px, หัวข้อใหญ่ประมาณ 20–28px และข้อความช่วย 13–14px
-- **Desktop (มากกว่า 1100px):** Sidebar คงที่ด้านซ้าย, ตารางรูปแบบเดิมและเลื่อนแนวนอนภายในตารางได้เมื่อคอลัมน์กว้างเกินพื้นที่
-- **Tablet/Notebook ขนาดเล็ก (1100px หรือน้อยกว่า):** Sidebar เป็นเมนูเปิด–ปิดด้วยปุ่ม `☰ หมวดข้อมูล` และคลิกพื้นหลังหรือกด Escape เพื่อปิด; ฟอร์มปรับเหลือ 2 คอลัมน์
-- **Mobile (700px หรือน้อยกว่า):** ฟอร์มเหลือคอลัมน์เดียว, ตารางผู้สอน/CLO/แผนการสอน/ประเมิน/แหล่งเรียนรู้เปลี่ยนเป็น **การ์ดข้อมูลรายแถว** โดยแต่ละช่องมีชื่อฟิลด์กำกับ
-- **Sticky Footer:** ปุ่ม `บันทึก JSON` ยังติดขอบล่างทุกหมวด พร้อมคำนึงถึงพื้นที่ Safe Area ของโทรศัพท์
-- **สิ่งที่ไม่เปลี่ยน:** SchemaVersion `1.0.0`, ชื่อ Field/JSON, PLO และ Instructor Master Data, โหมด JSON-only, ไม่มี Auto Save หรือ Validation Button
-
-หมายเหตุ: การแสดงตารางเป็นการ์ดใช้ CSS และ `data-label` เพื่อการนำเสนอเท่านั้น ไม่เปลี่ยนค่าฟิลด์ที่จะ Export; ไม่ใช่การสร้างฟอร์มสำหรับมือถือแยกอีกชุด
-
-## ข้อมูลที่บันทึก
-
-ใช้ JSON SchemaVersion `1.0.0` และชื่อฟิลด์เดิมทั้งหมด เช่น `CourseInfo`, `Curriculum`, `Instructors`, `PLOs`, `CLOs`, `LecturePlans`, `LabPlans`, `Assessments`, `GradeScale`, `Resources` ข้อมูลไม่ครบสามารถ Export/Import ต่อได้ แต่อาจ **ไม่ผ่าน JSON Schema** จึงยังไม่ควรส่งเข้า Blazor/SQL Server จนกว่าจะตรวจสอบความถูกต้องจากระบบที่รองรับ
+- เพิ่มปุ่ม **สร้าง DOCX** ใน Sticky Footer คู่กับ **บันทึก JSON** (มีอยู่ในหน้าจอทั้ง 6 หมวด)
+- สร้าง Microsoft Word `.docx` จากข้อมูลในฟอร์มโดย JavaScript **ภายใน Browser** ไม่มีการส่งไฟล์ไป Server และไม่มีการโหลดไลบรารีจาก CDN
+- จัดหน้า A4 พร้อมหัวข้อและตาราง: ข้อมูลรายวิชา/คำอธิบาย, PLOs, ผู้สอน, CLOs, Lecture Plan, Lab Plan, การวัดและประเมินผล, เกณฑ์เกรด, หนังสือและแหล่งเรียนรู้
+- เก็บข้อมูลตารางเรียน ตารางสอบ และกลุ่มนิสิตจาก JSON เดิมใน **ภาคผนวก** ถ้ามีข้อมูล
+- แปลงหน่วยกิตและชั่วโมงเรียนเป็น `3(2-2-5)` ตามข้อมูลในช่องกรอก (เช่น `Credits=3`, `LectureHours=2`, `LabHours=2`, `SelfStudyHours=5`)
+- ชื่อผู้สอนหลายคนใน `LecturePlans.Notes` และ `LabPlans.Notes` จะขึ้นหลายบรรทัดใน DOCX
+- ถ้าข้อมูลรายวิชาในส่วนหัวไม่ครบ จะใส่ข้อความ **ฉบับร่าง** ใน DOCX; ยังอนุญาตให้สร้างไฟล์ได้
+- JSON Schema **v1.0.0 ไม่เปลี่ยน**; บันทึก JSON ไม่บังคับ Validation เหมือนเดิม
 
 ## วิธีใช้งาน
 
-1. เปิด `index.html` ใน Chrome หรือ Edge หรือเปิดเว็บ GitHub Pages
-2. กรอกข้อมูลทั้ง 6 หมวดตามต้องการ
-3. กด **บันทึก JSON** จากแถบล่างในหมวดใดก็ได้
-4. เก็บไฟล์ `.json` ที่ดาวน์โหลดไว้ในโฟลเดอร์ที่ต้องการ
-5. ครั้งต่อไปเปิดเว็บไซต์ → กด **เปิด JSON** → เลือกไฟล์เดิม → แก้ไข → กด **บันทึก JSON** อีกครั้ง
-6. หากต้องการเริ่มรายวิชาใหม่ ให้เปิดหน้าเว็บใหม่หรือรีเฟรช (แนะนำบันทึก JSON ก่อน)
+1. เปิด `index.html` ด้วย Chrome/Edge หรือ GitHub Pages (ไม่จำเป็นต้องรัน Server)
+2. กรอกข้อมูลใหม่ หรือคลิก **เปิด JSON** เพื่อโหลดไฟล์เดิม
+3. เมื่อกำลังแก้ไขข้อมูล ให้กด **บันทึก JSON** เพื่อเก็บต้นฉบับที่นำมาแก้ไขต่อในภายหลัง (ไม่ใช่ Auto Save)
+4. เมื่ออยากได้เอกสาร Word ให้กด **สร้าง DOCX** จาก Sticky Footer ในหมวดใดก็ได้
+5. เปิดเอกสารที่ดาวน์โหลดใน Microsoft Word และตรวจรูปแบบ/ความครบถ้วนก่อนนำไปใช้จริง
 
-**คำเตือน:** เว็บรุ่นนี้ไม่มี Auto Save และไม่บันทึกใน IndexedDB ดังนั้นหากปิด/รีเฟรชหน้าเว็บโดยยังไม่กด **บันทึก JSON** การแก้ไขรอบนั้นจะหายไป Browser อาจเตือนก่อนปิด และการดาวน์โหลดไม่ได้เขียนทับไฟล์ต้นฉบับโดยอัตโนมัติ ให้ตรวจสอบไฟล์ใหม่ใน Downloads ก่อน
+ตัวอย่างชื่อไฟล์: `SYLLABUS_244106_2569_2_2.json` และ `SYLLABUS_244106_2569_2_2.docx`
 
-## โครงสร้างสำคัญ
+## ข้อควรทราบ
+
+- Word ที่สร้างเป็น **แม่แบบเอกสารฉบับแรกสำหรับ Phase 2** ยังไม่ใช่เอกสารที่ได้รับการรับรองตามรูปแบบทางการของมหาวิทยาลัย หากต้องการให้เหมือน DOCX Generator รุ่น Python ทุกจุด ต้องเทียบกับตัวอย่างเอกสารจริงและปรับรูปแบบใน `src/docx_export.js`
+- ฟอนต์ใน DOCX กำหนดชื่อเป็น `TH Sarabun New` ซึ่งจะใช้ได้ตรงตามที่กำหนดเมื่อมีฟอนต์บนเครื่องเปิด Word; ไม่ฝังหรือแจกฟอนต์มากับไฟล์
+- ZIP DOCX ภายในถูกประกอบด้วย JavaScript (WordprocessingML + ZIP STORE) ไม่ต้องใช้บริการ CDN, npm หรือ Backend ขณะใช้งาน
+- DOCX คือ **ผลลัพธ์อ่าน/พิมพ์** ส่วน **JSON เป็นไฟล์ต้นฉบับสำหรับแก้ไขซ้ำและนำเข้า Blazor** จึงควรเก็บ JSON ไว้ด้วยทุกครั้ง
+- Phase 2 ไม่มีปุ่ม Validation ตามที่กำหนดไว้ใน v1.4.2; การสร้าง DOCX ไม่ได้แปลว่าข้อมูลผ่านการตรวจสอบหรือพร้อมส่งระบบกลาง
+- ไม่ใช้ IndexedDB/LocalStorage ในการบันทึกงาน ต้องกด **บันทึก JSON** ก่อนปิดหรือ Refresh
+- การสร้าง DOCX ไม่อัปโหลดข้อมูลเข้าระบบใด ๆ ข้อมูลและไฟล์จะอยู่บนอุปกรณ์ของผู้ใช้
+
+## โครงสร้างไฟล์
 
 ```text
 syllabus-generator-web/
-├── index.html                      # เว็บ Standalone สำหรับ GitHub Pages
+├── index.html                       # Static Web ใช้งานจริง (รวมสคริปต์และ Master JSON แล้ว)
 ├── src/
-│   ├── app.js                      # UI/JSON import/export
-│   └── styles.css                  # รวม Sticky Footer
+│   ├── app.js                       # จัดการ UI, JSON, และเรียก DOCX Generator
+│   ├── docx_export.js               # สร้าง DOCX ใน Browser (เพิ่มใหม่)
+│   └── styles.css                   # Responsive Layout, Sticky Footer
 ├── tools/
-│   ├── build.py                    # สร้าง index.html ใหม่จาก src และ Master JSON
-│   └── test_ui_v143.py             # ทดสอบหน้าจอและ JSON end-to-end (นักพัฒนา)
+│   ├── build.py                     # ประกอบ index.html จากไฟล์ Source
+│   ├── test_phase2.py               # Browser end-to-end test
+│   └── test_docx_node.cjs           # Node smoke test สำหรับตัวสร้าง Word
 ├── data/
 │   ├── curriculum_plos.json
 │   └── instructors.json
 ├── schema/
-│   └── syllabus.v1.schema.json     # ไม่เปลี่ยนจาก v1.4.1
+│   └── syllabus.v1.schema.json      # ไม่เปลี่ยนจาก v1.4.3
 └── sample/
     ├── Smart_Syllabus_Demo.json
-    ├── UI_v1_4_3_desktop_course.png
-    └── UI_v1_4_3_mobile_course.png
+    └── Smart_Syllabus_Demo.docx     # เอกสารตัวอย่างสร้างด้วย JS
 ```
 
-## พัฒนาหรืออัปเดตบน GitHub
+## Build และทดสอบสำหรับนักพัฒนา
 
-1. เลือก Branch `develop` (ไม่ใช่ `main`)
-2. จาก ZIP Patch ให้อัปโหลดแทนที่ `index.html`, `src/app.js`, `src/styles.css`, `tools/build.py` และอัปเดตคู่มือ
-3. Commit ด้วยข้อความ `Improve responsive typography and mobile layout v1.4.3`
-4. ดาวน์โหลด ZIP ของ Branch `develop` แล้วทดสอบโดยเปิดไฟล์ `index.html` หรือเรียก `py -3 -m http.server 8000` ในโฟลเดอร์โปรเจกต์
-5. ตรวจสอบการ Import JSON จริง, Dropdown ประเภทประเมิน “ปฏิบัติการ”, ปุ่มบันทึกทุกหมวด และเปิด JSON กลับมาอีกครั้ง
-6. เมื่อผ่านการทดสอบ จึงสร้าง Pull Request `develop` → `main` เพื่อเผยแพร่ GitHub Pages
-
-สำหรับนักพัฒนาที่มี Playwright + Chromium และ jsonschema:
-
-```bash
-python tools/build.py
-python tools/test_ui_v143.py
-python tools/test_dropdown_roundtrip.py
-python tools/test_json_only.py
+```powershell
+py -3 tools/build.py
+py -3 tools/test_phase2.py
+# สำหรับผู้มี Node.js: 
+node tools/test_docx_node.cjs
 ```
 
-**หมายเหตุ:** ตัวเว็บ Standalone ไม่จำเป็นต้องโหลดข้อมูลจากไฟล์ `data/` ณ เวลาใช้งาน เพราะ Master JSON ถูกฝังใน `index.html` โดย `tools/build.py` แล้ว
+หากเปิดเว็บไซต์ออนไลน์จาก GitHub Pages ให้ Upload ชุดไฟล์ `index.html`, `src/`, `tools/` ใน Branch `develop` ก่อน; GitHub Pages ที่ใช้ `main` จะยังไม่เปลี่ยนจนกว่าจะ Merge.

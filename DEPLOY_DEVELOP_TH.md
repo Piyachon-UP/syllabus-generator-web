@@ -1,40 +1,34 @@
-# อัปเดต Smart Syllabus Generator v1.4.3 ลง Branch `develop`
+# อัปเดต GitHub Branch develop — Phase 2 v2.0.0
 
-**หลักการ:** ปรับขนาดตัวอักษร / Sidebar / Mobile Cards / Sticky Footer เท่านั้น; ไม่เปลี่ยน Schema, JSON, Dropdown หรือวิธีเปิด/บันทึก JSON
+Repository: `https://github.com/Piyachon-UP/syllabus-generator-web/tree/develop`
 
 ## ขั้นตอน
 
-1. สำรอง JSON ที่กำลังกรอกไว้ในเครื่อง และตรวจว่าไฟล์ถูกดาวน์โหลดครบ
-2. เข้า `https://github.com/Piyachon-UP/syllabus-generator-web` เลือก Branch **develop** (ไม่ใช่ main)
-3. ดาวน์โหลด Patch v1.4.3 และแตก ZIP; วางไฟล์ให้ตรงตำแหน่งเดิม:
-   - `index.html` ที่ Root
-   - `src/app.js`, `src/styles.css`
-   - `tools/build.py`, `tools/test_ui_v143.py`, `tools/test_responsive_v143.py`
-   - `README_TH.md`, `DEPLOY_DEVELOP_TH.md`, `CHANGELOG_TH.md`
-4. Commit ด้วยข้อความ `Improve responsive typography and mobile layout v1.4.3`
-5. ดาวน์โหลด ZIP จาก Branch develop แล้วแตกไฟล์ เปิด PowerShell ที่โฟลเดอร์โปรเจกต์
-6. รัน `py -3 -m http.server 8000` แล้วเปิด `http://localhost:8000/` (หรือดับเบิลคลิก `index.html` เพื่อดู UI เบื้องต้น)
-7. กด `Ctrl + Shift + R` เพื่อให้ Chrome โหลด CSS/JS ล่าสุด
+1. สำรอง JSON ของรายวิชาที่กำลังกรอกก่อนอัปเดต
+2. ดาวน์โหลด `Smart_Syllabus_Generator_Web_Phase2_v2_0_Patch.zip` แล้วแตกไฟล์
+3. เข้าหน้า Repository และเลือก Branch `develop`
+4. อัปโหลดไฟล์จาก ZIP โดย **รักษาตำแหน่งเดิม**:
+   - `index.html` — ทับไฟล์ที่ Root
+   - `src/app.js` — ทับไฟล์เดิม
+   - `src/docx_export.js` — **ไฟล์ใหม่**
+   - `src/styles.css` — ทับไฟล์เดิม
+   - `tools/build.py` — ทับไฟล์เดิม
+   - `tools/test_phase2.py`, `tools/test_docx_node.cjs` — เพิ่มชุดทดสอบ
+   - `README_TH.md`, `CHANGELOG_TH.md`, `DEPLOY_DEVELOP_TH.md` — คู่มือ
+5. Commit message: `Add browser-only DOCX export Phase 2 v2.0.0`
+6. ดาวน์โหลด ZIP ของ Branch `develop` ลง Windows และแตกไฟล์
+7. เปิด `index.html` หรือใช้ `py -3 -m http.server 8000` แล้วเปิด `http://localhost:8000/`
+8. ทดสอบ **เปิด JSON** จากรายวิชา 244106 หรือข้อมูลอื่นที่สำรองไว้ จากนั้นกด **สร้าง DOCX** แล้วเปิดใน Word
+9. ทดสอบบันทึก JSON กลับมาเทียบกับไฟล์เดิม และตรวจปุ่ม DOCX บน Desktop/Tablet/Mobile
+10. หากพอใจแล้วจึง Pull Request `develop` → `main` เพื่อเผยแพร่ GitHub Pages
 
-## ทดสอบการใช้งาน
+## สิ่งที่ต้องตรวจ
 
-- Desktop/Notebook: Sidebar อ่านง่าย, Input และ Dropdown ประมาณ 16px, ตารางยังกรอกได้
-- Tablet: `☰ หมวดข้อมูล` เปิด/ปิดเมนูได้, คลิกพื้นหลังหรือ Escape เพื่อปิด, เปลี่ยนหมวดแล้วเมนูปิดเอง
-- Smartphone: Chrome F12 → Ctrl+Shift+M → 390x844 / 375x812; ตารางเป็นการ์ดมี Label ครบและไม่มีการเลื่อนหน้าทั้งหน้าในแนวนอน
-- ทุกขนาดหน้าจอ: Sticky Footer มีปุ่ม `บันทึก JSON` และใช้งานได้
-- เปิด JSON รายวิชาเดิมแล้วตรวจข้อมูล CLO, Lecture, Lab, Assessments, Resources; บันทึกใหม่และเปิดกลับมาอีกครั้ง
-- ตรวจว่า **ไม่มีปุ่มสร้างใหม่, ไม่มีปุ่มตรวจสอบข้อมูล และไม่มี Auto Save** ตาม v1.4.2
+- แถบบนยังมีเฉพาะ **เปิด JSON** ไม่เพิ่มปุ่มตรวจสอบหรือสร้างใหม่
+- Sticky Footer มี **บันทึก JSON** และ **สร้าง DOCX**
+- Word แสดงภาษาไทยได้ไม่กลายเป็นอักขระผิดเพี้ยน
+- Word มีตาราง Lecture และ Lab, CLO/PLO, เกณฑ์เกรดและแหล่งเรียนรู้
+- JSON Schema v1.0.0 เดิมและการบันทึก JSON ข้อมูลไม่ครบยังทำงาน
+- แสดงผลพอดีบนหน้าจอเล็ก
 
-## สำหรับผู้พัฒนา (เลือกทำ)
-
-```powershell
-py -3 tools/build.py
-py -3 tools/test_json_only.py
-py -3 tools/test_dropdown_roundtrip.py
-py -3 tools/test_ui_v143.py
-py -3 tools/test_responsive_v143.py
-```
-
-ชุดทดสอบ Browser ต้องติดตั้ง Playwright/Chromium และ `jsonschema` ในเครื่องนักพัฒนา แต่ผู้ใช้งานทั่วไปไม่ต้องติดตั้งอะไร
-
-**ยังไม่ต้อง Merge เข้า main** จนกว่าจะตรวจ Responsive บนอุปกรณ์ที่ใช้งานจริงและพอใจกับขนาดตัวอักษรแล้ว
+**สำคัญ:** ไม่ต้องอัปโหลดไฟล์ JSON ของรายวิชาจริงหรือ DOCX ที่มีข้อมูลจริงเข้า Public GitHub Repository; ให้เก็บไว้ในเครื่องผู้สอน

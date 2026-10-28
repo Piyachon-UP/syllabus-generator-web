@@ -345,3 +345,23 @@ h3,.panel-head h3 { font-size:18px; }
   .sidebar { transition:none; }
   html:focus-within { scroll-behavior:auto; }
 }
+
+/* Phase 2 DOCX action uses the same sticky footer; responsive and accessible. */
+.footer-action-buttons{display:flex;gap:10px;align-items:center;flex:0 0 auto;flex-wrap:wrap;justify-content:flex-end}
+.footer-action-buttons .section-save-button{min-width:150px}
+@media(max-width:700px){
+  .section-save-footer{gap:8px;align-items:center}
+  .footer-action-buttons{gap:7px;max-width:100%;flex-wrap:nowrap}
+  .footer-action-buttons .section-save-button{font-size:14px;min-width:0;min-height:46px;padding:10px 12px;white-space:nowrap}
+  .section-save-copy{flex:1 1 100%;min-width:0}
+}
+@media(max-width:400px){
+ .section-save-footer{padding:9px 11px max(9px,env(safe-area-inset-bottom));flex-wrap:wrap}
+ .section-save-copy{display:none}
+ .footer-action-buttons{display:grid;grid-template-columns:1fr 1fr;width:100%}
+ .footer-action-buttons .section-save-button{font-size:13px;padding:9px 6px;width:100%;min-width:0}
+}
+
+/* Avoid status toast covering JSON/DOCX buttons in sticky footer. */
+.toast{bottom:108px}
+@media(max-width:400px){.toast{bottom:78px}}

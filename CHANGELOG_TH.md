@@ -1,18 +1,10 @@
-# Changelog
+# Changelog: v2.0.0 (Phase 2)
 
-## v1.4.3 — Responsive Typography & Layout
-
-- ตั้ง Typography ให้สม่ำเสมอ: เนื้อหาและ Input/Dropdown หลัก 16px, Label 15px, ข้อความรอง 13–14px
-- ขยายขนาดเป้าหมายสัมผัส (ปุ่มและช่องกรอก) เพื่อให้อ่านและกดง่าย
-- Mobile/Tablet มี Sidebar แบบ Drawer เปิด–ปิดด้วยปุ่ม และรองรับ Escape/คลิกพื้นหลัง
-- Mobile แสดงแถวของตารางทุกหมวดเป็นการ์ดพร้อม `data-label` ที่ตรงกับชื่อฟิลด์
-- Tablet ปรับฟอร์ม 2 คอลัมน์ และ Mobile 1 คอลัมน์
-- Sticky Footer ปรับช่องไฟ ปุ่ม และ Safe Area รองรับหน้าจอเล็ก
-- ไม่เปลี่ยน Schema v1.0.0, ไฟล์ Master, วิธี Import/Export หรือข้อมูล JSON
-
-## v1.4.2 — Simplified JSON Save
-
-- ปุ่ม `เปิด JSON` ด้านบน และ `บันทึก JSON` ใน Sticky Footer ทุกหมวด
-- Save JSON ได้ทุกเวลา ไม่ต้องผ่าน Validation
-- ไม่มีปุ่มสร้างใหม่หรือปุ่มตรวจสอบข้อมูล
-- เพิ่มตัวเลือก `ปฏิบัติการ` ในประเภทประเมิน
+- เพิ่ม Client-side DOCX Export แบบ Standalone ไม่ใช้ Server และไม่มี CDN
+- เพิ่มปุ่มสร้าง DOCX ใน Sticky Footer ของทุกหมวด พร้อมรักษาปุ่ม JSON เดิม
+- Generate Word จากข้อมูล 6 หมวด และจาก JSON ที่เปิดเข้ามา
+- DOCX ใช้ A4 ตารางตามหมวด พร้อมฟอนต์ชื่อ TH Sarabun New
+- เอกสารที่มีข้อมูลส่วนหัวไม่ครบจะแสดงสถานะฉบับร่าง
+- ปรับข้อความ Toast ไม่ให้บังปุ่มบนมือถือ
+- คง JSON Schema v1.0.0 และการทำงาน JSON-only/Responsive v1.4.3
+- ชุดทดสอบเพิ่มเติม: Browser → Download DOCX → ZIP/XML check, JSON roundtrip และ Responsive

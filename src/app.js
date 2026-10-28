@@ -1,4 +1,4 @@
-/* Syllabus Generator Web UI v1.4.2 / JSON Contract v1.0.0 — all operations stay in this browser. */
+/* Syllabus Generator Web Phase 2 v2.0.0 / JSON Contract v1.0.0 — all operations stay in this browser. */
 (() => {
 'use strict';
 const contract = JSON.parse(document.getElementById('contract-json').textContent);
@@ -364,6 +364,20 @@ function saveJSON(){
   resetSavedStatus('เริ่มดาวน์โหลด JSON แล้ว · ตรวจสอบไฟล์ใน Downloads');
   toast('เริ่มดาวน์โหลด '+filename+' · บันทึกได้แม้ยังตรวจสอบไม่ผ่าน');
 }
+function saveDOCX(){
+  try{
+    if(!window.SyllabusDocx)throw new Error('โมดูล DOCX ไม่พร้อมใช้งาน');
+    const c=state.CourseInfo||{};
+    const code=safePart(c.CourseCode)||'UNNAMED';
+    const year=/^\d{4}$/.test(String(c.AcademicYear||''))?String(c.AcademicYear):'YEAR';
+    const term=safePart(c.Semester)||'TERM';
+    const section=safePart(c.Section).replace(/^SEC/,'')||'SECTION';
+    const filename=`SYLLABUS_${code}_${year}_${term}_${section}.docx`;
+    const docx=window.SyllabusDocx.makeDocx(payload());
+    download(docx,filename);
+    toast('เริ่มดาวน์โหลด DOCX · ตรวจสอบรูปแบบเอกสารก่อนนำไปใช้');
+  }catch(e){console.error('DOCX generation failed',e);toast('สร้าง DOCX ไม่สำเร็จ: '+e.message);}
+}
 async function importJSON(file){
  if(!file)return;
  try{
@@ -395,6 +409,7 @@ async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)re
 }if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}
 if(action==='mobile-menu'){openMobileMenu();return;}if(action==='close-menu'){closeMobileMenu();return;}
 if(action==='save'){saveJSON();return;}
+if(action==='docx'){saveDOCX();return;}
 if(action==='import'){el('file-import').click();return;}
 
 }
