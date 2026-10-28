@@ -27,7 +27,7 @@ __CSS__
 <body>
 <div class="app">
 <aside class="sidebar">
-  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v1.4.1</div></div></div>
+  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v1.4.2</div></div></div>
   <div><div class="sidebar-label">WORKSPACE</div><nav class="nav" id="nav" aria-label="เมนูกรอกข้อมูล"></nav></div>
   <div class="sidebar-bottom"><span class="dot"></span>ทำงานในเครื่องของผู้ใช้งาน<br>Faculty of Science · University of Phayao<br>JSON Contract 1.0.0</div>
 </aside>
@@ -35,13 +35,14 @@ __CSS__
  <div class="topline">
   <div><div class="eyebrow">ACADEMIC TOOLS / COURSE PLANNING</div><h1>Smart Syllabus Generator</h1><p class="header-desc">ระบบจัดทำรายละเอียดรายวิชาออนไลน์ · ประมวลผลใน Browser ไม่ใช้ Backend</p></div>
   <div class="actions" role="group" aria-label="เครื่องมือจัดการไฟล์ JSON">
-    <button type="button" class="btn" data-action="new">＋ สร้างใหม่</button>
     <button type="button" class="btn" data-action="import">⇧ เปิด JSON</button>
-    <button type="button" class="btn btn-navy" data-action="save">⇩ บันทึก JSON</button>
   </div> </div>
- <div class="pagebar"><div><div class="eyebrow" id="tab-number">SECTION 1 / 6</div><h2 id="tab-title">ข้อมูลรายวิชา</h2><p class="intro" id="tab-desc">ข้อมูลรายวิชา</p></div><div class="inline-row"><span class="pill neutral" id="save-status" role="status" aria-live="polite">กำลังโหลด...</span><button type="button" class="btn btn-primary" data-action="validate">✓ ตรวจสอบข้อมูล</button></div></div>
+ <div class="pagebar"><div><div class="eyebrow" id="tab-number">SECTION 1 / 6</div><h2 id="tab-title">ข้อมูลรายวิชา</h2><p class="intro" id="tab-desc">ข้อมูลรายวิชา</p></div></div>
  <div id="panel-content" aria-live="polite"></div>
- <section id="validation" class="validate-area" aria-live="polite"><div class="results-head"><h2 id="issue-heading">ผลตรวจสอบ</h2><span class="pill neutral">คลิกเพื่อไปยังแท็บที่เกี่ยวข้อง</span></div><div class="issues" id="issue-list"></div></section>
+ <div class="section-save-footer" role="region" aria-label="บันทึกไฟล์ข้อมูลรายวิชา">
+   <div class="section-save-copy"><span class="section-save-title">บันทึกข้อมูลทั้งหมด</span><span class="section-save-hint">บันทึกข้อมูลทั้ง 6 หมวดเป็นไฟล์ JSON ได้ทุกเวลา ไม่ต้องตรวจสอบก่อน</span><span id="save-status" class="save-indicator" role="status" aria-live="polite">ยังไม่ได้บันทึก JSON</span></div>
+   <button type="button" class="btn btn-primary section-save-button" data-action="save">⇩ บันทึก JSON</button>
+ </div>
  <div class="footerline">© Faculty of Science, University of Phayao · Browser-only · <span id="storage-label">บันทึกเป็นไฟล์ JSON เท่านั้น</span> · ไม่อัปโหลดข้อมูลไปยัง Server</div>
 </main>
 </div>

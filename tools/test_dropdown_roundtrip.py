@@ -1,4 +1,4 @@
-"""End-to-end browser regression for v1.4.1 dropdowns.
+"""End-to-end browser regression for v1.4.2 dropdowns.
 
 Run: python tools/test_dropdown_roundtrip.py
 Optional external JSON for local testing (never added to the repository):
@@ -45,7 +45,8 @@ with TemporaryDirectory() as temp, sync_playwright() as p:
     counts['lab']=check_options(lab,17,REFERENCE['LabPlans'][0]['TeachingMethods'])
     page.locator('[data-action="tab"][data-value="assessment"]').click()
     assess=page.locator('.table-Assessments select[data-action="choice-select"]')
-    counts['assessment']=check_options(assess,17,REFERENCE['Assessments'][0]['AssessmentType'])
+    counts['assessment']=check_options(assess,18,REFERENCE['Assessments'][0]['AssessmentType'])
+    assert 'ปฏิบัติการ' in assess.first.locator('option').all_text_contents()
     resource=page.locator('.table-Resources select[data-action="choice-select"]')
     counts['resources']=check_options(resource,16,REFERENCE['Resources'][0]['ResourceType'])
     with page.expect_download() as d:page.locator('[data-action="save"]').click()

@@ -1,4 +1,4 @@
-/* Syllabus Generator Web UI v1.4.1 / JSON Contract v1.0.0 — all operations stay in this browser. */
+/* Syllabus Generator Web UI v1.4.2 / JSON Contract v1.0.0 — all operations stay in this browser. */
 (() => {
 'use strict';
 const contract = JSON.parse(document.getElementById('contract-json').textContent);
@@ -42,7 +42,7 @@ const MAP={
 const SELECT={DegreeLevel:['วิทยาศาสตรบัณฑิต','วิทยาศาสตรมหาบัณฑิต','วิทยาศาสตรดุษฎีบัณฑิต','ปรัชญาดุษฎีบัณฑิต'],Prefix:['อ.','ดร.','ผศ.','ผศ.ดร.','รศ.','รศ.ดร.'],DayOfWeek:['จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์','อาทิตย์']};
 const LECTURE_METHODS=['การบรรยาย','การบรรยายเชิงปฏิสัมพันธ์','การอภิปรายกลุ่ม','การเรียนรู้แบบใช้ปัญหาเป็นฐาน (PBL)','การเรียนรู้แบบใช้โครงงานเป็นฐาน (PjBL)','การเรียนรู้แบบกรณีศึกษา','การเรียนรู้แบบสืบเสาะหาความรู้','การเรียนรู้แบบร่วมมือ','ห้องเรียนกลับด้าน (Flipped Classroom)','การสาธิต','การเรียนรู้แบบผสมผสาน','การนำเสนอและอภิปราย','การเรียนรู้ด้วยตนเอง','การฝึกปฏิบัติคำนวณและแก้โจทย์','การเรียนรู้ผ่านสื่อดิจิทัล','กำหนดเอง'];
 const LAB_METHODS=['การสาธิตขั้นตอนปฏิบัติ','การฝึกปฏิบัติในห้องปฏิบัติการ','การทดลองและเก็บข้อมูล','การปฏิบัติแบบรายบุคคล','การปฏิบัติแบบกลุ่ม','การฝึกใช้เครื่องมือและอุปกรณ์','การออกแบบและดำเนินการทดลอง','การเรียนรู้แบบโครงงาน','การแก้ปัญหาจากสถานการณ์จริง','การเรียนรู้แบบฐานกิจกรรม','การฝึกทักษะผ่านสถานการณ์จำลอง','การศึกษาภาคสนาม','การประเมินผลจากชิ้นงาน','การทำเวิร์กช็อป','การเรียนรู้แบบสืบเสาะหาความรู้','กำหนดเอง'];
-const ASSESSMENT_TYPES=['การสอบย่อย','การบ้าน / แบบฝึกหัด','การสอบกลางภาค','การสอบปลายภาค','การสอบปฏิบัติ','รายงาน','โครงงาน','การนำเสนอ','การมีส่วนร่วมในชั้นเรียน','การประเมินชิ้นงาน','การประเมินทักษะปฏิบัติ','การสังเกตพฤติกรรม','แฟ้มสะสมผลงาน','การประเมินตนเอง','การประเมินโดยเพื่อน','กำหนดเอง'];
+const ASSESSMENT_TYPES=['การสอบย่อย','การบ้าน / แบบฝึกหัด','การสอบกลางภาค','การสอบปลายภาค','การสอบปฏิบัติ','ปฏิบัติการ','รายงาน','โครงงาน','การนำเสนอ','การมีส่วนร่วมในชั้นเรียน','การประเมินชิ้นงาน','การประเมินทักษะปฏิบัติ','การสังเกตพฤติกรรม','แฟ้มสะสมผลงาน','การประเมินตนเอง','การประเมินโดยเพื่อน','กำหนดเอง'];
 const RESOURCE_TYPES=['ตำราเรียน','หนังสือ','หนังสืออิเล็กทรอนิกส์','เอกสารประกอบการสอน','บทความวิชาการ','บทความวิจัย','วารสาร','เว็บไซต์','วิดีโอการสอน','สื่อออนไลน์','คู่มือปฏิบัติการ','ฐานข้อมูลวิชาการ','ซอฟต์แวร์และเครื่องมือ','สื่อการเรียนรู้แบบเปิด','กำหนดเอง'];
 const GRADE_ABC=['A','B+','B','C+','C','D+','D','F'];
 const GRADE_SU=['S','U'];
@@ -259,7 +259,7 @@ if(t.dataset.action==='choice-custom'){
 }
 if(t.dataset.action==='curriculum-select'&&event.type==='change'){
   if(!t.value){t.value=state.Curriculum.CurriculumCode||'';return;}
-  if(selectCurriculum(t.value)){el('validation').classList.remove('visible');showingErrors=false;render();scheduleSave();}else{t.value=state.Curriculum.CurriculumCode||'';}return;
+  if(selectCurriculum(t.value)){el('validation')?.classList.remove('visible');showingErrors=false;render();scheduleSave();}else{t.value=state.Curriculum.CurriculumCode||'';}return;
 }
 if(t.dataset.action==='teacher-scope'&&event.type==='change'){allDepartments=t.value==='all';render();return;}
 if(t.dataset.action==='grade-mode'&&event.type==='change'){
@@ -302,10 +302,10 @@ if(t.dataset.action==='instructor-select'&&event.type==='change'){
   const first=parts.join(' ');
   r.Prefix=teacher.title_prefix||'';r.FirstName=first;r.LastName=last;r.DisplayName=teacherDisplay(teacher);r.Department=teacher.department||'';
   if(prev!==normalizeName(r.DisplayName)){r.StaffId='';r.Email='';}
-  el('validation').classList.remove('visible');showingErrors=false;render();scheduleSave();return;
+  el('validation')?.classList.remove('visible');showingErrors=false;render();scheduleSave();return;
 }
 if(!t.dataset.group)return;
-let {group,key,scope,row}=t.dataset,v=t.type==='checkbox'?t.checked:t.value,typ=getArrayType(group,key);if(scope==='object')state[group][key]=normalizedInput(v,typ);else{if(!state[group][Number(row)])return;state[group][Number(row)][key]=normalizedInput(v,typ);}if((group==='LecturePlans'||group==='LabPlans')&&key==='Topic'&&scope==='table')state[group][Number(row)].LearningActivities='';refreshHeader();scheduleSave();if(showingErrors){el('validation').classList.remove('visible');showingErrors=false;}}
+let {group,key,scope,row}=t.dataset,v=t.type==='checkbox'?t.checked:t.value,typ=getArrayType(group,key);if(scope==='object')state[group][key]=normalizedInput(v,typ);else{if(!state[group][Number(row)])return;state[group][Number(row)][key]=normalizedInput(v,typ);}if((group==='LecturePlans'||group==='LabPlans')&&key==='Topic'&&scope==='table')state[group][Number(row)].LearningActivities='';refreshHeader();scheduleSave();if(showingErrors){el('validation')?.classList.remove('visible');showingErrors=false;}}
 function validate(data){const errors=[], warnings=[],issue=(severity,group,message,field='')=>({severity,group,message,field,tab:GROUP_TAB[group]||'course'});const error=(g,m,f)=>errors.push(issue('error',g,m,f));const warn=(g,m,f)=>warnings.push(issue('warning',g,m,f));
 if(data.SchemaVersion!=='1.0.0')error('CourseInfo','SchemaVersion ต้องเป็น 1.0.0');
 if(!data.OfferingId||!new RegExp(contract.properties.OfferingId.pattern).test(data.OfferingId))error('CourseInfo','รหัส OfferingId ยังไม่สมบูรณ์ (CourseCode–Semester–ปี พ.ศ.–SECxx)');
@@ -364,7 +364,7 @@ async function importJSON(file){
    state=fromPayload(obj);
    lastLoadedFile=file.name;
    manualTeacherRows.clear();currentTab='course';weeklyKind='LecturePlans';showingErrors=false;
-   el('validation').classList.remove('visible');render();
+   el('validation')?.classList.remove('visible');render();
    resetSavedStatus('เปิดไฟล์ '+file.name+' แล้ว');
    toast('เปิด JSON สำเร็จ · แก้ไขข้อมูลแล้วกดบันทึก JSON อีกครั้ง');
  }catch(e){toast('เปิด JSON ไม่สำเร็จ: '+e.message);}
@@ -373,7 +373,7 @@ async function importJSON(file){
 function newDraft(){
  if(!confirmDiscard())return;
  state=blankData();lastLoadedFile='';manualTeacherRows.clear();currentTab='course';weeklyKind='LecturePlans';showingErrors=false;
- el('validation').classList.remove('visible');render();resetSavedStatus('เริ่มรายวิชาใหม่ · ยังไม่ได้บันทึก JSON');toast('เริ่มรายวิชาใหม่แล้ว');
+ el('validation')?.classList.remove('visible');render();resetSavedStatus('เริ่มรายวิชาใหม่ · ยังไม่ได้บันทึก JSON');toast('เริ่มรายวิชาใหม่แล้ว');
 }
 async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)return;const {action,group,row,value}=b.dataset;if(action==='weekly-teacher-remove'){
  const r=state[group]?.[Number(row)];if(r)setWeeklyTeachers(group,Number(row),splitTeacherNames(r.Notes).filter(x=>x!==value));return;
@@ -381,10 +381,10 @@ async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)re
  const root=b.closest('.teacher-multi'),input=root?.querySelector('[data-action="weekly-teacher-custom"]');
  const name=normalizeName(input?.value);if(!name){input?.focus();return;}
  const rec=state[group]?.[Number(row)];if(rec)setWeeklyTeachers(group,Number(row),[...splitTeacherNames(rec.Notes),name]);return;
-}if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}if(action==='issue-tab'){if(group==='LabPlans')weeklyKind='LabPlans';tab(value);setTimeout(()=>el('group-'+group)?.scrollIntoView({behavior:'smooth',block:'start'}),120);return;}if(action==='validate'){showValidation();return;}
+}if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}
 if(action==='save'){saveJSON();return;}
 if(action==='import'){el('file-import').click();return;}
-if(action==='new'){newDraft();return;}
+
 }
 function init(){
  state=blankData();manualTeacherRows.clear();currentTab='course';

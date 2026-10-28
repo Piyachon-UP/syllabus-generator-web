@@ -1,24 +1,19 @@
-# อัปเดต UX/UI v1.4.1 บน Branch develop
+# ขั้นตอนอัปเดต UI v1.4.2 ลง Branch develop
 
-## สิ่งที่แก้
-แก้ dropdown หลังเปิด JSON: วิธีสอน Lecture/Lab, ประเภทประเมิน และประเภทแหล่งเรียนรู้ ให้เห็นตัวเลือกครบเสมอ และรองรับ “กำหนดเอง” โดยไม่เปลี่ยน JSON Schema เดิม
+1. สำรอง JSON ของรายวิชาที่กำลังแก้ไขและตรวจว่าดาวน์โหลดสำเร็จ
+2. เปิด GitHub Repository `Piyachon-UP/syllabus-generator-web` และเลือก Branch `develop`
+3. อัปโหลดไฟล์ Patch โดยรักษาตำแหน่งโฟลเดอร์ไว้:
+   - `index.html` ที่ Root
+   - `src/app.js`
+   - `src/styles.css`
+   - `tools/build.py`
+   - `README_TH.md` และ `DEPLOY_DEVELOP_TH.md`
+4. Commit: `Simplify JSON save UI with persistent footer v1.4.2`
+5. ดาวน์โหลด Code → Download ZIP จาก Branch `develop`, แตกไฟล์ แล้วเปิด PowerShell ในโฟลเดอร์นั้น
+6. รัน `py -3 -m http.server 8000` แล้วเปิด `http://localhost:8000/`
+7. ตรวจว่าแถบบนมีเฉพาะ “เปิด JSON”, ไม่มี “สร้างใหม่” และ “ตรวจสอบข้อมูล”
+8. สลับครบ 6 หมวด ดูว่า Sticky Footer มี “บันทึก JSON” อยู่ตลอด ทดลองกรอกไม่ครบแล้วบันทึก JSON
+9. ใช้ “เปิด JSON” โหลดไฟล์นั้นกลับมา และทดสอบ Dropdown ประเภทประเมินว่ามี “ปฏิบัติการ” กับ “กำหนดเอง”
+10. **ยังไม่ Merge เข้า main** จนกว่าจะตรวจสอบเสร็จ
 
-## อัปโหลดไฟล์
-
-1. สำรองไฟล์ JSON ที่กำลังทำอยู่บนเครื่องก่อน (การอัปเดต source ไม่แก้ไขไฟล์ JSON ที่ดาวน์โหลดไว้)
-2. ไปที่ GitHub Repository และเลือก Branch `develop` (อย่าอัปเดต `main` ระหว่างทดลอง)
-3. แตกไฟล์ ZIP Patch แล้วอัปโหลด **โดยรักษาตำแหน่ง** ให้ตรงเดิม:
-   - `index.html` → root
-   - `src/app.js` → src
-   - `src/styles.css` → src
-   - `tools/build.py` → tools
-   - `README_TH.md` / `DEPLOY_DEVELOP_TH.md` → root
-4. Commit: `Fix complete dropdown choices after JSON import v1.4.1`
-5. Download ZIP ของ Branch `develop` เปิด PowerShell ในโฟลเดอร์หลัก แล้วรัน `py -3 -m http.server 8000`
-6. เปิด `http://localhost:8000/` และกด `Ctrl+Shift+R` แล้วตรวจเวอร์ชัน v1.4.1 ทางซ้ายบน
-7. กด **เปิด JSON** เลือกไฟล์รายวิชาที่เคยบันทึกไว้ เช่น `SYLLABUS_244106_2569_2_2.json`
-8. ไปที่ **แผนการสอน** เลือกทั้ง Lecture และ Lab แล้วคลิก Dropdown วิธีสอน: ต้องเห็นรายการทั้งหมด แม้มีค่าที่กรอกไว้แล้ว
-9. ไปที่ **การประเมิน** ทดสอบ Dropdown ประเภทประเมินและประเภทแหล่งเรียนรู้
-10. เลือก `กำหนดเอง` พิมพ์คำใหม่ กด `บันทึก JSON`, เปิด JSON ใหม่นั้นแล้วตรวจว่าค่ายังครบ
-
-หมายเหตุ: **ยังไม่ต้อง Merge เข้า main** จนกว่าจะทดสอบสำเร็จ
+Schema v1.0.0 เดิมไม่มีการเปลี่ยนแปลง การบันทึกแม้ไม่ผ่านเงื่อนไขการตรวจสอบไม่ถือว่าข้อมูลพร้อมเข้าระบบ Blazor โดยอัตโนมัติ
