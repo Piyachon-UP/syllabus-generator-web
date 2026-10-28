@@ -1,4 +1,4 @@
-/* Syllabus Generator Web UI v1.4.0 / JSON Contract v1.0.0 — all operations stay in this browser. */
+/* Syllabus Generator Web UI v1.4.1 / JSON Contract v1.0.0 — all operations stay in this browser. */
 (() => {
 'use strict';
 const contract = JSON.parse(document.getElementById('contract-json').textContent);
@@ -49,7 +49,22 @@ const GRADE_SU=['S','U'];
 const VISIBLE_COLS={CLOs:['CloCode','DescriptionTh','MappedPloCodes'],LecturePlans:['WeekNumber','Topic','TeachingMethods','MappedCloCodes','Notes'],LabPlans:['WeekNumber','Topic','TeachingMethods','MappedCloCodes','Notes'],Assessments:['AssessmentName','AssessmentType','WeightPercent','MappedCloCodes'],GradeScale:['Grade','MinimumScore','MaximumScore'],Resources:['ResourceType','Title','Author','Year','Url']};
 let manualTeacherRows=new Set();
 function visibleCols(group){return VISIBLE_COLS[group]||Object.keys(dataFields(group));}
-function optionsDatalist(id,items){return `<datalist id="${id}">${items.map(x=>`<option value="${escapeHtml(x)}"></option>`).join('')}</datalist>`;}
+// Native HTML datalist filters the options by the prefilled value, hiding most
+// choices after JSON import. Use a true select for the complete, stable list.
+function choicesFor(group,key){
+ if(key==='TeachingMethods')return group==='LecturePlans'?LECTURE_METHODS:LAB_METHODS;
+ if(key==='AssessmentType')return ASSESSMENT_TYPES;
+ return RESOURCE_TYPES;
+}
+function editableChoiceMarkup(group,key,value,scope,row,attr){
+ const choices=choicesFor(group,key).filter(v=>v!=='กำหนดเอง');
+ const saved=String(value??'');
+ const custom=!!saved && !choices.includes(saved);
+ const current=custom?'__custom__':saved;
+ const description=key==='TeachingMethods'?'วิธีการสอน':key==='AssessmentType'?'ประเภทประเมิน':'ประเภทแหล่งเรียนรู้';
+ const attrs=`data-group="${group}" data-key="${key}" data-scope="${scope}" data-row="${row}"`;
+ return `<div class="editable-choice"><select data-action="choice-select" ${attrs} aria-label="เลือก${description}"><option value="" ${!current?'selected':''}>— เลือกรายการ —</option>${choices.map(v=>`<option value="${escapeHtml(v)}" ${current===v?'selected':''}>${escapeHtml(v)}</option>`).join('')}<option value="__custom__" ${custom?'selected':''}>กำหนดเอง</option></select><input type="text" class="editable-custom-input ${custom?'':'hidden'}" data-action="choice-custom" ${attrs} value="${custom?escapeHtml(saved):''}" placeholder="ระบุ${description}ด้วยตนเอง" aria-label="ระบุ${description}ด้วยตนเอง" ${custom?'':'disabled'}></div>`;
+}
 function gradeMode(){if(!state.GradeScale.length)return '';return state.GradeScale.some(x=>GRADE_SU.includes(x.Grade))&&!state.GradeScale.some(x=>GRADE_ABC.includes(x.Grade))?'su':'abc';}
 
 
@@ -155,9 +170,7 @@ function inputElement(group,key,value,scope,row,table=false){
    return `<div class="teacher-multi" data-teacher-group="${group}" data-teacher-row="${row}"><select data-action="weekly-teacher-add" data-group="${group}" data-row="${row}" aria-label="เพิ่มผู้สอนในสัปดาห์ ${row+1}"><option value="">＋ เลือกผู้สอนเพื่อเพิ่ม</option>${names.filter(x=>!selected.includes(x)).map(name=>`<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('')}</select><div class="teacher-chips">${selected.map(name=>`<button type="button" class="chip" data-action="weekly-teacher-remove" data-group="${group}" data-row="${row}" data-value="${escapeHtml(name)}" title="นำ ${escapeHtml(name)} ออก">${escapeHtml(name)} ×</button>`).join('')}</div><div class="teacher-custom"><input type="text" data-action="weekly-teacher-custom" data-group="${group}" data-row="${row}" aria-label="พิมพ์ชื่อผู้สอนเพิ่มเติม" placeholder="ชื่อผู้สอนที่ไม่มีในรายการ"><button type="button" data-action="weekly-teacher-add-custom" data-group="${group}" data-row="${row}" class="btn btn-mini">เพิ่ม</button></div></div>`;
  }
  if((group==='LecturePlans'||group==='LabPlans')&&key==='TeachingMethods'||group==='Assessments'&&key==='AssessmentType'||group==='Resources'&&key==='ResourceType'){
-   const choices=key==='TeachingMethods'?(group==='LecturePlans'?LECTURE_METHODS:LAB_METHODS):key==='AssessmentType'?ASSESSMENT_TYPES:RESOURCE_TYPES;
-   const id=`choices-${group}-${row}-${key}`;
-   return `<div class="editable-choice"><input type="text" list="${id}" ${attr} value="${escapeHtml(inputValue(value))}" placeholder="เลือกหรือพิมพ์รายการอื่น" aria-label="${escapeHtml(MAP[key]||key)}">${optionsDatalist(id,choices)}</div>`;
+   return editableChoiceMarkup(group,key,value,scope,row,attr);
  }
  // Course information is always entered using plain text fields (no asterisk, number spinner or semester select).
  if(group!=='CourseInfo'&&SELECT[key])return `<select aria-label="${escapeHtml(MAP[key]||key)}" class="${cls}" ${attr}><option value="">— เลือก —</option>${SELECT[key].map(item=>`<option value="${escapeHtml(item)}" ${String(value)===String(item)?'selected':''}>${escapeHtml(item)}</option>`).join('')}${value&&!SELECT[key].includes(String(value))?`<option value="${escapeHtml(value)}" selected>${escapeHtml(value)}</option>`:''}</select>`;
@@ -222,6 +235,28 @@ function confirmDiscard(){
 }
 function tab(id){currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
 function onInput(event){const t=event.target;
+// A select always shows ALL choices even when the imported JSON has a value.
+// Only the optional custom input accepts free text; never save the sentinel.
+if(t.dataset.action==='choice-select'){
+ if(event.type!=='change')return;
+ const {group,key,row}=t.dataset;
+ const record=state[group]?.[Number(row)];if(!record)return;
+ const custom=t.parentElement.querySelector('[data-action="choice-custom"]');
+ if(t.value==='__custom__'){
+   record[key]='';
+   if(custom){custom.classList.remove('hidden');custom.disabled=false;custom.value='';custom.focus();}
+ }else{
+   record[key]=t.value;
+   if(custom){custom.value='';custom.classList.add('hidden');custom.disabled=true;}
+ }
+ scheduleSave();return;
+}
+if(t.dataset.action==='choice-custom'){
+ const {group,key,row}=t.dataset;
+ const record=state[group]?.[Number(row)];if(!record)return;
+ record[key]=t.value;
+ scheduleSave();return;
+}
 if(t.dataset.action==='curriculum-select'&&event.type==='change'){
   if(!t.value){t.value=state.Curriculum.CurriculumCode||'';return;}
   if(selectCurriculum(t.value)){el('validation').classList.remove('visible');showingErrors=false;render();scheduleSave();}else{t.value=state.Curriculum.CurriculumCode||'';}return;
@@ -270,17 +305,6 @@ if(t.dataset.action==='instructor-select'&&event.type==='change'){
   el('validation').classList.remove('visible');showingErrors=false;render();scheduleSave();return;
 }
 if(!t.dataset.group)return;
-// "กำหนดเอง" is an action in the dropdown, never a saved teaching/assessment/resource value.
-// The same input remains editable so users can type any Thai method/category.
-if((t.dataset.key==='TeachingMethods'&&['LecturePlans','LabPlans'].includes(t.dataset.group)) ||
-   (t.dataset.key==='AssessmentType'&&t.dataset.group==='Assessments') ||
-   (t.dataset.key==='ResourceType'&&t.dataset.group==='Resources')){
- if(t.value.trim()==='กำหนดเอง'){
-   t.value='';t.placeholder=t.dataset.key==='TeachingMethods'?'ระบุวิธีการสอนเอง':t.dataset.key==='ResourceType'?'ระบุประเภทแหล่งเรียนรู้เอง':'ระบุประเภทประเมินเอง';
-   t.focus();
-   toast('พิมพ์รายการที่ต้องการในช่องนี้ได้เลย');
- }
-}
 let {group,key,scope,row}=t.dataset,v=t.type==='checkbox'?t.checked:t.value,typ=getArrayType(group,key);if(scope==='object')state[group][key]=normalizedInput(v,typ);else{if(!state[group][Number(row)])return;state[group][Number(row)][key]=normalizedInput(v,typ);}if((group==='LecturePlans'||group==='LabPlans')&&key==='Topic'&&scope==='table')state[group][Number(row)].LearningActivities='';refreshHeader();scheduleSave();if(showingErrors){el('validation').classList.remove('visible');showingErrors=false;}}
 function validate(data){const errors=[], warnings=[],issue=(severity,group,message,field='')=>({severity,group,message,field,tab:GROUP_TAB[group]||'course'});const error=(g,m,f)=>errors.push(issue('error',g,m,f));const warn=(g,m,f)=>warnings.push(issue('warning',g,m,f));
 if(data.SchemaVersion!=='1.0.0')error('CourseInfo','SchemaVersion ต้องเป็น 1.0.0');

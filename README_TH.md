@@ -1,4 +1,14 @@
-# Smart Syllabus Generator Web v1.4.0 — JSON Only
+# Smart Syllabus Generator Web v1.4.1 — JSON Only
+
+## สิ่งที่แก้ไขใน v1.4.1 — Dropdown หลังเปิด JSON
+
+- เดิมช่อง **วิธีสอน (Lecture/Lab)**, **ประเภทประเมิน**, และ **ประเภทแหล่งเรียนรู้** ใช้ HTML `datalist` ซึ่ง Browser จะกรองตัวเลือกตามค่าที่กรอกไว้แล้ว เมื่อเปิด JSON จึงเห็นตัวเลือกไม่ครบ
+- เปลี่ยนเป็น HTML `<select>` จริง โดยแสดงรายการที่เตรียมไว้ **ครบทุกครั้ง** แม้ช่องมีค่าเดิมจากไฟล์ JSON
+- มีตัวเลือก **กำหนดเอง** หากเลือกจะเปิดช่องข้อความเพิ่ม โดยบันทึกเพียงข้อความจริง ไม่บันทึกคำว่า `__custom__`
+- หาก JSON เก่ามีค่าที่ไม่อยู่ในรายการ ระบบจะเลือก “กำหนดเอง” ให้อัตโนมัติและแสดงข้อความเดิมในช่องเสริม **โดยไม่แก้ค่าเดิม**
+- รูปแบบ JSON, ชื่อฟิลด์ `TeachingMethods` / `AssessmentType` / `ResourceType`, SchemaVersion `1.0.0` และฟังก์ชันอื่น ๆ เหมือนเดิม
+
+**ทดสอบ:** `python tools/test_dropdown_roundtrip.py` (สำหรับนักพัฒนาที่ติดตั้ง Python Playwright และ Chromium แล้ว) ผู้สอนทั่วไปไม่ต้องติดตั้งอะไรเพิ่มเติม
 
 ## หลักการ
 
@@ -13,7 +23,7 @@
 
 ## ข้อมูลเก่าที่บันทึกผ่าน IndexedDB
 
-ก่อนแทนที่ v1.3.4 **เปิดเว็บเดิม แล้วกด “Draft ของฉัน” และ “สำรอง Draft JSON”** สำหรับ Draft ทุกไฟล์ที่ต้องการเก็บ เพื่อย้ายมา v1.4.0 รุ่นใหม่นี้ไม่ลบ IndexedDB เก่า แต่จะไม่แสดงรายการ Draft ใน Browser อีกต่อไป
+ก่อนแทนที่ v1.3.4 **เปิดเว็บเดิม แล้วกด “Draft ของฉัน” และ “สำรอง Draft JSON”** สำหรับ Draft ทุกไฟล์ที่ต้องการเก็บ เพื่อย้ายมา v1.4 รุ่นใหม่นี้ไม่ลบ IndexedDB เก่า แต่จะไม่แสดงรายการ Draft ใน Browser อีกต่อไป
 
 ## การทำงานสำหรับภาคเรียนต่อไป
 
@@ -26,10 +36,10 @@
 
 ## Deploy
 
-1. แตก ZIP แล้วอัปโหลดไฟล์ `index.html`, `src/app.js`, `tools/build.py` ไปยัง `develop` ในตำแหน่งเดิม
-2. Commit: `Switch to JSON-only save and reload v1.4`
+1. แตก ZIP แล้วอัปโหลดไฟล์ `index.html`, `src/app.js`, `src/styles.css`, `tools/build.py` ไปยัง `develop` ในตำแหน่งเดิม
+2. Commit: `Fix complete dropdown choices after JSON import v1.4.1`
 3. ทดสอบ Localhost ผ่าน `py -3 -m http.server 8000` ใน root ของโฟลเดอร์
-4. เปิด `http://localhost:8000/` (ตรวจว่า UI บอก v1.4.0)
+4. เปิด `http://localhost:8000/` (ตรวจว่า UI บอก v1.4.1)
 5. ทดสอบบันทึก JSON ที่ไม่ครบ, โหลดกลับ, แก้, ตรวจสอบ, บันทึก, และเปิดหลัง Refresh
 6. ยังไม่ต้อง Merge เข้า main
 
