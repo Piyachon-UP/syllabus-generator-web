@@ -52,3 +52,21 @@
   .nav button > span:nth-child(2) { flex: 0 0 auto; }
   .nav button > .nav-state { margin-left: 0; }
 }
+
+/* v1.2: simple authoring layout, no dashboard, read-only PLO master and instructor selector */
+.main>.pagebar{margin-top:24px}
+.master-summary{margin-top:15px;padding:12px 14px;border-radius:9px;background:#edf8f6;color:#17665f;font-weight:700;font-size:12px}
+.plo-list{display:flex;flex-direction:column;padding:4px 21px 10px}
+.plo-item{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;border-bottom:1px solid #e9eff4;padding:15px 3px;align-items:start}
+.plo-item:last-child{border-bottom:0}
+.plo-code{background:#eaf7f5;color:#087d78;padding:7px 10px;border-radius:8px;font-size:12px;text-align:center}
+.plo-description{line-height:1.65;white-space:pre-line;color:var(--ink);font-size:13px}
+.plo-category{color:var(--muted);font-size:11px;margin-top:6px}
+.instructor-editor{min-width:760px}
+.instructor-editor th:nth-child(2){width:33%}
+.instructor-editor th:nth-child(3){width:23%}
+.instructor-editor td select{min-width:245px}
+.instructor-editor td .teacher-current{color:var(--muted);font-size:11px;margin-top:5px}
+.instructor-editor .teacher-department{display:block;font-size:12px;line-height:1.6;padding-top:7px;max-width:240px}
+.instructor-editor td.teacher-check{text-align:center}
+@media(max-width:650px){.plo-list{padding:2px 12px 8px}.plo-item{grid-template-columns:56px minmax(0,1fr);gap:8px}.plo-code{padding:6px 5px;font-size:11px}}

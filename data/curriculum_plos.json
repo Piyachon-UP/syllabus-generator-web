@@ -1,0 +1,627 @@
+{
+  "schema_version": "1.0.0",
+  "curricula": [
+    {
+      "curriculum_id": "BS-PHYSICS",
+      "program_name": "หลักสูตรวิทยาศาสตรบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ",
+          "category": "Knowledge / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน",
+          "category": "Practical / Digital / AI",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม",
+          "category": "Ethics",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก",
+          "category": "Communication / Teamwork",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO5",
+          "description": "ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต",
+          "category": "Lifelong Learning",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO6",
+          "description": "ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้",
+          "category": "Design Thinking",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO7",
+          "description": "ผู้เรียนสามารถอธิบายหลักการทางฟิสิกส์พื้นฐานได้",
+          "category": "Knowledge",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO8",
+          "description": "ผู้เรียนสามารถทำการทดลองทางฟิสิกส์ด้วยกระบวนวิธีทางวิทยาศาสตร์ได้",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO9",
+          "description": "ผู้เรียนสามารถวิเคราะห์ผลการทดลองหรือข้อมูลทางฟิสิกส์ได้",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO10",
+          "description": "ผู้เรียนสามารถวิพากษ์ผลการทดลองทางฟิสิกส์ได้",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO11",
+          "description": "ผู้เรียนสามารถสร้างนวัตกรรมหรืองานวิจัยที่เกิดประโยชน์",
+          "category": "Knowledge/ Practical/ Innovation",
+          "note": ""
+        }
+      ],
+      "major": "สาขาวิชาฟิสิกส์"
+    },
+    {
+      "curriculum_id": "BS-CHEMISTRY",
+      "program_name": "หลักสูตรวิทยาศาสตรบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "ผู้เรียนสามารถใช้ภาษาในการสื่อสารและนำเสนอองค์ความรู้ทางเคมีได้ทั้งภาษาไทยและอังกฤษ",
+          "category": "Knowledge / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "ผู้เรียนสามารถใช้เทคโนโลยีในการสืบค้น วิเคราะห์ นำเสนอข้อมูลทางเคมีได้อย่างเหมาะสม",
+          "category": "Practical / Digital / AI",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ผู้เรียนแสดงออกถึงการเป็นผู้ตรงต่อเวลา ซื่อสัตย์ มีวินัย ประพฤติตนตามหลักความปลอดภัยในห้องปฏิบัติการเคมีได้อย่างเหมาะสม",
+          "category": "Ethics",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก",
+          "category": "Communication / Teamwork",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO5",
+          "description": "ผู้เรียนสามารถเรียนรู้ได้ด้วยตนเองในการปฏิบัติงานทางเคมีได้ และนำองค์ความรู้ที่ได้มาใช้ในการแก้ไขปัญหา",
+          "category": "Knowledge/ Practical/ Innovation",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO6",
+          "description": "ผู้เรียนสามารถอธิบายทฤษฎีทางวิทยาศาสตร์พื้นฐาน คณิตศาสตร์ และเคมีได้อย่างถูกต้อง",
+          "category": "Knowledge ",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO7",
+          "description": "ผู้เรียนสามารถนำความรู้ทางเคมีมาออกแบบการทดลอง วิเคราะห์และอภิปรายผลจากการทดลองทางเคมี",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO8",
+          "description": "ผู้เรียนสามารถทำปฏิบัติการทางเคมีร่วมกับการใช้เครื่องมือวิเคราะห์ทางเคมีได้อย่างถูกต้อง",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO9",
+          "description": "ผู้เรียนสามารถนำความรู้ทางเคมีมาประยุกต์ใช้ในการศึกษาทรัพยากรธรรมชาติและภูมิปัญญาท้องถิ่น ด้วยกรอบแนวคิดการสร้างนวัตกรรม",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        }
+      ],
+      "major": "สาขาวิชาเคมี"
+    },
+    {
+      "curriculum_id": "BS-BIOLOGY",
+      "program_name": "หลักสูตรวิทยาศาสตรบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "ผู้เรียนปฏิบัติตนอย่างมีคุณธรรมจริยธรรมและเป็นพลเมืองที่ดีของสังคม\nSub PLO 1.1 ผู้เรียนแสดงพฤติกรรมอย่างมีคุณธรรมและจริยธรรม\nSub PLO 1.2 ผู้เรียนทำงานร่วมกับผู้อื่นและรับผิดชอบต่อตนเองและท้องถิ่น\nSub PLO 1.3 ผู้เรียนแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคม",
+          "category": "Ethics / Communication/ Teamwork",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "ผู้เรียนอธิบายความรู้ หลักการทางวิทยาศาสตร์ คณิตศาสตร์ และชีววิทยา",
+          "category": "Knowledge",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ผู้เรียนอธิบายคุณค่าของทรัพยากรทางชีวภาพที่มีในท้องถิ่น เพื่อการอนุรักษ์และใช้ประโยชน์อย่างยั่งยืน",
+          "category": "Knowledge / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "ผู้เรียนใช้เทคโนโลยีสารสนเทศและใช้ภาษาเพื่อการสื่อสารได้ดี นำไปสู่ทักษะการเรียนรู้ตลอดชีวิต\nSub PLO 4.1 ผู้เรียนใช้เทคโนโลยีสารสนเทศเพื่อการค้นคว้าอย่างรู้เท่าทัน\nSub PLO 4.2 ผู้เรียนใช้ทักษะด้านภาษาเพื่อการสื่อสารได้ดี",
+          "category": "Communication/ Lifelong Learning/ Practical / Digital / AI",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO5",
+          "description": "ผู้เรียนใช้ความรู้ทางชีววิทยา วิทยาศาสตร์ คณิตศาสตร์ และสถิติ ในการวิเคราะห์และดำเนินการวิจัยทางชีววิทยาด้วยกระบวนการคิดเชิงออกแบบได้",
+          "category": "Knowledge/ Practical/ Design Thinking",
+          "note": ""
+        }
+      ],
+      "major": "สาขาวิชาชีววิทยา"
+    },
+ {
+      "curriculum_id": "BS-MATHEMATICS",
+      "program_name": "หลักสูตรวิทยาศาสตรบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "ผู้เรียนสามารถใช้ภาษาในการสื่อสารได้อย่างมีประสิทธิภาพ",
+          "category": "Knowledge / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "ผู้เรียนสามารถใช้เทคโนโลยียุคดิจิทัลอย่างรู้เท่าทัน",
+          "category": "Practical / Digital / AI",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ผู้เรียนสามารถจัดการชีวิตตนเองอย่างมีคุณธรรมและจริยธรรม",
+          "category": "Ethics",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "ผู้เรียนสามารถทำงานร่วมกับผู้อื่นและแสดงออกถึงคุณลักษณะความเป็นพลเมืองที่มีคุณค่าของสังคมไทยและสังคมโลก",
+          "category": "Communication / Teamwork",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO5",
+          "description": "ผู้เรียนสามารถแสดงออกซึ่งทักษะการเรียนรู้ตลอดชีวิต",
+          "category": "Lifelong Learning",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO6",
+          "description": "ผู้เรียนสามารถออกแบบนวัตกรรมทางวิชาชีพด้วยกระบวนการคิดเชิงออกแบบได้",
+          "category": "Design Thinking",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO7",
+          "description": "ผู้เรียนสามารถอธิบายและสรุปหลักการพื้นฐานหรือทฤษฎีทางคณิตศาสตร์ได้อย่างถูกต้อง",
+          "category": "Knowledge",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO8",
+          "description": "ผู้เรียนสามารถใช้หลักการและทักษะกระบวนการทางคณิตศาสตร์ในการแก้ปัญหาได้อย่างเป็นระบบ",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO9",
+          "description": "ผู้เรียนสามารถนำเครื่องมือทางคณิตศาสตร์ไปประยุกต์แก้ปัญหาในศาสตร์อื่น ๆ ที่เกี่ยวข้องได้และถ่ายทอดองค์ความรู้โดยใช้เทคโนโลยีได้อย่างเหมาะสม",
+          "category": "Knowledge/ Practical/ Digital / AI",
+          "note": ""
+        },
+       {
+          "plo_id": "PLO10",
+          "description": "ผู้เรียนมีความรับผิดชอบต่อตนเอง ชุมชน และสังคม",
+          "category": "Ethics/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาคณิตสาสตร์"
+ },
+ {
+      "curriculum_id": "BS-EXERCISE AND SPORT SCIENCE",
+      "program_name": "หลักสูตรวิทยาศาสตรบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "ผู้เรียนสามารถนำความรู้ในด้านวิทยาศาสตร์การออกกำลังกายและการกีฬาเพื่อส่งเสริมสุขภาพของตนเองและผู้อื่นได้",
+          "category": "Knowledge/ Practical / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "ผู้เรียนสามารถวิเคราะห์ ประเมินสมรรถภาพทางกายและสมรรถนะทางการกีฬา โดยใช้กระบวนการ เครื่องมือ เทคโนโลยีทางวิทยาศาสตร์การออกกำลังกายและการกีฬาได้",
+          "category": "Knowledge/ Practical / Digital / AI",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ผู้เรียนสามารถออกแบบการฝึกการออกกำลังกายและการกีฬาได้อย่างเหมาะสม โดยใช้พื้นฐานทักษะทางวิทยาศาสตร์การออกกำลังกายและการกีฬาอย่างมีจรรยาบรรณ",
+          "category": "Knowledge/ Practical / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "ผู้เรียนสามารถให้คำแนะนำ โดยใช้หลักการทางวิทยาศาสตร์การออกกำลังกายและการกีฬาทั้งแบบไทยและสากล",
+          "category": "Ethics/ Knowledge/ Practical / Communication",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"
+ },
+ {
+      "curriculum_id": "MS-APPLIED CHEMISTRY",
+      "program_name": "หลักสูตรวิทยาศาสตรมหาบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "บัณฑิตสามารถทำวิจัยโดยบูรณาการความรู้ทางเคมีประยุกต์และเทคโนโลยีดิจิทัลอย่างมีจรรยาบรรณ",
+          "category": "Knowledge/ Practical / Digital / AI/ Ethics",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "บัณฑิตสามารถวิเคราะห์และแก้ปัญหาอุตสาหกรรมและชุมชนด้วยความรู้และทักษะทางเคมีประยุกต์อย่างยั่งยืน",
+          "category": "Knowledge/ Practical / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "บัณฑิตสามารถสื่อสารทางวิชาการและภาษาอังกฤษในการนำเสนอทางเคมีประยุกต์ได้",
+          "category": "Communication/ Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "บัณฑิตสามารถติดตามองค์ความรู้ เพื่อนำไปใช้ในการพัฒนางานทางเคมีประยุกต์ได้",
+          "category": "Lifelong Learning/ Ethics/ Knowledge/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาเคมี"
+ },
+ {
+      "curriculum_id": "MS-BIOLOGY PLAN1-THESIS",
+      "program_name": "หลักสูตรวิทยาศาสตรมหาบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "สามารถเสนอแนวทางการพัฒนาและสร้างประโยชน์ทางชีววิทยาอย่างเป็นระบบ โดยใช้เทคนิคและเครื่องมือทางชีววิทยาที่เหมาะสมให้แก่ชุมชนโดยบูรณาการกับศาสตร์อื่นได้",
+          "category": "Knowledge/ Practical / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "สามารถออกแบบและดำเนินการวิจัยทางด้านชีววิทยาด้วยจรรณยาบรรณและเคารพสิทธิ์เพื่อสร้างคุณค่าของทรัพยากรท้องถิ่น",
+          "category": "Knowledge/ Practical / Ethics/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ติดตามและประยุกต์ใช้ความรู้ทางชีววิทยาในการใช้ประโยชน์ อนุรักษ์ และพัฒนาทรัพยากรชีวภาพของท้องถิ่นอย่างยั่งยืน เพื่อยกระดับคุณภาพชีวิตและความสมดุลของระบบนิเวศ",
+          "category": "Lifelong Learning/ Communication/ Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "สื่อสารและนำเสนอข้อมูลทางชีววิทยาต่อสังคมวิชาการและชุมชนท้องถิ่นได้อย่างมีประสิทธิภาพและมีจริยธรรมทางวิชาการ",
+          "category": "Communication/ Ethics/ Knowledge/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาชีววิทยา"
+ },
+ {
+      "curriculum_id": "MS-BIOLOGY PLAN2-IS",
+      "program_name": "หลักสูตรวิทยาศาสตรมหาบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "สามารถเสนอแนวทางแก้ปัญหาและสร้างประโยชน์ให้แก่ชุมชนโดยบูรณาการกับศาสตร์อื่นได้",
+          "category": "Knowledge/ Practical / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "สามารถสร้างความรู้จากงานวิจัยบนฐานของทรัพยากรในท้องถิ่นเพื่อการพัฒนาที่ยั่งยืน",
+          "category": "Knowledge/ Practical / Ethics/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ติดตามองค์ความรู้ทางด้านชีววิทยาโดยใช้เทคโนโลยีและการเรียนรู้ตลอดชีวิตเพื่อการพัฒนาตนเอง",
+          "category": "Lifelong Learning/ Communication/ Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "ผลิต เผยแพร่ และสื่อสารข้อมูลทางชีววิทยาต่อสาธารณะบนพื้นฐานของจรรยาบรรณนักวิจัย",
+          "category": "Communication/ Ethics/ Knowledge/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาชีววิทยา"
+ },
+ {
+      "curriculum_id": "MS-MATHEMATICS",
+      "program_name": "หลักสูตรวิทยาศาสตรมหาบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "บัณฑิตสามารถใช้หลักเหตุและผลในการดำเนินการวิจัยทางคณิตศาสตร์ได้",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "บัณฑิตสามารถนำเสนอผลงานวิจัยทางคณิตศาสตร์ที่มีคุณภาพบนพื้นฐานจริยธรรมวิจัย",
+          "category": "Knowledge/ Practical / Ethics/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "บัณฑิตสามารถใช้องค์ความรู้ทางคณิตศาสตร์และเทคโนโลยีในการแก้ปัญหาทางคณิตศาสตร์หรือปัญหาจากชุมชนได้",
+          "category": "Communication/ Knowledge/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาคณิตศาสตร์"
+ },
+ {
+      "curriculum_id": "MS-SPORT SCIENCE AND PHYSICAL EDUCATION PLAN1-THESIS",
+      "program_name": "หลักสูตรวิทยาศาสตรมหาบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+        {
+          "plo_id": "PLO1",
+          "description": "สามารถบูรณาการความรู้และความเข้าใจเชิงลึกในศาสตร์ด้านวิทยาศาสตร์การกีฬาและพลศึกษาในการวางแผนการพัฒนาสุขภาพและคุณภาพชีวิต",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "สามารถการออกแบบและประยุกต์ใช้เทคโนโลยีหรือนวัตกรรมเพื่อจัดการและพัฒนางานทางด้านวิทยาศาสตร์การกีฬาและพลศึกษาของบุคคลและชุมชนอย่างยั่งยืน",
+          "category": "Knowledge/ Practical/ Innovation /Digital / AI/  Lifelong Learning",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "สามารถออกแบบการพัฒนางานวิจัยทางด้านวิทยาศาสตร์การกีฬาและพลศึกษา โดยใช้กระบวนการวิจัยอย่างมีประสิทธิภาพ",
+          "category": "Knowledge/ Practical ",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "สามารถทำงานร่วมกับผู้อื่นหรือสหวิชาชีพได้อย่างมืออาชีพและมีความรับผิดชอบ",
+          "category": "Communication/ Ethics/  Teamwork/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"
+ },
+ {
+      "curriculum_id": "MS-SPORT SCIENCE AND PHYSICAL EDUCATION PLAN2-IS",
+      "program_name": "หลักสูตรวิทยาศาสตรมหาบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+             {
+          "plo_id": "PLO1",
+          "description": "สามารถบูรณาการความรู้และความเข้าใจเชิงลึกในศาสตร์ด้านวิทยาศาสตร์การกีฬาและพลศึกษาในการวางแผนการพัฒนาสุขภาพและคุณภาพชีวิต",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "สามารถการออกแบบและประยุกต์ใช้เทคโนโลยีหรือนวัตกรรมเพื่อจัดการและพัฒนางานทางด้านวิทยาศาสตร์การกีฬาและพลศึกษาของบุคคลและชุมชนอย่างยั่งยืน",
+          "category": "Knowledge/ Practical/ Innovation /Digital / AI/  Lifelong Learning",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "สามารถออกแบบการพัฒนางานวิจัยทางด้านวิทยาศาสตร์การกีฬาและพลศึกษา โดยใช้กระบวนการวิจัยอย่างมีประสิทธิภาพ",
+          "category": "Knowledge/ Practical ",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "สามารถทำงานร่วมกับผู้อื่นหรือสหวิชาชีพได้อย่างมืออาชีพและมีความรับผิดชอบ",
+          "category": "Communication/ Ethics/  Teamwork/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"
+ },
+ {
+      "curriculum_id": "PhD-BIOLOGY",
+      "program_name": "หลักสูตรปรัชญาดุษฎีบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+             {
+          "plo_id": "PLO1",
+          "description": " ใช้เทคโนโลยีสารสนเทศ เครื่องมือ และนวัตกรรมด้านวิทยาศาสตร์ที่ทันสมัยในการจัดการและแก้ไขปัญหาตามบริบทที่เหมาะสมและทันต่อสถานการณ์",
+          "category": "Knowledge/ Practical/ Innovation /Digital / AI",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "วางแผนดำเนินงาน สังเคราะห์ผลงานวิจัยและทฤษฎีเพื่อการออกแบบกระบวนวิจัยในบริบทใหม่ที่ซับซ้อนและเหมาะสมกับสถานการณ์ที่เปลี่ยนแปลงไป",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ประยุกต์ใช้ความรู้และเทคโนโลยีในการวิเคราะห์ การสร้างองค์ความรู้ใหม่จากการวิจัยหรือจัดการประเด็นปัญหาด้วยการวินิจฉัยอย่างถูกต้อง",
+          "category": "Knowledge/ Practical/ Innovation /Digital / AI",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description":  "บูรณาการทักษะการวิจัยรอบด้านและการบริหารจัดการงานวิจัย เพื่อนำไปสู่การพัฒนาอาชีพและการใช้ประโยชน์ด้านสังคม เศรษฐกิจ และสิ่งแวดล้อม",
+          "category": "Knowledge/ Practical/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO5",
+          "description": "ปฏิบัติตนเป็นแบบอย่างที่ดีตามจรรยาบรรณทางวิชากา",
+          "category": "Ethics",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO6",
+          "description": "สื่อสารข้อมูลองค์ความรู้จากงานวิจัยแก่ผู้ที่สนใจได้อย่างเหมาะสม และสร้างเครือข่ายความร่วมมือทั้งในระดับชุมชน และผลงานวิจัยเชิงประจักษ์ระดับสากล",
+          "category": "Communication/ Ethics/ Teamwork/ Practical",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาชีววิทยา"
+ },
+ {
+      "curriculum_id": "PhD-MATHEMATICS",
+      "program_name": "หลักสูตรปรัชญาดุษฎีบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+             {
+          "plo_id": "PLO1",
+          "description": "บัณฑิตสามารถสร้างองค์ความรู้ใหม่จากฐานปัญหาได้อย่างถูกต้องตามหลักการทางคณิตศาสตร์",
+          "category": "Knowledge/ Practical",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "บัณฑิตสามารถผลิตและเผยแพร่ผลงานวิจัยทางคณิตศาสตร์ที่มีคุณภาพในระดับนานาชาติบนพื้นฐานจริยธรรมวิจัยได้อย่างเหมาะสม",
+          "category": "Knowledge/ Practical/ Ethics",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "บัณฑิตสามารถใช้เทคโนโลยีร่วมกับหลักการทางคณิตศาสตร์เพื่อแก้ปัญหาที่ซับซ้อนหรือปัญหาจากชุมชนได้",
+          "category": "Knowledge/ Practical /Digital / AI/ Communication",
+          "note": ""
+        }
+   ],
+      "major": "สาขาวิชาคณิตศาสตร์"
+ },
+ {
+      "curriculum_id": "PhD-SPORT SCIENCE AND PHYSICAL EDUCATION",
+      "program_name": "หลักสูตรปรัชญาดุษฎีบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+             {
+          "plo_id": "PLO1",
+          "description": "สร้างความรู้ใหม่ทางวิทยาศาสตร์การกีฬาและพลศึกษา ผ่านกระบวนการวิจัยขั้นสูง เพื่อบูรณาการการกีฬาและพัฒนาสังคมสุขภาวะ มุ่งสู่ความเป็นเลิศทางการกีฬาและความยั่งยืนของสังคม",
+          "category": "Knowledge/ Practical/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "ขับเคลื่อนความเป็นเลิศทางการกีฬาและการยกระดับสุขภาวะของสังคมอย่างเป็นระบบ",
+          "category": "Knowledge/ Practical/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ติดตามและประยุกต์ใช้เทคโนโลยีดิจิทัลและปัญญาประดิษฐ์อย่างมีประสิทธิภาพ เพื่อพัฒนาและยกระดับระบบการกีฬาและสุขภาวะบนฐานข้อมูลและหลักฐานเชิงวิทยาศาสตร์",
+          "category": "Knowledge/ Practical /Digital / AI/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "สร้างสังคมสุขภาวะ ด้วยศาสตร์วิทยาศาสตร์การกีฬาและพลศึกษาอย่างมืออาชีพ มีจริยธรรม มีความรับผิดชอบ และสามารถทำงานร่วมกับภาคส่วนต่างๆ ในระดับชาติและสากล",
+          "category": "Knowledge/ Practical / Ethics",
+          "note": ""
+        }
+
+   ],
+      "major": "สาขาวิชาวิทยาศาสตร์การออกกำลังกายและการกีฬา"
+ },
+ {
+      "curriculum_id": "PhD-APPLIED SCIENCE",
+      "program_name": "หลักสูตรปรัชญาดุษฎีบัณฑิต",
+      "faculty": "คณะวิทยาศาสตร์",
+      "university": "มหาวิทยาลัยพะเยา",
+      "plos": [
+             {
+          "plo_id": "PLO1",
+          "description": "ผู้เรียนสามารถสืบค้นและรวบรวมข้อมูลอย่างเป็นระบบ โดยใช้หลักฐานเชิงประจักษ์",
+          "category": "Knowledge/ Practical/Digital ",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO2",
+          "description": "ผู้เรียนสามารถนำเสนอผลงานวิชาการด้วยภาษาอังกฤษ ",
+          "category": "Knowledge/ Practical/ Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO3",
+          "description": "ผู้เรียนสามารถเขียนบทความวิชาการเพื่อตีพิมพ์ในวารสารวิชาการระดับนานาชาติได้",
+          "category": "Knowledge/ Practical / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO4",
+          "description": "ผู้เรียนสามารถสังเคราะห์องค์ความรู้หรือพัฒนานวัตกรรมที่สามารถใช้ประโยชน์ เพื่อการพัฒนาชุมชนและประเทศอย่างยั่งยืน",
+          "category": "Knowledge/ Practical / Communication",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO5",
+          "description": "ผู้เรียนสามารถสื่อสารและถ่ายทอดองค์ความรู้ สามารถทำงานร่วมกับผู้อื่นหรือชุมชนได้",
+          "category": "Knowledge/ Practical /Communication/ Teamwork",
+          "note": ""
+        },
+        {
+          "plo_id": "PLO6",
+          "description": "ผู้เรียนสามารถปฏิบัติตามจรรยาบรรณของนักวิจัย",
+          "category": "Ethics",
+          "note": ""
+        }
+   ],
+      "major": ""
+    }
+  ]
+}
