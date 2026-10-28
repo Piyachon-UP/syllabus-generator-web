@@ -34,3 +34,21 @@
 @media(max-width:1200px){.progress-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:650px){.progress-card{padding:15px}.progress-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.progress-step{min-height:66px}.tools-dropdown{right:-65px}}
 @media(max-width:400px){.progress-step{font-size:10px}.actions{width:100%}.tools-dropdown{right:-100px}}
+
+
+/* v1.1.1 — Sidebar navigation bug fix.
+   Do not reuse the global .empty utility on navigation status icons:
+   .empty adds 30px padding and makes each nav item ~100px tall.
+   Also reserve explicit width for status and label to prevent Thai wrapping.
+*/
+.nav button { gap: 10px; min-height: 51px; }
+.nav .num { flex: 0 0 25px; }
+.nav button > span:nth-child(2) { flex: 1 1 auto; min-width: 0; white-space: nowrap; }
+.nav button > .nav-state { flex: 0 0 14px; width: 14px; min-width: 14px; margin-left: auto; padding: 0; text-align: center; line-height: 1.25; }
+.nav button.active > .nav-state { color: #0b7870; }
+.nav button.active > .nav-state.partial { color: #9d681b; }
+@media (max-width: 770px) {
+  .nav button { min-height: 42px; }
+  .nav button > span:nth-child(2) { flex: 0 0 auto; }
+  .nav button > .nav-state { margin-left: 0; }
+}

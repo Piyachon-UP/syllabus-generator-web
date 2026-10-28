@@ -1,4 +1,4 @@
-/* Syllabus Generator Web UI v1.1.0 / JSON Contract v1.0.0 — all operations stay in this browser. */
+/* Syllabus Generator Web UI v1.1.1 / JSON Contract v1.0.0 — all operations stay in this browser. */
 (() => {
 'use strict';
 const contract = JSON.parse(document.getElementById('contract-json').textContent);
@@ -86,7 +86,7 @@ function renderProgress(){
  el('progress-track').setAttribute('aria-valuenow',String(done));
  el('progress-fill').style.width=`${done/6*100}%`;
  el('progress-steps').innerHTML=statuses.map((s,i)=>`<button class="progress-step ${s.state}" data-action="tab" data-value="${s.id}" ${s.id===currentTab?'aria-current="step"':''}><span class="step-index">${s.complete?'✓':i+1}</span><span>${escapeHtml(TABS[i].name)}</span><span class="step-state">${s.complete?'ครบเบื้องต้น':s.started?'กำลังกรอก':'ยังไม่กรอก'}</span></button>`).join('');
- statuses.forEach(s=>{const node=el('nav-state-'+s.id);if(node){node.textContent=s.complete?'✓':s.started?'◐':'·';node.className='nav-state '+s.state;node.setAttribute('aria-label',s.complete?'ครบเบื้องต้น':s.started?'กำลังกรอก':'ยังไม่กรอก');}});
+ statuses.forEach(s=>{const node=el('nav-state-'+s.id);if(node){node.textContent=s.complete?'✓':s.started?'◐':'·';node.className='nav-state '+(s.state==='empty'?'not-started':s.state);node.setAttribute('aria-label',s.complete?'ครบเบื้องต้น':s.started?'กำลังกรอก':'ยังไม่กรอก');}});
 }
 function refreshHeader(){const c=state.CourseInfo;el('hero-course').textContent=c.CourseTitleTh||'เริ่มต้นสร้าง Course Syllabus';el('hero-sub').textContent=[c.CourseCode,c.CourseTitleEn].filter(Boolean).join(' • ')||'ข้อมูลรายวิชาและแผนการสอน — มหาวิทยาลัยพะเยา';el('offering-label').textContent=offeringId()||'ยังไม่ระบุรหัส';el('s-instructors').textContent=state.Instructors.filter(x=>isPopulated('Instructors',x)).length;el('s-clos').textContent=state.CLOs.filter(x=>isPopulated('CLOs',x)).length;el('s-plans').textContent=state.LecturePlans.filter(x=>isPopulated('LecturePlans',x)).length+state.LabPlans.filter(x=>isPopulated('LabPlans',x)).length;const total=state.Assessments.filter(x=>isPopulated('Assessments',x)).reduce((n,x)=>n+(Number(x.WeightPercent)||0),0);el('s-weight').textContent=`${Math.round(total*100)/100}%`;el('s-weight').style.color=Math.abs(total-100)<.01?'var(--green)':total>100?'var(--red)':'var(--ink)';el('storage-label').textContent=storageMode||'กำลังตรวจสอบ';renderProgress();}
 function toast(message){const root=el('toast');root.textContent=message;root.classList.remove('hidden');clearTimeout(toast._timer);toast._timer=setTimeout(()=>root.classList.add('hidden'),3800);}
