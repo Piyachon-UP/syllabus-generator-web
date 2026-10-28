@@ -198,14 +198,14 @@ function instructorSelectMarkup(rec,row){
 }
 function instructorsPage(){const dept=activeTeacherDepartment(),rows=state.Instructors,chosen=rows.filter(x=>isPopulated('Instructors',x)).length;
  const controls=`<section class="panel"><div class="panel-head"><div><h3>กรองรายชื่อผู้สอนตามหลักสูตร</h3><div class="subhead">ข้อมูลจาก instructors.json หรือเพิ่มผู้สอนที่ไม่อยู่ในรายการได้</div></div></div><div class="panel-body"><div class="form-grid">${curriculumSelectMarkup()}<div class="field wide"><label for="teacher-dept">ตัวกรองรายชื่อผู้สอน</label><select id="teacher-dept" data-action="teacher-scope"><option value="matched" ${!allDepartments?'selected':''}>${dept?escapeHtml('สาขา: '+dept):'ทุกสาขาวิชา (ยังไม่เลือกหลักสูตร)'}</option><option value="all" ${allDepartments?'selected':''}>แสดงรายชื่อทุกสาขาวิชา</option></select></div></div></div></section>`;
- return `<div class="section-stack">${controls}<section class="panel" id="group-Instructors"><div class="panel-head"><div><h3>ผู้รับผิดชอบรายวิชาและผู้สอน <span class="pill neutral">${chosen} คน</span></h3><div class="subhead">เลือกจากรายชื่อ หรือเลือก “ไม่พบรายชื่อ / กรอกเอง” · ผู้รับผิดชอบรายวิชาต้องมี 1 คน</div></div><button type="button" class="btn btn-mini btn-primary" data-action="add" data-group="Instructors">＋ เพิ่มผู้สอน</button></div><div class="table-wrap"><table class="editor-table instructor-editor"><thead><tr><th style="width:38px">#</th><th>ชื่อผู้สอน</th><th>สาขาวิชา</th><th>ผู้รับผิดชอบ</th><th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td><td>${instructorSelectMarkup(r,i)}</td><td><span class="teacher-department">${escapeHtml(r.Department||'—')}</span></td><td class="teacher-check">${inputElement('Instructors','IsResponsibleInstructor',r.IsResponsibleInstructor,'table',i,true)}</td><td><button class="del" data-action="delete" data-group="Instructors" data-row="${i}" aria-label="ลบผู้สอนแถว ${i+1}">×</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">ยังไม่มีผู้สอน กด “เพิ่มผู้สอน” เพื่อเริ่มกรอก</td></tr>'}</tbody></table></div><div class="table-note">Master รายชื่อยังไม่มี StaffId และ Email · ระบบไม่สมมติรหัสบุคลากรหรืออีเมลขึ้นมา</div></section></div>`;
+ return `<div class="section-stack">${controls}<section class="panel" id="group-Instructors"><div class="panel-head"><div><h3>ผู้รับผิดชอบรายวิชาและผู้สอน <span class="pill neutral">${chosen} คน</span></h3><div class="subhead">เลือกจากรายชื่อ หรือเลือก “ไม่พบรายชื่อ / กรอกเอง” · ผู้รับผิดชอบรายวิชาต้องมี 1 คน</div></div><button type="button" class="btn btn-mini btn-primary" data-action="add" data-group="Instructors">＋ เพิ่มผู้สอน</button></div><div class="table-wrap"><table class="editor-table instructor-editor"><thead><tr><th style="width:38px">#</th><th>ชื่อผู้สอน</th><th>สาขาวิชา</th><th>ผู้รับผิดชอบ</th><th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td><td data-label="ชื่อผู้สอน">${instructorSelectMarkup(r,i)}</td><td data-label="สาขาวิชา"><span class="teacher-department">${escapeHtml(r.Department||'—')}</span></td><td class="teacher-check" data-label="ผู้รับผิดชอบ">${inputElement('Instructors','IsResponsibleInstructor',r.IsResponsibleInstructor,'table',i,true)}</td><td data-label="ลบรายการ"><button class="del" data-action="delete" data-group="Instructors" data-row="${i}" aria-label="ลบผู้สอนแถว ${i+1}">×</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">ยังไม่มีผู้สอน กด “เพิ่มผู้สอน” เพื่อเริ่มกรอก</td></tr>'}</tbody></table></div><div class="table-note">Master รายชื่อยังไม่มี StaffId และ Email · ระบบไม่สมมติรหัสบุคลากรหรืออีเมลขึ้นมา</div></section></div>`;
 }
 
 
 function tablePanel(group,title,desc,actions=''){
  const keys=visibleCols(group),rows=state[group]||[],count=rows.filter(r=>isPopulated(group,r)).length;
  const label=key=>group==='LecturePlans'||group==='LabPlans'?(key==='Notes'?'ผู้สอน':MAP[key]||key):MAP[key]||key;
- return `<section class="panel" id="group-${group}"><div class="panel-head"><div><h3>${escapeHtml(title)} <span class="pill neutral">${count} รายการ</span></h3><div class="subhead">${escapeHtml(desc)}</div></div><div class="inline-row">${actions}<button class="btn btn-mini btn-primary" data-action="add" data-group="${group}">＋ เพิ่มรายการ</button></div></div><div class="table-wrap"><table class="editor-table section-table table-${group}"><thead><tr><th style="width:36px">#</th>${keys.map(k=>`<th>${escapeHtml(label(k))}</th>`).join('')}<th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td>${keys.map(key=>`<td>${inputElement(group,key,r[key],'table',i,true)}</td>`).join('')}<td><button class="del" data-action="delete" data-group="${group}" data-row="${i}" title="ลบแถว ${i+1}" aria-label="ลบแถว ${i+1}">×</button></td></tr>`).join(''):`<tr><td colspan="${keys.length+2}" class="empty">ยังไม่มีข้อมูล กด “เพิ่มรายการ” เพื่อเริ่มกรอก</td></tr>`}</tbody></table></div><div class="table-note">${group==='LecturePlans'||group==='LabPlans'?'มีช่องสัปดาห์ไว้ 15 สัปดาห์ · เลือกวิธีสอนและผู้สอนจากรายการหรือพิมพ์เพิ่มเติมได้':group==='CLOs'?'เลือก PLO ได้หลายรายการโดยกดเพิ่มทีละรหัส และกด × เพื่อนำออก':group==='Assessments'?'น้ำหนักรวมการประเมินต้องเท่ากับ 100% · CLO คั่นด้วยเครื่องหมายจุลภาค':'กรอกข้อมูลตามที่รายวิชาใช้จริง'}</div></section>`;
+ return `<section class="panel" id="group-${group}"><div class="panel-head"><div><h3>${escapeHtml(title)} <span class="pill neutral">${count} รายการ</span></h3><div class="subhead">${escapeHtml(desc)}</div></div><div class="inline-row">${actions}<button class="btn btn-mini btn-primary" data-action="add" data-group="${group}">＋ เพิ่มรายการ</button></div></div><div class="table-wrap"><table class="editor-table section-table table-${group}"><thead><tr><th style="width:36px">#</th>${keys.map(k=>`<th>${escapeHtml(label(k))}</th>`).join('')}<th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td>${keys.map(key=>`<td data-label="${escapeHtml(label(key))}">${inputElement(group,key,r[key],'table',i,true)}</td>`).join('')}<td data-label="ลบรายการ"><button class="del" data-action="delete" data-group="${group}" data-row="${i}" title="ลบแถว ${i+1}" aria-label="ลบแถว ${i+1}">×</button></td></tr>`).join(''):`<tr><td colspan="${keys.length+2}" class="empty">ยังไม่มีข้อมูล กด “เพิ่มรายการ” เพื่อเริ่มกรอก</td></tr>`}</tbody></table></div><div class="table-note">${group==='LecturePlans'||group==='LabPlans'?'มีช่องสัปดาห์ไว้ 15 สัปดาห์ · เลือกวิธีสอนและผู้สอนจากรายการหรือพิมพ์เพิ่มเติมได้':group==='CLOs'?'เลือก PLO ได้หลายรายการโดยกดเพิ่มทีละรหัส และกด × เพื่อนำออก':group==='Assessments'?'น้ำหนักรวมการประเมินต้องเท่ากับ 100% · CLO คั่นด้วยเครื่องหมายจุลภาค':'กรอกข้อมูลตามที่รายวิชาใช้จริง'}</div></section>`;
 }
 
 
@@ -233,7 +233,18 @@ function resetSavedStatus(text){
 function confirmDiscard(){
   return !unsavedChanges || confirm('มีข้อมูลที่ยังไม่ได้บันทึกเป็นไฟล์ JSON หากดำเนินการต่อการแก้ไขเหล่านี้จะหายไป ต้องการดำเนินการต่อหรือไม่?');
 }
-function tab(id){currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
+function syncMobileMenu(){
+  const mobile=window.matchMedia('(max-width: 1100px)').matches;
+  const sidebar=el('sidebar');
+  const open=mobile&&document.documentElement.classList.contains('menu-open');
+  if(sidebar)sidebar.inert=mobile&&!open;
+  const button=el('mobile-menu-button');
+  if(button)button.setAttribute('aria-expanded',String(open));
+  if(!mobile)document.documentElement.classList.remove('menu-open');
+}
+function closeMobileMenu(){document.documentElement.classList.remove('menu-open');syncMobileMenu();}
+function openMobileMenu(){document.documentElement.classList.add('menu-open');syncMobileMenu();}
+function tab(id){closeMobileMenu();currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
 function onInput(event){const t=event.target;
 // A select always shows ALL choices even when the imported JSON has a value.
 // Only the optional custom input accepts free text; never save the sentinel.
@@ -382,18 +393,19 @@ async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)re
  const name=normalizeName(input?.value);if(!name){input?.focus();return;}
  const rec=state[group]?.[Number(row)];if(rec)setWeeklyTeachers(group,Number(row),[...splitTeacherNames(rec.Notes),name]);return;
 }if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}
+if(action==='mobile-menu'){openMobileMenu();return;}if(action==='close-menu'){closeMobileMenu();return;}
 if(action==='save'){saveJSON();return;}
 if(action==='import'){el('file-import').click();return;}
 
 }
 function init(){
  state=blankData();manualTeacherRows.clear();currentTab='course';
- render();resetSavedStatus('ยังไม่ได้บันทึก JSON');
+ render();resetSavedStatus('ยังไม่ได้บันทึก JSON');syncMobileMenu();window.addEventListener('resize',syncMobileMenu);
  document.addEventListener('input',onInput);
  document.addEventListener('change',onInput);
  document.addEventListener('click',clickAction);
  el('file-import').addEventListener('change',e=>importJSON(e.target.files?.[0]));
- document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveJSON();}});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.documentElement.classList.contains('menu-open')){closeMobileMenu();el('mobile-menu-button')?.focus();}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveJSON();}});
  window.addEventListener('beforeunload',e=>{if(unsavedChanges){e.preventDefault();e.returnValue='';}});
 }
 

@@ -26,14 +26,17 @@ __CSS__
 </head>
 <body>
 <div class="app">
-<aside class="sidebar">
-  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v1.4.2</div></div></div>
+<aside class="sidebar" id="sidebar" aria-label="เมนูหมวดข้อมูล">
+  <button type="button" class="sidebar-close" data-action="close-menu" aria-label="ปิดเมนูหมวดข้อมูล">✕ ปิดเมนู</button>
+  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v1.4.3</div></div></div>
   <div><div class="sidebar-label">WORKSPACE</div><nav class="nav" id="nav" aria-label="เมนูกรอกข้อมูล"></nav></div>
   <div class="sidebar-bottom"><span class="dot"></span>ทำงานในเครื่องของผู้ใช้งาน<br>Faculty of Science · University of Phayao<br>JSON Contract 1.0.0</div>
 </aside>
+<div class="sidebar-backdrop" data-action="close-menu" aria-hidden="true"></div>
 <main class="main">
  <div class="topline">
-  <div><div class="eyebrow">ACADEMIC TOOLS / COURSE PLANNING</div><h1>Smart Syllabus Generator</h1><p class="header-desc">ระบบจัดทำรายละเอียดรายวิชาออนไลน์ · ประมวลผลใน Browser ไม่ใช้ Backend</p></div>
+  <button id="mobile-menu-button" class="btn mobile-menu-button" data-action="mobile-menu" type="button" aria-controls="sidebar" aria-expanded="false">☰ หมวดข้อมูล</button>
+  <div class="header-group"><div class="eyebrow">ACADEMIC TOOLS / COURSE PLANNING</div><h1>Smart Syllabus Generator</h1><p class="header-desc">ระบบจัดทำรายละเอียดรายวิชาออนไลน์ · ประมวลผลใน Browser ไม่ใช้ Backend</p></div>
   <div class="actions" role="group" aria-label="เครื่องมือจัดการไฟล์ JSON">
     <button type="button" class="btn" data-action="import">⇧ เปิด JSON</button>
   </div> </div>

@@ -1,4 +1,4 @@
-"""Verify JSON-only v1.4.2 save/reload, incomplete file round-trip, course reuse, and no browser storage."""
+"""Verify JSON-only v1.4.3 save/reload, incomplete file round-trip, course reuse, and no browser storage."""
 from pathlib import Path
 import json, tempfile
 from jsonschema import Draft202012Validator
@@ -19,7 +19,7 @@ def run():
     p.goto('about:blank')
     p.set_content(HTML,wait_until='load')
     p.wait_for_selector('#f-CourseInfo-CourseCode')
-    assert 'v1.4.2' in p.locator('.brand-small').inner_text()
+    assert 'v1.4.3' in p.locator('.brand-small').inner_text()
     assert p.locator('[data-action="save"]').count()==1
     assert p.locator('[data-action="import"]').count()==1
     assert p.locator('[data-action="new"]').count()==0
@@ -69,6 +69,6 @@ def run():
     assert 'indexedDB.open(' not in (ROOT/'src/app.js').read_text(encoding='utf8')
     assert not failures,failures
     ctx.close();b.close()
-  print('PASS v1.4.2 JSON-only: incomplete download and restore; validation independent; previous JSON compatible; year/semester reuse; full schema valid; no auto-storage')
+  print('PASS v1.4.3 JSON-only: incomplete download and restore; validation independent; previous JSON compatible; year/semester reuse; full schema valid; no auto-storage')
 
 if __name__=='__main__':run()

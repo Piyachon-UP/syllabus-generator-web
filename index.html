@@ -146,18 +146,230 @@
 }
 @media(max-width:380px){.section-save-title{font-size:12px}.section-save-button{min-width:110px}}
 
+
+/* =============================================================
+   v1.4.3 — Responsive Typography & Layout
+   Presentation only: preserves JSON, field names, save/import logic.
+   ============================================================= */
+:root {
+  --font-body:16px;
+  --font-input:16px;
+  --font-label:15px;
+  --font-table:16px;
+  --font-sidebar:16px;
+  --font-heading:20px;
+  --font-caption:14px;
+}
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body { font-size:var(--font-body); line-height:1.55; }
+.app { grid-template-columns:258px minmax(0,1fr); }
+.sidebar { padding:24px 16px; }
+.brand-title { font-size:18px; }
+.brand-small { font-size:12px; }
+.sidebar-label { font-size:12px; }
+.sidebar-bottom { font-size:13px; line-height:1.7; }
+.nav button { min-height:52px; font-size:var(--font-sidebar); gap:11px; }
+.nav .num { font-size:14px; min-width:28px; height:28px; flex-basis:28px; }
+.nav button > span:nth-child(2) { white-space:nowrap; }
+.main { padding-bottom:32px; }
+h1 { font-size:clamp(24px,2.15vw,28px); }
+h2 { font-size:var(--font-heading); }
+h3,.panel-head h3 { font-size:18px; }
+.eyebrow { font-size:12px; }
+.header-desc,.pagebar .intro { font-size:var(--font-caption); line-height:1.6; }
+.panel-head { padding:18px 22px; }
+.panel-head .subhead,.field .micro,.table-note,.grade-help { font-size:var(--font-caption); line-height:1.6; }
+.panel-body { padding:22px; }
+.field label { font-size:var(--font-label); }
+.field input,.field select,.field textarea {
+  font-size:var(--font-input); min-height:46px; padding:10px 12px; line-height:1.5;
+}
+.field textarea { min-height:96px; }
+.notice { font-size:var(--font-caption); line-height:1.7; }
+.btn,.switchbar button,.jump-pill { font-size:15px; min-height:44px; padding:10px 14px; }
+.btn-mini { min-height:40px; font-size:14px; padding:8px 12px; }
+.switchbar button { padding:10px 14px; }
+.pill { font-size:12px; }
+.editor-table th { font-size:13px; letter-spacing:0; white-space:normal; }
+.editor-table td { font-size:var(--font-table); padding:10px 8px; }
+.editor-table td input:not([type=checkbox]),
+.editor-table td select,.editor-table td textarea {
+  font-size:var(--font-input); min-height:44px; padding:10px 11px; line-height:1.5;
+}
+.editor-table td textarea { min-height:74px; }
+.editor-table .row-no { font-size:14px; }
+.editor-table .del { min-width:40px; height:42px; font-size:19px; }
+.editor-table .check { width:20px;height:20px; }
+.table-CLOs,.table-Assessments,.table-Resources { min-width:960px; }
+.table-LecturePlans,.table-LabPlans { min-width:1200px; }
+.instructor-editor { min-width:770px; }
+.instructor-editor td .teacher-current,.instructor-editor .teacher-department,
+.editable-choice .choice-hint,.editor-table td .editable-choice select,
+.editor-table td .editable-choice .editable-custom-input { font-size:var(--font-caption); }
+.plo-description { font-size:var(--font-body); }
+.plo-code { font-size:14px; }
+.plo-category,.master-summary { font-size:var(--font-caption); }
+.chip { font-size:13px; min-height:32px; }
+.teacher-multi,.teacher-multi > select { max-width:100%; }
+.teacher-chips { gap:7px; }
+.grade-table { font-size:15px; }
+.grade-table td { height:46px; }
+.grade-table input { font-size:16px; height:38px; }
+.grade-table-wrap { max-width:370px; }
+.section-save-footer { min-height:83px; padding:14px 20px max(14px,env(safe-area-inset-bottom)); }
+.section-save-title,.section-save-button { font-size:16px; }
+.section-save-hint,.save-indicator { font-size:13px; }
+.section-save-button { min-height:48px; min-width:170px; }
+.footerline { font-size:12px; }
+.mobile-menu-button,.sidebar-close,.sidebar-backdrop { display:none; }
+
+/* Tablet / smaller notebook: menu becomes an accessible off-canvas drawer. */
+@media(max-width:1100px) {
+  .app { display:block; }
+  .main { max-width:none; padding:20px clamp(16px,3vw,30px) 28px; }
+  .sidebar {
+    position:fixed; top:0; left:0; bottom:0; z-index:160;
+    height:100dvh; width:min(318px,86vw);
+    transform:translateX(-102%); visibility:hidden;
+    transition:transform .22s ease;
+    box-shadow:12px 0 36px rgba(9,35,56,.22);
+    overflow-y:auto; overscroll-behavior:contain;
+  }
+  .menu-open .sidebar { transform:translateX(0); visibility:visible; }
+  .sidebar-backdrop { position:fixed; inset:0; background:rgba(11,35,59,.55); z-index:150; }
+  .menu-open .sidebar-backdrop { display:block; }
+  .mobile-menu-button { display:inline-flex; min-width:116px; align-self:flex-start; }
+  .sidebar-close {
+    display:inline-flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22);
+    color:#fff; font-size:14px; border-radius:9px; padding:8px 12px;
+    min-height:42px; margin:0 6px; align-self:flex-end;
+  }
+  .sidebar .nav button { min-height:52px; }
+  .topline { justify-content:flex-start; }
+  .topline > .header-group { flex:1 1 360px; }
+  .topline > .actions { margin-left:auto; }
+  .form-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .field.wide { grid-column:span 2; }
+  .table-wrap { overflow-x:auto; overscroll-behavior-inline:contain; }
+  .grade-layout { grid-template-columns:minmax(0,1fr) minmax(270px,370px);gap:18px; }
+  .grade-help { grid-column:2; }
+}
+
+/* Phones: tabular rows become labelled cards, not horizontal scrolling. */
+@media(max-width:700px) {
+  .main { padding:14px 12px 20px; }
+  .topline { gap:10px; }
+  .topline > .header-group { flex-basis:100%; order:2; }
+  .mobile-menu-button { order:0; }
+  .topline > .actions { width:auto; margin-left:auto; order:1; }
+  .eyebrow { font-size:11px; }
+  h1 { font-size:23px; margin-top:4px; }
+  h2 { font-size:19px; }
+  .pagebar { margin-top:19px; }
+  .pagebar .intro { font-size:13px; }
+  .panel { border-radius:11px; }
+  .panel-head { padding:14px 15px; }
+  .panel-head h3 { font-size:17px; }
+  .panel-head .inline-row { width:100%; }
+  .panel-body { padding:15px; }
+  .form-grid { grid-template-columns:minmax(0,1fr); gap:14px; }
+  .field.wide,.field.full { grid-column:1/-1; }
+  .field input,.field select,.field textarea { font-size:16px; }
+  .plo-item { grid-template-columns:64px minmax(0,1fr); }
+  .switchbar { width:100%; }
+  .switchbar button { flex:1 1 0; padding:10px 8px; }
+  /* Preserve semantic table markup and delegated input events. */
+  .table-wrap { overflow:visible; padding:10px; background:#f7fafc; }
+  .editor-table,.instructor-editor,.table-CLOs,.table-LecturePlans,
+  .table-LabPlans,.table-Assessments,.table-Resources {
+    width:100%; min-width:0; display:block;
+  }
+  .editor-table thead { display:none; }
+  .editor-table tbody { display:grid; grid-template-columns:minmax(0,1fr); gap:13px; }
+  .editor-table tbody tr {
+    display:block; min-width:0; border:1px solid #d7e3eb;
+    border-radius:11px; background:white; padding:13px;
+    box-shadow:0 3px 10px rgba(16,44,74,.035);
+  }
+  .editor-table tbody tr td {
+    display:block; width:100%; min-width:0; max-width:100%;
+    padding:0; border:0; background:transparent!important; margin:0 0 14px;
+  }
+  .editor-table tbody tr td:last-child { margin-bottom:0; }
+  .editor-table tbody tr td[data-label]:not(.row-no)::before {
+    content:attr(data-label); display:block; color:#465d72; font-weight:700;
+    font-size:14px; line-height:1.5; margin-bottom:6px;
+  }
+  .editor-table tbody tr td.row-no {
+    width:100%; margin:0 0 13px; padding:0 0 9px;
+    border-bottom:1px solid #ebf0f4; font-size:15px; color:#0b6d6a;
+    font-weight:800; line-height:1.45;
+  }
+  .editor-table tbody tr td.row-no::before { content:'รายการที่ '; }
+  .editor-table td input:not([type=checkbox]),
+  .editor-table td select,.editor-table td textarea,
+  .editor-table td .editable-choice select,
+  .editor-table td .editable-choice .editable-custom-input {
+    width:100%; min-width:0!important; max-width:100%!important; font-size:16px;
+    min-height:46px;
+  }
+  .editor-table td textarea,.weekly-topic { width:100%; min-width:0; min-height:85px; }
+  .editor-table td .narrow,.editor-table td .long,.editor-table td .small {
+    width:100%!important; max-width:100%!important; min-width:0!important;
+  }
+  .teacher-multi,.teacher-multi>select,.teacher-custom,.manual-teacher,
+  .plo-picker,.editable-choice { width:100%;max-width:100%;min-width:0; }
+  .teacher-custom input { min-width:0!important; }
+  .teacher-custom button,.editor-table .del { min-width:44px; min-height:44px; }
+  .instructor-editor td select { min-width:0; }
+  .instructor-editor .teacher-department { max-width:none; }
+  .instructor-editor td.teacher-check { text-align:left; }
+  .editor-table tr:has(>td.empty) { box-shadow:none;border-style:dashed; }
+  .editor-table td.empty { font-size:14px; padding:14px 3px; }
+  .grade-layout { display:grid; grid-template-columns:minmax(0,1fr);gap:16px; }
+  .grade-table-wrap { max-width:100%; width:100%; }
+  .grade-help { grid-column:1; margin-top:0; }
+  .grade-table td,.grade-table th { font-size:14px; }
+  .section-save-footer {
+    position:sticky;bottom:0;z-index:45; margin:16px -12px 0;
+    border-radius:11px 11px 0 0; padding:10px 12px max(10px,env(safe-area-inset-bottom));
+    gap:9px; min-height:76px;
+  }
+  .section-save-title { font-size:14px; }
+  .section-save-hint { display:none; }
+  .save-indicator { font-size:12px; }
+  .section-save-button { min-width:125px; min-height:48px; font-size:15px; padding:10px 12px; }
+  .footerline { line-height:1.6; padding:10px 0; }
+}
+@media(max-width:400px) {
+  .topline > .header-group { flex-basis:100%; order:2; }
+  .mobile-menu-button { order:0; }
+  .topline > .actions { order:1; width:auto; margin-left:auto; }
+  h1 { font-size:21px; }
+  .section-save-button { min-width:110px; padding:9px; }
+  .panel-head .btn-mini { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .sidebar { transition:none; }
+  html:focus-within { scroll-behavior:auto; }
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar">
-  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v1.4.2</div></div></div>
+<aside class="sidebar" id="sidebar" aria-label="เมนูหมวดข้อมูล">
+  <button type="button" class="sidebar-close" data-action="close-menu" aria-label="ปิดเมนูหมวดข้อมูล">✕ ปิดเมนู</button>
+  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v1.4.3</div></div></div>
   <div><div class="sidebar-label">WORKSPACE</div><nav class="nav" id="nav" aria-label="เมนูกรอกข้อมูล"></nav></div>
   <div class="sidebar-bottom"><span class="dot"></span>ทำงานในเครื่องของผู้ใช้งาน<br>Faculty of Science · University of Phayao<br>JSON Contract 1.0.0</div>
 </aside>
+<div class="sidebar-backdrop" data-action="close-menu" aria-hidden="true"></div>
 <main class="main">
  <div class="topline">
-  <div><div class="eyebrow">ACADEMIC TOOLS / COURSE PLANNING</div><h1>Smart Syllabus Generator</h1><p class="header-desc">ระบบจัดทำรายละเอียดรายวิชาออนไลน์ · ประมวลผลใน Browser ไม่ใช้ Backend</p></div>
+  <button id="mobile-menu-button" class="btn mobile-menu-button" data-action="mobile-menu" type="button" aria-controls="sidebar" aria-expanded="false">☰ หมวดข้อมูล</button>
+  <div class="header-group"><div class="eyebrow">ACADEMIC TOOLS / COURSE PLANNING</div><h1>Smart Syllabus Generator</h1><p class="header-desc">ระบบจัดทำรายละเอียดรายวิชาออนไลน์ · ประมวลผลใน Browser ไม่ใช้ Backend</p></div>
   <div class="actions" role="group" aria-label="เครื่องมือจัดการไฟล์ JSON">
     <button type="button" class="btn" data-action="import">⇧ เปิด JSON</button>
   </div> </div>
@@ -377,14 +589,14 @@ function instructorSelectMarkup(rec,row){
 }
 function instructorsPage(){const dept=activeTeacherDepartment(),rows=state.Instructors,chosen=rows.filter(x=>isPopulated('Instructors',x)).length;
  const controls=`<section class="panel"><div class="panel-head"><div><h3>กรองรายชื่อผู้สอนตามหลักสูตร</h3><div class="subhead">ข้อมูลจาก instructors.json หรือเพิ่มผู้สอนที่ไม่อยู่ในรายการได้</div></div></div><div class="panel-body"><div class="form-grid">${curriculumSelectMarkup()}<div class="field wide"><label for="teacher-dept">ตัวกรองรายชื่อผู้สอน</label><select id="teacher-dept" data-action="teacher-scope"><option value="matched" ${!allDepartments?'selected':''}>${dept?escapeHtml('สาขา: '+dept):'ทุกสาขาวิชา (ยังไม่เลือกหลักสูตร)'}</option><option value="all" ${allDepartments?'selected':''}>แสดงรายชื่อทุกสาขาวิชา</option></select></div></div></div></section>`;
- return `<div class="section-stack">${controls}<section class="panel" id="group-Instructors"><div class="panel-head"><div><h3>ผู้รับผิดชอบรายวิชาและผู้สอน <span class="pill neutral">${chosen} คน</span></h3><div class="subhead">เลือกจากรายชื่อ หรือเลือก “ไม่พบรายชื่อ / กรอกเอง” · ผู้รับผิดชอบรายวิชาต้องมี 1 คน</div></div><button type="button" class="btn btn-mini btn-primary" data-action="add" data-group="Instructors">＋ เพิ่มผู้สอน</button></div><div class="table-wrap"><table class="editor-table instructor-editor"><thead><tr><th style="width:38px">#</th><th>ชื่อผู้สอน</th><th>สาขาวิชา</th><th>ผู้รับผิดชอบ</th><th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td><td>${instructorSelectMarkup(r,i)}</td><td><span class="teacher-department">${escapeHtml(r.Department||'—')}</span></td><td class="teacher-check">${inputElement('Instructors','IsResponsibleInstructor',r.IsResponsibleInstructor,'table',i,true)}</td><td><button class="del" data-action="delete" data-group="Instructors" data-row="${i}" aria-label="ลบผู้สอนแถว ${i+1}">×</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">ยังไม่มีผู้สอน กด “เพิ่มผู้สอน” เพื่อเริ่มกรอก</td></tr>'}</tbody></table></div><div class="table-note">Master รายชื่อยังไม่มี StaffId และ Email · ระบบไม่สมมติรหัสบุคลากรหรืออีเมลขึ้นมา</div></section></div>`;
+ return `<div class="section-stack">${controls}<section class="panel" id="group-Instructors"><div class="panel-head"><div><h3>ผู้รับผิดชอบรายวิชาและผู้สอน <span class="pill neutral">${chosen} คน</span></h3><div class="subhead">เลือกจากรายชื่อ หรือเลือก “ไม่พบรายชื่อ / กรอกเอง” · ผู้รับผิดชอบรายวิชาต้องมี 1 คน</div></div><button type="button" class="btn btn-mini btn-primary" data-action="add" data-group="Instructors">＋ เพิ่มผู้สอน</button></div><div class="table-wrap"><table class="editor-table instructor-editor"><thead><tr><th style="width:38px">#</th><th>ชื่อผู้สอน</th><th>สาขาวิชา</th><th>ผู้รับผิดชอบ</th><th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td><td data-label="ชื่อผู้สอน">${instructorSelectMarkup(r,i)}</td><td data-label="สาขาวิชา"><span class="teacher-department">${escapeHtml(r.Department||'—')}</span></td><td class="teacher-check" data-label="ผู้รับผิดชอบ">${inputElement('Instructors','IsResponsibleInstructor',r.IsResponsibleInstructor,'table',i,true)}</td><td data-label="ลบรายการ"><button class="del" data-action="delete" data-group="Instructors" data-row="${i}" aria-label="ลบผู้สอนแถว ${i+1}">×</button></td></tr>`).join(''):'<tr><td colspan="5" class="empty">ยังไม่มีผู้สอน กด “เพิ่มผู้สอน” เพื่อเริ่มกรอก</td></tr>'}</tbody></table></div><div class="table-note">Master รายชื่อยังไม่มี StaffId และ Email · ระบบไม่สมมติรหัสบุคลากรหรืออีเมลขึ้นมา</div></section></div>`;
 }
 
 
 function tablePanel(group,title,desc,actions=''){
  const keys=visibleCols(group),rows=state[group]||[],count=rows.filter(r=>isPopulated(group,r)).length;
  const label=key=>group==='LecturePlans'||group==='LabPlans'?(key==='Notes'?'ผู้สอน':MAP[key]||key):MAP[key]||key;
- return `<section class="panel" id="group-${group}"><div class="panel-head"><div><h3>${escapeHtml(title)} <span class="pill neutral">${count} รายการ</span></h3><div class="subhead">${escapeHtml(desc)}</div></div><div class="inline-row">${actions}<button class="btn btn-mini btn-primary" data-action="add" data-group="${group}">＋ เพิ่มรายการ</button></div></div><div class="table-wrap"><table class="editor-table section-table table-${group}"><thead><tr><th style="width:36px">#</th>${keys.map(k=>`<th>${escapeHtml(label(k))}</th>`).join('')}<th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td>${keys.map(key=>`<td>${inputElement(group,key,r[key],'table',i,true)}</td>`).join('')}<td><button class="del" data-action="delete" data-group="${group}" data-row="${i}" title="ลบแถว ${i+1}" aria-label="ลบแถว ${i+1}">×</button></td></tr>`).join(''):`<tr><td colspan="${keys.length+2}" class="empty">ยังไม่มีข้อมูล กด “เพิ่มรายการ” เพื่อเริ่มกรอก</td></tr>`}</tbody></table></div><div class="table-note">${group==='LecturePlans'||group==='LabPlans'?'มีช่องสัปดาห์ไว้ 15 สัปดาห์ · เลือกวิธีสอนและผู้สอนจากรายการหรือพิมพ์เพิ่มเติมได้':group==='CLOs'?'เลือก PLO ได้หลายรายการโดยกดเพิ่มทีละรหัส และกด × เพื่อนำออก':group==='Assessments'?'น้ำหนักรวมการประเมินต้องเท่ากับ 100% · CLO คั่นด้วยเครื่องหมายจุลภาค':'กรอกข้อมูลตามที่รายวิชาใช้จริง'}</div></section>`;
+ return `<section class="panel" id="group-${group}"><div class="panel-head"><div><h3>${escapeHtml(title)} <span class="pill neutral">${count} รายการ</span></h3><div class="subhead">${escapeHtml(desc)}</div></div><div class="inline-row">${actions}<button class="btn btn-mini btn-primary" data-action="add" data-group="${group}">＋ เพิ่มรายการ</button></div></div><div class="table-wrap"><table class="editor-table section-table table-${group}"><thead><tr><th style="width:36px">#</th>${keys.map(k=>`<th>${escapeHtml(label(k))}</th>`).join('')}<th>ลบ</th></tr></thead><tbody>${rows.length?rows.map((r,i)=>`<tr><td class="row-no">${i+1}</td>${keys.map(key=>`<td data-label="${escapeHtml(label(key))}">${inputElement(group,key,r[key],'table',i,true)}</td>`).join('')}<td data-label="ลบรายการ"><button class="del" data-action="delete" data-group="${group}" data-row="${i}" title="ลบแถว ${i+1}" aria-label="ลบแถว ${i+1}">×</button></td></tr>`).join(''):`<tr><td colspan="${keys.length+2}" class="empty">ยังไม่มีข้อมูล กด “เพิ่มรายการ” เพื่อเริ่มกรอก</td></tr>`}</tbody></table></div><div class="table-note">${group==='LecturePlans'||group==='LabPlans'?'มีช่องสัปดาห์ไว้ 15 สัปดาห์ · เลือกวิธีสอนและผู้สอนจากรายการหรือพิมพ์เพิ่มเติมได้':group==='CLOs'?'เลือก PLO ได้หลายรายการโดยกดเพิ่มทีละรหัส และกด × เพื่อนำออก':group==='Assessments'?'น้ำหนักรวมการประเมินต้องเท่ากับ 100% · CLO คั่นด้วยเครื่องหมายจุลภาค':'กรอกข้อมูลตามที่รายวิชาใช้จริง'}</div></section>`;
 }
 
 
@@ -412,7 +624,18 @@ function resetSavedStatus(text){
 function confirmDiscard(){
   return !unsavedChanges || confirm('มีข้อมูลที่ยังไม่ได้บันทึกเป็นไฟล์ JSON หากดำเนินการต่อการแก้ไขเหล่านี้จะหายไป ต้องการดำเนินการต่อหรือไม่?');
 }
-function tab(id){currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
+function syncMobileMenu(){
+  const mobile=window.matchMedia('(max-width: 1100px)').matches;
+  const sidebar=el('sidebar');
+  const open=mobile&&document.documentElement.classList.contains('menu-open');
+  if(sidebar)sidebar.inert=mobile&&!open;
+  const button=el('mobile-menu-button');
+  if(button)button.setAttribute('aria-expanded',String(open));
+  if(!mobile)document.documentElement.classList.remove('menu-open');
+}
+function closeMobileMenu(){document.documentElement.classList.remove('menu-open');syncMobileMenu();}
+function openMobileMenu(){document.documentElement.classList.add('menu-open');syncMobileMenu();}
+function tab(id){closeMobileMenu();currentTab=id;render();el('panel-content').scrollIntoView({behavior:'smooth',block:'start'});}
 function onInput(event){const t=event.target;
 // A select always shows ALL choices even when the imported JSON has a value.
 // Only the optional custom input accepts free text; never save the sentinel.
@@ -561,18 +784,19 @@ async function clickAction(e){const b=e.target.closest('[data-action]');if(!b)re
  const name=normalizeName(input?.value);if(!name){input?.focus();return;}
  const rec=state[group]?.[Number(row)];if(rec)setWeeklyTeachers(group,Number(row),[...splitTeacherNames(rec.Notes),name]);return;
 }if(b.closest('.tools-dropdown'))el('tools-menu')?.removeAttribute('open');if(action==='tab'){tab(value);return;}if(action==='plo-remove'){const r=state.CLOs[Number(row)];if(r){r.MappedPloCodes=(r.MappedPloCodes||[]).filter(x=>x!==value);render();scheduleSave();}return;}if(action==='jump-group'){document.getElementById(value)?.scrollIntoView({behavior:'smooth',block:'start'});return;}if(action==='add'){const d=blankRecord(group);if(group==='LecturePlans'||group==='LabPlans')d.WeekNumber=Math.max(0,...state[group].map(x=>Number(x.WeekNumber)||0))+1;state[group].push(d);render();scheduleSave();return;}if(action==='delete'){if(group==='Instructors')manualTeacherRows.clear();if(!confirm(`ลบรายการที่ ${Number(row)+1} ใน ${group}?`))return;state[group].splice(Number(row),1);ensureStarterRows(state);render();scheduleSave();return;}if(action==='fill-weeks'){const exists=new Set(state[group].map(x=>Number(x.WeekNumber)));for(let i=1;i<=15;i++)if(!exists.has(i))state[group].push({...blankRecord(group),WeekNumber:i});state[group].sort((a,b)=>Number(a.WeekNumber)-Number(b.WeekNumber));render();scheduleSave();return;}if(action==='week-switch'){weeklyKind=value;render();return;}
+if(action==='mobile-menu'){openMobileMenu();return;}if(action==='close-menu'){closeMobileMenu();return;}
 if(action==='save'){saveJSON();return;}
 if(action==='import'){el('file-import').click();return;}
 
 }
 function init(){
  state=blankData();manualTeacherRows.clear();currentTab='course';
- render();resetSavedStatus('ยังไม่ได้บันทึก JSON');
+ render();resetSavedStatus('ยังไม่ได้บันทึก JSON');syncMobileMenu();window.addEventListener('resize',syncMobileMenu);
  document.addEventListener('input',onInput);
  document.addEventListener('change',onInput);
  document.addEventListener('click',clickAction);
  el('file-import').addEventListener('change',e=>importJSON(e.target.files?.[0]));
- document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveJSON();}});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.documentElement.classList.contains('menu-open')){closeMobileMenu();el('mobile-menu-button')?.focus();}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();saveJSON();}});
  window.addEventListener('beforeunload',e=>{if(unsavedChanges){e.preventDefault();e.returnValue='';}});
 }
 

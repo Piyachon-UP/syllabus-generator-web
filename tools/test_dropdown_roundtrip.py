@@ -1,4 +1,4 @@
-"""End-to-end browser regression for v1.4.2 dropdowns.
+"""End-to-end browser regression for v1.4.3 dropdowns.
 
 Run: python tools/test_dropdown_roundtrip.py
 Optional external JSON for local testing (never added to the repository):
