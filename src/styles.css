@@ -365,3 +365,8 @@ h3,.panel-head h3 { font-size:18px; }
 /* Avoid status toast covering JSON/DOCX buttons in sticky footer. */
 .toast{bottom:108px}
 @media(max-width:400px){.toast{bottom:78px}}
+
+/* v2.1 — native calendar input in Course Info; preserves responsive form layout. */
+.course-date{min-height:44px;font-size:16px;min-width:0;max-width:100%;color:var(--ink);cursor:pointer}
+.course-date::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.85}
+@media(max-width:650px){.course-date{width:100%;min-height:46px}}

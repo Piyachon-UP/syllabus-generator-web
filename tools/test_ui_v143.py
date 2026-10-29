@@ -25,7 +25,7 @@ with TemporaryDirectory() as tmpdir, sync_playwright() as pw:
     page.on('dialog', lambda dialog:dialog.accept())
     page.goto('about:blank')
     page.set_content(HTML, wait_until='load')
-    assert 'v2.0.0' in page.locator('.brand-small').inner_text()
+    assert 'v2.1.0' in page.locator('.brand-small').inner_text()
     assert page.locator('.topline [data-action="import"]').count() == 1
     assert page.locator('.topline [data-action="import"]').count() == 1
     assert page.locator('.topline [data-action="mobile-menu"]').count() == 1

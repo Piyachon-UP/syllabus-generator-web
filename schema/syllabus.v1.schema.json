@@ -84,6 +84,11 @@
         "Section": {
           "type": "string"
         },
+        "LastUpdatedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "วันที่ผู้สอนบันทึกหรือปรับปรุงเนื้อหา (YYYY-MM-DD ตาม ค.ศ.); ไม่บังคับกรอก"
+        },
         "FacultyName": {
           "type": "string"
         },
