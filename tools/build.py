@@ -29,7 +29,7 @@ __CSS__
 <div class="app">
 <aside class="sidebar" id="sidebar" aria-label="เมนูหมวดข้อมูล">
   <button type="button" class="sidebar-close" data-action="close-menu" aria-label="ปิดเมนูหมวดข้อมูล">✕ ปิดเมนู</button>
-  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v2.0.0</div></div></div>
+  <div class="brand"><div class="brand-mark">∑</div><div><div class="brand-title">SYLLABUS</div><div class="brand-small">GENERATOR · WEB v2.1.0</div></div></div>
   <div><div class="sidebar-label">WORKSPACE</div><nav class="nav" id="nav" aria-label="เมนูกรอกข้อมูล"></nav></div>
   <div class="sidebar-bottom"><span class="dot"></span>ทำงานในเครื่องของผู้ใช้งาน<br>Faculty of Science · University of Phayao<br>JSON Contract 1.0.0</div>
 </aside>

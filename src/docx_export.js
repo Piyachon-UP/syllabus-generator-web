@@ -31,6 +31,15 @@ function table(heads,rows,widths){
 const heading=(text)=>p(text,'Heading1');
 const subheading=(text)=>p(text,'Heading2');
 function displayDate(v){if(!v)return '—';return String(v);}
+// Date is stored as Gregorian YYYY-MM-DD; display the selected date in Buddhist Era for Thai documents.
+function displayThaiDate(v){
+ const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(v||''));
+ if(!m)return value(v);
+ const [year,month,day]=m.slice(1).map(Number);
+ const date=new Date(Date.UTC(year,month-1,day));
+ if(date.getUTCFullYear()!==year||date.getUTCMonth()!==month-1||date.getUTCDate()!==day)return value(v);
+ return `${String(day).padStart(2,'0')}/${String(month).padStart(2,'0')}/${year+543}`;
+}
 function cleanCourseData(data){if(!data||typeof data!=='object')throw Error('ไม่มีข้อมูลรายวิชา');const s=data.SchemaVersion;if(s!=='1.0.0')throw Error('รองรับ SchemaVersion 1.0.0 เท่านั้น');return data;}
 function documentXML(data){
  data=cleanCourseData(data);
@@ -48,7 +57,7 @@ function documentXML(data){
  if(!required)b.push(p('ฉบับร่าง — ข้อมูลส่วนหัวรายวิชายังไม่ครบ กรุณาตรวจสอบก่อนใช้งาน','Warning'));
  b.push(heading('1. ข้อมูลรายวิชา'));
  b.push(table(['รายการ','รายละเอียด'],[
- ['รหัสรายวิชา',value(ci.CourseCode)],['ชื่อรายวิชาภาษาไทย',value(ci.CourseTitleTh)],['ชื่อรายวิชาภาษาอังกฤษ',value(ci.CourseTitleEn)],['หน่วยกิต',credits],['ปีการศึกษา / ภาคเรียน',`${value(ci.AcademicYear)} / ${value(ci.Semester)}`],['กลุ่มเรียน',value(ci.Section)],['หลักสูตร',value(cur.CurriculumName)],['สาขาวิชา',value(cur.ProgramName)]
+ ['รหัสรายวิชา',value(ci.CourseCode)],['ชื่อรายวิชาภาษาไทย',value(ci.CourseTitleTh)],['ชื่อรายวิชาภาษาอังกฤษ',value(ci.CourseTitleEn)],['หน่วยกิต',credits],['ปีการศึกษา / ภาคเรียน',`${value(ci.AcademicYear)} / ${value(ci.Semester)}`],['กลุ่มเรียน',value(ci.Section)],...(ci.LastUpdatedDate?[['วันที่บันทึก/ปรับปรุงข้อมูล',displayThaiDate(ci.LastUpdatedDate)]]:[]),['หลักสูตร',value(cur.CurriculumName)],['สาขาวิชา',value(cur.ProgramName)]
  ],[2400,7000]));
  b.push(subheading('คำอธิบายรายวิชา (ภาษาไทย)'));b.push(p(value(ci.CourseDescriptionTh)));
  b.push(subheading('Course Description (English)'));b.push(p(value(ci.CourseDescriptionEn)));

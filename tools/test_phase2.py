@@ -11,7 +11,7 @@ with tempfile.TemporaryDirectory() as td, sync_playwright() as pw:
     ctx=b.new_context(accept_downloads=True,viewport={'width':1366,'height':880})
     p=ctx.new_page();errors=[];p.on('pageerror',lambda x:errors.append(str(x)))
     p.goto('about:blank');p.set_content(html,wait_until='load')
-    assert p.locator('.brand-small').inner_text().endswith('v2.0.0')
+    assert p.locator('.brand-small').inner_text().endswith('v2.1.0')
     assert p.locator('.topline [data-action="import"]').count()==1
     assert p.locator('[data-action="validate"]').count()==0
     assert p.locator('.section-save-footer [data-action="save"]').count()==1
